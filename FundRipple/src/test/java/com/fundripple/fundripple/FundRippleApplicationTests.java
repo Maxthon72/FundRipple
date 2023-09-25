@@ -1,0 +1,13 @@
+package com.fundripple.fundripple;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class FundRippleApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
