@@ -19,4 +19,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column
+    private String description;
+
+    @Column
+    private String role;
+
 }
