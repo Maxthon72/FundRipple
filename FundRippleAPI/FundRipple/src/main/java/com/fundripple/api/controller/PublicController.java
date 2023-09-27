@@ -8,16 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
-public class StartingController {
+@RequestMapping("/public")
+public class PublicController {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public StartingController(UserRepository userRepository) {
+    public PublicController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -29,7 +28,8 @@ public class StartingController {
     }
 
     // Endpoint to retrieve all users
-    @GetMapping
+    @GetMapping("/users")
+
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userRepository.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
