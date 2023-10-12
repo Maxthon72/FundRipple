@@ -11,6 +11,6 @@ export class AppComponent {
   constructor(private router: Router){}
   title = 'FundRippleGUI';
   navigateToHome(){
-    this.router.navigate(['/']);
+    this.router.navigate(['home']);
   }
 }
