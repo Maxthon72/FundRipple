@@ -32,7 +32,8 @@ export class RegisterPageComponent implements OnInit{
     this.auth.registerNormalUser(this.user).subscribe(
       (response:Token)=>{
         this.token = response
-        this.localStorage.setItem('token',this.token)
+        this.localStorage.clear()
+        this.localStorage.setItem('token',response)
         this.router.navigate(['/']);
       }
     )
