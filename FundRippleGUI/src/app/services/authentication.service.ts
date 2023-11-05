@@ -21,4 +21,15 @@ export class AuthenticationService {
     return this.http.post<Token>(`${environment.apiBaseUrl}/auth/authenticate`,user);
   }
 
+  public testUser(): Observable<any> {
+    // Define the HTTP headers with the JWT token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.jwtToken}`, // Include the JWT token in the 'Authorization' header
+    });
+
+    // Make the GET request with the custom headers
+    return this.http.get(`${this.apiUrl}/endpoint`, { headers });
+  }
+
 }

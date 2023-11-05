@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     @GetMapping
-    public ResponseEntity<String> sayHi(){
-        return ResponseEntity.ok("Hi");
+    public ResponseEntity<Boolean> sayHi(){
+        return ResponseEntity.ok(true);
     }
 }
