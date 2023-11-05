@@ -10,6 +10,9 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input'; // Import MatInputModule for input fields
+import { MatFormFieldModule } from '@angular/material/form-field'; // Import MatFormFieldModule for form fields
+import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule for buttons
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
