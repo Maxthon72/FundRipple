@@ -39,4 +39,7 @@ export class RegisterPageComponent implements OnInit{
     )
     console.log('Registration submitted:', this.user)
   }
+  navigateToHome(){
+    this.router.navigate(['home']);
+  }
 }

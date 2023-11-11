@@ -1,0 +1,51 @@
+/* styles.css or styles.scss */
+
+
+/* Style the spacers */
+
+.nav-space {
+    margin: 0 10px;
+    /* Adjust the margin for the desired space */
+}
+
+.nav-tab {
+    margin: 0 40px;
+    /* Adjust the margin for the desired space */
+}
+
+
+/* Style the left navigation */
+
+.left-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Style the right navigation */
+
+.right-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+/* Center the logo container */
+
+.header-content {
+    width: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+
+/* Adjust the margin between the navigation links */
+
+.mat-button {
+    margin-right: 10px;
+}
