@@ -18,11 +18,9 @@ export class LoginPageComponent implements OnInit{
     this.user = {userName:'',password:''}
   }
   onSubmit(){
-    console.log(this.user)
     this.authenticationService.authenticateNormalUser(this.user).subscribe(
       (response:Token)=>{
         this.token=response
-        console.log(this.token.token)
         this.localStorage.clear()
         localStorage.setItem('token', this.token.token);
 
@@ -30,12 +28,14 @@ export class LoginPageComponent implements OnInit{
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
           const value = localStorage.getItem(key!);
-          console.log(`Key: ${key}, Value: ${value}`);
         }
 
         // Navigate to the desired route
         this.router.navigate(['/']);
       }
     )
+  }
+  navigateToHome(){
+    this.router.navigate(['home']);
   }
 }

@@ -1,3 +1,22 @@
+<mat-toolbar color="primary">
+    <nav class="left-nav">
+        <a mat-button routerLink="/discover">Discover</a>
+        <span class="nav-space"></span>
+        <!-- Add a spacer -->
+        <a mat-button routerLink="/search">Search</a>
+        <span class="nav-tab"></span>
+        <!-- Add a spacer -->
+    </nav>
+    <div class="header-content" (click)="navigateToHome()">
+        <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
+    </div>
+    <nav class="right-nav">
+        <a mat-button routerLink="/login">Login</a>
+        <span class="nav-space"></span>
+        <!-- Add a spacer -->
+        <a mat-button routerLink="/register">Register</a>
+    </nav>
+</mat-toolbar>
 <div class="registration-form">
     <h2>Login</h2>
     <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">

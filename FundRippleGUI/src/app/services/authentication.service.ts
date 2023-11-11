@@ -28,9 +28,8 @@ export class AuthenticationService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers)
     // Make the GET request with the custom headers
-    return this.http.get<boolean>(`${environment.proxyUrl}/test/user`, { headers });
+    return this.http.get<boolean>(`${environment.proxyUrl}/test`, { headers });
   }
 
 }

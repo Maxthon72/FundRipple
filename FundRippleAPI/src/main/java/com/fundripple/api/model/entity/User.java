@@ -2,9 +2,7 @@ package com.fundripple.api.model.entity;
 
 import com.fundripple.api.model.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +14,8 @@ import java.util.List;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -60,6 +59,7 @@ public class User implements UserDetails {
         return userName;
     }
 
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -78,5 +78,19 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Builder
+    public static User createUser(Long id, String userName, String email, String password, String firstName, String lastName, String description, Role role) {
+        User user = new User();
+        user.setId(id);
+        user.setUserName(userName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setDescription(description);
+        user.setRole(role);
+        return user;
     }
 }

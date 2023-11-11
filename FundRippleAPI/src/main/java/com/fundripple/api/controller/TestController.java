@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/user")
+    @GetMapping()
     public ResponseEntity<Boolean> sayHi(){
         return ResponseEntity.ok(true);
     }
