@@ -29,7 +29,7 @@ export class AuthenticationService {
       Authorization: `Bearer ${token}`,
     });
     // Make the GET request with the custom headers
-    return this.http.get<boolean>(`${environment.proxyUrl}/test`, { headers });
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/test`, { headers });
   }
 
 }

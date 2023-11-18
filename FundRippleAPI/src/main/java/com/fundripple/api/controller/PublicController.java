@@ -27,11 +27,11 @@ public class PublicController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    // Endpoint to retrieve all users
-    @GetMapping("/users")
-
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
+//    // Endpoint to retrieve all users
+//    @GetMapping("/users")
+//
+//    public ResponseEntity<List<User>> getAllUsers() {
+//        List<User> users = userRepository.findAll();
+//        return new ResponseEntity<>(users, HttpStatus.OK);
+//    }
 }
