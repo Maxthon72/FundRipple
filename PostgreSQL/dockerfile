@@ -1,7 +1,10 @@
-FROM openjdk:17-oracle
+# Use the official PostgreSQL image as a parent image
+FROM postgres:latest
 
-WORKDIR /app
+# Copy the initialization script into the container at /docker-entrypoint-initdb.d
+COPY init.sql /docker-entrypoint-initdb.d/
 
-COPY build/libs/FundRipple.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Set environment variables
+ENV POSTGRES_DB fundripple
+ENV POSTGRES_USER yourusername
+ENV POSTGRES_PASSWORD yourpassword
