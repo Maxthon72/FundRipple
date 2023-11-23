@@ -1,0 +1,10 @@
+# Use the official PostgreSQL image as a parent image
+FROM postgres:latest
+
+# Copy the initialization script into the container at /docker-entrypoint-initdb.d
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Set environment variables
+ENV POSTGRES_DB fundripple
+ENV POSTGRES_USER yourusername
+ENV POSTGRES_PASSWORD yourpassword
