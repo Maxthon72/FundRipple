@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Projects {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,8 @@ public class Projects {
     @Column(name = "number_of_supporters",nullable = false)
     private Long numberOfSupporters;
 
-    @Column(name = "date_created", nullable = false)
+    @Column(nullable = false,name = "date_created")
+    @GeneratedValue()
     private LocalDateTime dateCreated;
 
     @Column(name = "date_closed", nullable = false)
@@ -58,5 +59,8 @@ public class Projects {
     @Column(name = "status",nullable = false)
     private ProjectStatus status;
 
-
+    @PrePersist
+    public void prePersist() {
+        dateCreated = LocalDateTime.now();
+    }
 }

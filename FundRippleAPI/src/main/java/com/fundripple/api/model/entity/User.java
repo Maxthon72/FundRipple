@@ -10,7 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,7 +26,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "user_name",nullable = false, unique = true)
     private String userName;
 
     @Column(nullable = false, unique = true)
@@ -33,13 +35,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column()
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column()
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column
+    @Column()
     private String description;
 
     @Column(nullable = false)
@@ -52,6 +54,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private LocalDateTime dateCreated;
 
+    @ManyToMany(mappedBy = "users")
+    private Set<Benefit> benefits = new HashSet<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
