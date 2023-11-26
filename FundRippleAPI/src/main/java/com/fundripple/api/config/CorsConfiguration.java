@@ -1,8 +1,10 @@
 package com.fundripple.api.config;
 
 import io.micrometer.common.lang.NonNull;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -15,11 +17,10 @@ public class CorsConfiguration {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("http://localhost:4200","http://0.0.0.0:80","http://localhost:80")
                         .allowedMethods("GET", "POST", "PUT", "DELETE","OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
-                System.out.println("CorsConfiguration addCorsMappings invoked");
             }
         };
     }
