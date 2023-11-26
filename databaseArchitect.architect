@@ -33,25 +33,25 @@
        <column id="COL6" populated="true" UUID="9773fb70-b929-4ea1-86d1-68f3dabe4b7a" autoIncrement="true" defaultValue="nextval(&apos;users_id_seq&apos;::regclass)" name="id" nullable="0" physicalName="id" precision="19" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="bigserial" type="-5" >
         <remarks></remarks>
        </column>
-       <column id="COL7" populated="true" UUID="97de570b-5084-47ae-9b70-2483c91ccea4" autoIncrement="false" name="description" nullable="1" physicalName="description" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL7" populated="true" UUID="97de570b-5084-47ae-9b70-2483c91ccea4" autoIncrement="false" defaultValue="" name="description" nullable="1" physicalName="description" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
-       <column id="COL8" populated="true" UUID="04c4125f-0a7d-4f7d-a243-9cfc1ae40180" autoIncrement="false" name="email" nullable="0" physicalName="email" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL8" populated="true" UUID="04c4125f-0a7d-4f7d-a243-9cfc1ae40180" autoIncrement="false" defaultValue="" name="email" nullable="0" physicalName="email" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
-       <column id="COL9" populated="true" UUID="6a7666f8-40fd-4ae7-83c7-81dc612f9a00" autoIncrement="false" name="first_name" nullable="0" physicalName="first_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL9" populated="true" UUID="6a7666f8-40fd-4ae7-83c7-81dc612f9a00" autoIncrement="false" defaultValue="" name="first_name" nullable="0" physicalName="first_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
-       <column id="COL10" populated="true" UUID="e17bb51a-04e3-409d-8812-f9abdac56b9a" autoIncrement="false" name="last_name" nullable="0" physicalName="last_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL10" populated="true" UUID="e17bb51a-04e3-409d-8812-f9abdac56b9a" autoIncrement="false" defaultValue="" name="last_name" nullable="0" physicalName="last_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
-       <column id="COL11" populated="true" UUID="eb5cfbd1-3ece-4bd7-a6c2-b347484a9eee" autoIncrement="false" name="password" nullable="0" physicalName="password" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL11" populated="true" UUID="eb5cfbd1-3ece-4bd7-a6c2-b347484a9eee" autoIncrement="false" defaultValue="" name="password" nullable="0" physicalName="password" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
-       <column id="COL12" populated="true" UUID="85bc9532-6f10-4c10-8724-d09dc5dfc53d" autoIncrement="false" name="role" nullable="0" physicalName="role" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL12" populated="true" UUID="85bc9532-6f10-4c10-8724-d09dc5dfc53d" autoIncrement="false" defaultValue="" name="role" nullable="0" physicalName="role" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
-       <column id="COL13" populated="true" UUID="b5d90b6a-45a5-41bb-b7d9-b9a75185202f" autoIncrement="false" name="user_name" nullable="0" physicalName="user_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
+       <column id="COL13" populated="true" UUID="b5d90b6a-45a5-41bb-b7d9-b9a75185202f" autoIncrement="false" defaultValue="" name="user_name" nullable="0" physicalName="user_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="varchar" type="12" >
         <remarks></remarks>
        </column>
        </folder>
@@ -490,7 +490,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.GenericDDLGenerator" allow-connection="true"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="0.7071067811865474" viewportX="0" viewportY="233" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="0.7071067811865474" viewportX="0" viewportY="438" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB21" x="1315" y="1331" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB38" x="912" y="1123" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB53" x="553" y="592" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>

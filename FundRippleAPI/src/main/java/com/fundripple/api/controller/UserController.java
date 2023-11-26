@@ -17,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @GetMapping()
     public ResponseEntity<UserReadModel> GetUserByToken(@RequestHeader("Authorization") String header){
         return new ResponseEntity<>(userService.getUserByToken(header), HttpStatus.OK);

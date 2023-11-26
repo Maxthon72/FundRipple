@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,6 +45,12 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(nullable = false)
+    private Boolean isActive;
+
+    @Column(nullable = false)
+    private LocalDateTime dateCreated;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -91,6 +99,8 @@ public class User implements UserDetails {
         user.setLastName(lastName);
         user.setDescription(description);
         user.setRole(role);
+        user.setIsActive(true);
+        user.setDateCreated(LocalDateTime.now());
         return user;
     }
 }
