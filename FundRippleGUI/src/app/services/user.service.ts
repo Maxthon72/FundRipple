@@ -21,7 +21,7 @@ export class UserService {
         Authorization: `Bearer ${storedToken}`,
       });
   
-      return this.http.get<User>(`${environment.proxyUrl}/user`, { headers });
+      return this.http.get<User>(`${environment.apiBaseUrl}/user`, { headers });
     } else {
       // If there's no token, return an observable that emits null
       return of(null);

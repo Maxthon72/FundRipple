@@ -12,14 +12,20 @@ import {FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input'; // Import MatInputModule for input fields
 import { MatFormFieldModule } from '@angular/material/form-field'; // Import MatFormFieldModule for form fields
-import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule for buttons
+import { MatButtonModule } from '@angular/material/button';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
+import { UserPageComponent } from './components/user-page/user-page.component'; // Import MatButtonModule for buttons
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    CreateProjectComponent,
+    SpecificProjectComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
