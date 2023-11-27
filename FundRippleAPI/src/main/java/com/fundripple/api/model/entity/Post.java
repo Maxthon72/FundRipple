@@ -26,7 +26,7 @@ public class Post {
     @Column(nullable = false)
     private PostStatus status;
 
-    @Column()
+    @Column(name = "image")
     private String url;
 
     @Column(nullable = false)

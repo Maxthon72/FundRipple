@@ -48,10 +48,8 @@ public class Project {
     private LocalDateTime planedDateOfClosing;
 
 
-    //TO DO
-    /*
     @Column(name="banner_image")
-     */
+    private String bannerURL;
 
     @Column(nullable = false)
     private String summery;
