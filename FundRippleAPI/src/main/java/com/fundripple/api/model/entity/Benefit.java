@@ -28,4 +28,14 @@ public class Benefit {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users = new HashSet<>();
+
+    @ManyToOne()
+    @JoinColumn()
+    private Project project;
+
+    @Column(name = "money_goal")
+    private Long moneyGoal;
+
+    @Column()
+    private String description;
 }
