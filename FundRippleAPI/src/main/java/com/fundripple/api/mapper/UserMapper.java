@@ -1,12 +1,14 @@
 package com.fundripple.api.mapper;
 
 import com.fundripple.api.model.dto.read.UserReadModel;
+import com.fundripple.api.model.dto.read.UserSLElement;
 import com.fundripple.api.model.dto.write.UserWriteModel;
 import com.fundripple.api.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
+import org.mapstruct.control.MappingControl;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -25,4 +27,6 @@ public interface UserMapper {
     void updateUserFromDto(UserWriteModel userWriteModel, @MappingTarget User user);
 
     List<UserReadModel> map(List<User> users);
+
+    UserSLElement toSLE(USer user);
 }

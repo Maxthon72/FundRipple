@@ -1,6 +1,7 @@
 package com.fundripple.api.mapper;
 
 import com.fundripple.api.model.dto.read.ProjectReadModel;
+import com.fundripple.api.model.dto.read.ProjectSLElement;
 import com.fundripple.api.model.dto.read.UserReadModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.entity.Project;
@@ -22,4 +23,8 @@ public interface ProjectMapper {
     //void updateProjectFromDto(ProjectWriteModel projectWriteModel);
 
     List<ProjectReadModel> map(List<Project> projectList);
+
+    ProjectSLElement toSLElementModel(Project project);
+
+    List<ProjectSLElement> mapSLE(List<Project> projectList);
 }
