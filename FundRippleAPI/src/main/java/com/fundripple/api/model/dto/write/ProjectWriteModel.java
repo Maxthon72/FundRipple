@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ProjectWriteModel {
     private String projectName;
-    private Long goal;
+    private Double goal;
     private String summery;
     private LocalDateTime planedDateOfClosing;
 }

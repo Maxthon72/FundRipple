@@ -29,19 +29,21 @@ public class Project {
     private User responsibleUser;
 
     @Column(nullable = false)
-    private Long goal;
+    private Double goal;
 
     @Column(name = "money_collected",nullable = false)
-    private Long moneyCollected;
+    @GeneratedValue()
+    private Double moneyCollected;
 
     @Column(name = "number_of_supporters",nullable = false)
+    @GeneratedValue()
     private Long numberOfSupporters;
 
     @Column(nullable = false,name = "date_created")
     @GeneratedValue()
     private LocalDateTime dateCreated;
 
-    @Column(name = "date_closed", nullable = false)
+    @Column(name = "date_closed")
     private LocalDateTime dateClosed;
 
     @Column(name = "planed_date_of_closing", nullable = false)
@@ -55,10 +57,14 @@ public class Project {
     private String summery;
 
     @Column(name = "status",nullable = false)
+    @GeneratedValue()
     private ProjectStatus status;
 
     @PrePersist
     public void prePersist() {
         dateCreated = LocalDateTime.now();
+        moneyCollected = 0.00;
+        numberOfSupporters = 0L;
+        status = ProjectStatus.OPEN;
     }
 }

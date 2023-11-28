@@ -14,8 +14,8 @@ import java.util.List;
 public class ProjectReadModel {
     private String projectName;
     private UserReadModel responsibleUser;
-    private Long goal;
-    private Long moneyCollected;
+    private Double goal;
+    private Double moneyCollected;
     private Long numberOfSupporters;
     private LocalDateTime dateCreated;
     private LocalDateTime dateClosed;
