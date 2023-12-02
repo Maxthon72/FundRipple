@@ -1,6 +1,7 @@
 package com.fundripple.api.model.entity;
 
 import com.fundripple.api.model.enums.Role;
+import com.fundripple.api.repository.ProjectRepository;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,9 +33,6 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
-
     @Column(name = "first_name")
     private String firstName;
 
@@ -56,6 +54,10 @@ public class User implements UserDetails {
 
     @ManyToMany(mappedBy = "users")
     private Set<Benefit> benefits = new HashSet<>();
+
+    @OneToOne()
+    @JoinColumn()
+    private Authentication authentication;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -63,7 +65,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return authentication.getPassword();
     }
 
     @Override
@@ -93,12 +95,12 @@ public class User implements UserDetails {
     }
 
     @Builder
-    public static User createUser(Long id, String userName, String email, String password, String firstName, String lastName, String description, Role role) {
+    public static User createUser(Long id, String userName, String email, Authentication authentication, String firstName, String lastName, String description, Role role) {
         User user = new User();
         user.setId(id);
+        user.setAuthentication(authentication);
         user.setUserName(userName);
         user.setEmail(email);
-        user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setDescription(description);
