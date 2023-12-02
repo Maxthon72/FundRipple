@@ -34,7 +34,8 @@ public class ProjectService {
 
     public List<ProjectSLElement> getAllProjectsSLE(String status){
         return projectMapper.mapSLE(
-                projectRepository.findAllByStatus(ProjectStatus.valueOf(status))
+                projectRepository.findAllByStatus(
+                        ProjectStatus.valueOf(status))
         );
     }
 }

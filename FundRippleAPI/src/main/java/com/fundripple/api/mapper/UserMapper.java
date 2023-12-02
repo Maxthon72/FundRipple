@@ -19,6 +19,7 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     User toEntity(UserWriteModel userWriteModel);
+    User toEntity(UserSLElement userSLElement);
 
 
     default UserReadModel toReadModel(User user){
@@ -28,5 +29,7 @@ public interface UserMapper {
 
     List<UserReadModel> map(List<User> users);
 
-    UserSLElement toSLE(USer user);
+    UserSLElement toSLEElement(User user);
+    List<UserSLElement> mapToSLE(List<User> users);
+
 }
