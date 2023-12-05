@@ -23,6 +23,7 @@ public class ProjectDescription {
     private Project project;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private ProjectDescriptionElementType type;
 
     @Column(name = "index_in_description")

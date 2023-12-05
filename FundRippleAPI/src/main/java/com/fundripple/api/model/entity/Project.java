@@ -21,7 +21,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "project_name", nullable = false)
+    @Column(name = "project_name", nullable = false,unique = true)
     private String projectName;
 
     @ManyToOne
@@ -48,7 +48,6 @@ public class Project {
 
     @Column(name = "planed_date_of_closing", nullable = false)
     private LocalDateTime planedDateOfClosing;
-
 
     @Column(name="banner_image")
     private String bannerURL;

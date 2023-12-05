@@ -29,7 +29,11 @@ public interface UserMapper {
 
     List<UserReadModel> map(List<User> users);
 
-    UserSLElement toSLEElement(User user);
+    default UserSLElement toSLElement(User user){
+        UserSLElement userSLElement = new UserSLElement();
+        userSLElement.setUserName(user.getUsername());
+        return userSLElement;
+    }
     List<UserSLElement> mapToSLE(List<User> users);
 
 }

@@ -20,7 +20,7 @@ public class ProjectReadModel {
     private LocalDateTime dateCreated;
     private LocalDateTime dateClosed;
     private LocalDateTime planedDateOfClosing;
-    //private List<DescriptionReadModel> description;
+    private List<ProjectDescriptionReadModel> description;
     private String summery;
     private String status;
 }

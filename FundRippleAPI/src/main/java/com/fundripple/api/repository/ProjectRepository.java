@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findAllByStatus(ProjectStatus status);
+    Project findProjectByProjectName(String projectName);
 }

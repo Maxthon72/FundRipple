@@ -4,6 +4,8 @@ import com.fundripple.api.model.authentication.AuthenticationResponse;
 import com.fundripple.api.model.authentication.RegisterRequest;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
 import com.fundripple.api.model.dto.read.ProjectSLElement;
+import com.fundripple.api.model.dto.write.PaymentWriteModel;
+import com.fundripple.api.model.dto.write.ProjectDescriptionWriteModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.service.ProjectService;
@@ -27,10 +29,11 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.addProject(projectWriteModel,header));
     }
 
-    @GetMapping("/SLE")
-    public ResponseEntity<List<ProjectSLElement>> getAllProjectInSLE(
-            @RequestParam(name = "status", defaultValue = "OPEN") String status
-    ){
-        return ResponseEntity.ok(projectService.getAllProjectsSLE(status));
+    @PostMapping("/description/{projectId}")
+    public ResponseEntity<ProjectReadModel> setDescriptionToProject(
+            @PathVariable Long projectId,
+            @RequestBody List<ProjectDescriptionWriteModel> projectDescriptionWriteModels){
+        return ResponseEntity.ok(projectService.addDescriptionToProject(projectId,projectDescriptionWriteModels));
     }
+
 }
