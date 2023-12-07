@@ -47,7 +47,10 @@
         <div class="form-group">
             <mat-form-field appearance="fill">
                 <mat-label for="password">Password</mat-label>
-                <input matInput type="password" id="password" name="password" [(ngModel)]="user.password" required>
+                <input matInput type="{{ hidePassword ? 'password' : 'text' }}" id="password" name="password" [(ngModel)]="user.password" required>
+                <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+                    <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                  </button>
             </mat-form-field>
         </div>
         <button type="submit" [disabled]="registrationForm.invalid" mat-button>Register</button>

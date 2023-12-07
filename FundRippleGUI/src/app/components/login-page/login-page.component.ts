@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit{
   user!: PartUser;
   token:Token|null=null
+  hidePassword = true;
+
   constructor(private authenticationService:AuthenticationService,private localStorage:LocalStorage,private router:Router){}
   ngOnInit(): void {
     this.user = {userName:'',password:''}
@@ -35,6 +37,13 @@ export class LoginPageComponent implements OnInit{
       }
     )
   }
+  
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+    console.log(this.hidePassword);
+  }
+
   navigateToHome(){
     this.router.navigate(['home']);
   }

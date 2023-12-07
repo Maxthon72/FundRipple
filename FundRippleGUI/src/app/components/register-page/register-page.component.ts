@@ -17,6 +17,7 @@ export class RegisterPageComponent implements OnInit{
 
   constructor(private auth:AuthenticationService,private router:Router,private localStorage: LocalStorage){}
 
+  hidePassword = true;
   ngOnInit(): void {
     this.user = {
       userName: '',
@@ -41,5 +42,8 @@ export class RegisterPageComponent implements OnInit{
   }
   navigateToHome(){
     this.router.navigate(['home']);
+  }
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }
