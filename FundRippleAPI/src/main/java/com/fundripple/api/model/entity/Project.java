@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "projects")
@@ -58,6 +60,9 @@ public class Project {
     @Column(name = "status",nullable = false)
     @GeneratedValue()
     private ProjectStatus status;
+
+    @ManyToMany(mappedBy = "projects")
+    private Set<Tag> tags = new HashSet<>();
 
     @PrePersist
     public void prePersist() {
