@@ -28,4 +28,7 @@ public class Tag {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private Set<Project> projects = new HashSet<>();
+
+    @Column()
+    private String tag;
 }

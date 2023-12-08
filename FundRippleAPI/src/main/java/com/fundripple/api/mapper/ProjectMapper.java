@@ -18,13 +18,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy. WARN,
-        uses = {UserMapper.class,ProjectDescriptionMapper.class,ProjectDescriptionMapper.class})
+        uses = {UserMapper.class,ProjectDescriptionMapper.class,ProjectDescriptionMapper.class,TagMapper.class})
 public interface ProjectMapper {
 
     ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
 
     Project toEntity(ProjectWriteModel projectWriteModel);
-    Project toEntity(ProjectSLElement projectSLElement);
 
     ProjectReadModel toReadModel(Project project);
 

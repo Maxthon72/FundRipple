@@ -21,6 +21,7 @@ public class ProjectReadModel {
     private LocalDateTime dateClosed;
     private LocalDateTime planedDateOfClosing;
     private List<ProjectDescriptionReadModel> description;
+    private List<TagReadModel> tags;
     private String summery;
     private String status;
 }
