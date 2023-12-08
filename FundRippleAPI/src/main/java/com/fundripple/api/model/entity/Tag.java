@@ -29,6 +29,6 @@ public class Tag {
     )
     private Set<Project> projects = new HashSet<>();
 
-    @Column()
-    private String tag;
+    @Column(unique=true,nullable = false,name = "tag_name")
+    private String tagName;
 }
