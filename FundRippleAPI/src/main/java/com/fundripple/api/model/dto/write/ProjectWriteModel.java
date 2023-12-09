@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -13,5 +13,5 @@ public class ProjectWriteModel {
     private String projectName;
     private Double goal;
     private String summery;
-    private LocalDateTime planedDateOfClosing;
+    private LocalDate planedDateOfClosing;
 }

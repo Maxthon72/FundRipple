@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,13 +44,13 @@ public class Project {
 
     @Column(nullable = false,name = "date_created")
     @GeneratedValue()
-    private LocalDateTime dateCreated;
+    private LocalDate dateCreated;
 
     @Column(name = "date_closed")
-    private LocalDateTime dateClosed;
+    private LocalDate dateClosed;
 
     @Column(name = "planed_date_of_closing", nullable = false)
-    private LocalDateTime planedDateOfClosing;
+    private LocalDate planedDateOfClosing;
 
     @Column(name="banner_image")
     private String bannerURL;
@@ -66,7 +67,7 @@ public class Project {
 
     @PrePersist
     public void prePersist() {
-        dateCreated = LocalDateTime.now();
+        dateCreated = LocalDate.now();
         moneyCollected = 0.00;
         numberOfSupporters = 0L;
         status = ProjectStatus.OPEN;

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,9 +18,9 @@ public class ProjectReadModel {
     private Double goal;
     private Double moneyCollected;
     private Long numberOfSupporters;
-    private LocalDateTime dateCreated;
-    private LocalDateTime dateClosed;
-    private LocalDateTime planedDateOfClosing;
+    private LocalDate dateCreated;
+    private LocalDate dateClosed;
+    private LocalDate planedDateOfClosing;
     private List<ProjectDescriptionReadModel> description;
     private List<TagReadModel> tags;
     private String summery;
