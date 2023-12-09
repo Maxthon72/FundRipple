@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
 import { UserPageComponent } from './components/user-page/user-page.component'; // Import MatButtonModule for buttons
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { UserPageComponent } from './components/user-page/user-page.component'; 
     UserPageComponent
   ],
   imports: [
+    MatChipsModule,
     MatIconModule,
     BrowserModule,
     AppRoutingModule,

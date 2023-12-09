@@ -1,0 +1,140 @@
+/* styles.css or styles.scss */
+
+
+/* Style the spacers */
+
+.nav-space {
+    margin: 0 10px;
+    /* Adjust the margin for the desired space */
+}
+
+.nav-tab {
+    margin: 0 40px;
+    /* Adjust the margin for the desired space */
+}
+
+
+/* Style the left navigation */
+
+.left-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Style the right navigation */
+
+.right-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+/* Center the logo container */
+
+.header-content {
+    width: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+
+/* Adjust the margin between the navigation links */
+
+.mat-button {
+    margin-right: 10px;
+}
+
+
+/* Style the project info input area */
+
+.project-info-input-area {
+    margin-top: 20px;
+    /* Adjust the margin as needed */
+}
+
+
+/* Style the tag selection buttons */
+
+.tag-selection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag-selection button {
+    margin: 5px;
+}
+
+
+/* Style the form fields */
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+    /* Adjust the margin as needed */
+}
+
+
+/* Style the form buttons */
+
+mat-raised-button {
+    margin-right: 10px;
+    /* Adjust the margin between buttons */
+}
+
+
+/* Style the warning button */
+
+mat-raised-button[color="warn"] {
+    background-color: #ff5722;
+    /* Adjust the color for the warning button */
+}
+
+
+/* Style the accent button */
+
+mat-raised-button[color="accent"] {
+    background-color: #ff4081;
+    /* Adjust the color for the accent button */
+}
+
+
+/* Style for registration form */
+
+.project-info-input-area {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+
+/* Align the "Next" button to the right */
+
+.next-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    /* Add some top margin for spacing */
+}
+
+.next-back-button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    /* Add some top margin for spacing */
+}
+
+.finish-back-button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    /* Add some top margin for spacing */
+}

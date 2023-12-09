@@ -1,11 +1,24 @@
 <mat-toolbar color="primary">
     <nav class="left-nav">
-        <a mat-button routerLink="/discover">Discover</a>
-        <span class="nav-space"></span>
-        <!-- Add a spacer -->
-        <a mat-button routerLink="/search">Search</a>
-        <span class="nav-tab"></span>
-        <!-- Add a spacer -->
+        <div *ngIf="!logedIn">
+            <a mat-button routerLink="/discover">Discover</a>
+            <span class="nav-space"></span>
+            <!-- Add a spacer -->
+            <a mat-button routerLink="/search">Search</a>
+            <span class="nav-tab"></span>
+            <!-- Add a spacer -->
+        </div>
+
+        <div *ngIf="logedIn">
+            <a mat-button routerLink="/discover">Discover</a>
+            <span class="nav-space"></span>
+            <a mat-button routerLink="/search">Search</a>
+            <span class="nav-space"></span>
+            <a mat-button routerLink="/userProjects">My Projects</a>
+            <span class="nav-space"></span>
+            <a mat-button routerLink="/createProject">Create Project</a>
+            <span class="nav-tab"></span>
+        </div>
     </nav>
     <div class="header-content" (click)="navigateToHome()">
         <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />

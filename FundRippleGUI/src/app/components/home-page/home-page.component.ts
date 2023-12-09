@@ -59,5 +59,6 @@ export class HomePageComponent implements OnInit{
     localStorage.clear()
     this.logedIn = false
     this.user = null
+    this.navigateToHome()
   }
 }
