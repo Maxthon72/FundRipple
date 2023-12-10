@@ -1,42 +1,44 @@
-<mat-toolbar color="primary">
-    <nav class="left-nav">
-        <div *ngIf="!logedIn">
-            <a mat-button routerLink="/discover">Discover</a>
-            <span class="nav-space"></span>
-            <!-- Add a spacer -->
-            <a mat-button routerLink="/search">Search</a>
-            <span class="nav-tab"></span>
-            <!-- Add a spacer -->
-        </div>
+<div class="tool-bar">
+    <mat-toolbar color="primary">
+        <nav class="left-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/discover">Discover</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/search">Search</a>
+                <span class="nav-tab"></span>
+                <!-- Add a spacer -->
+            </div>
 
-        <div *ngIf="logedIn">
-            <a mat-button routerLink="/discover">Discover</a>
-            <span class="nav-space"></span>
-            <a mat-button routerLink="/search">Search</a>
-            <span class="nav-space"></span>
-            <a mat-button routerLink="/userProjects">My Projects</a>
-            <span class="nav-space"></span>
-            <a mat-button routerLink="/createProject">Create Project</a>
-            <span class="nav-tab"></span>
+            <div *ngIf="logedIn">
+                <a mat-button routerLink="/discover">Discover</a>
+                <span class="nav-space"></span>
+                <a mat-button routerLink="/search">Search</a>
+                <span class="nav-space"></span>
+                <a mat-button routerLink="/userProjects">My Projects</a>
+                <span class="nav-space"></span>
+                <a mat-button routerLink="/createProject">Create Project</a>
+                <span class="nav-tab"></span>
+            </div>
+        </nav>
+        <div class="header-content" (click)="navigateToHome()">
+            <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
         </div>
-    </nav>
-    <div class="header-content" (click)="navigateToHome()">
-        <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
-    </div>
-    <nav class="right-nav">
-        <div *ngIf="!logedIn">
-            <a mat-button routerLink="/login">Login</a>
-            <span class="nav-space"></span>
-            <!-- Add a spacer -->
-            <a mat-button routerLink="/register">Register</a>
-        </div>
-        <div *ngIf="logedIn">
-            <a mat-button routerLink="/user">{{getUserName()}}</a>
-            <span class="nav-space"></span>
-            <a mat-button (click)="logOut()">Logout</a>
-        </div>
-    </nav>
-</mat-toolbar>
+        <nav class="right-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/login">Login</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/register">Register</a>
+            </div>
+            <div *ngIf="logedIn">
+                <a mat-button routerLink="/user">{{getUserName()}}</a>
+                <span class="nav-space"></span>
+                <a mat-button (click)="logOut()">Logout</a>
+            </div>
+        </nav>
+    </mat-toolbar>
+</div>
 <div class="home">
     <h1>Welcome to My Angular App</h1>
     <p>This is the home page of my Angular application.</p>

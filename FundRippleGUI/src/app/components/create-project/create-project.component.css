@@ -3,6 +3,10 @@
 
 /* Style the spacers */
 
+.tool-bar {
+    padding-bottom: 40px;
+}
+
 .nav-space {
     margin: 0 10px;
     /* Adjust the margin for the desired space */
@@ -107,9 +111,10 @@ mat-raised-button[color="accent"] {
 /* Style for registration form */
 
 .project-info-input-area {
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    padding-top: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     border-radius: 8px;
@@ -136,5 +141,43 @@ mat-raised-button[color="accent"] {
     display: flex;
     justify-content: space-between;
     margin-top: 16px;
-    /* Add some top margin for spacing */
+}
+
+.page-three {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.description-elements {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.description-content {
+    padding-top: 10px;
+    display: flex;
+    align-items: stretch;
+}
+
+.description-text-input {
+    flex-grow: 1;
+    /* Take remaining width */
+}
+
+.description-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.button-column button {
+    margin-bottom: 8px;
+    /* Adjust the margin as needed */
 }

@@ -22,6 +22,10 @@
     align-items: center;
 }
 
+.tool-bar {
+    padding-bottom: 40px;
+}
+
 
 /* Style the right navigation */
 

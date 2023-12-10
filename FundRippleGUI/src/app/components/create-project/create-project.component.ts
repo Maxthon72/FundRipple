@@ -12,6 +12,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ProjectDescription } from 'src/app/interfaces/Project/ProjectDescription';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class CreateProjectComponent implements OnInit{
   selectedTags:Tag[]=[]
   maxTags = 4;
   totalSelected=0;
+  numberOfDescriptions = 0;
+  listOfDescriptions:ProjectDescription[]=[]
 
   announcer = Inject(LiveAnnouncer);
   
@@ -77,6 +80,51 @@ export class CreateProjectComponent implements OnInit{
       localStorage.clear()
       this.router.navigate(['home']);
     }
+  }
+
+  descriptionUp(selectedDescription:ProjectDescription){
+    const indexToMove = this.listOfDescriptions.findIndex(description => description.indexIdDescription === selectedDescription.indexIdDescription);
+    this.moveElementUp(this.listOfDescriptions,indexToMove)
+  }
+
+  descriptionDown(selectedDescription:ProjectDescription){
+    const indexToMove = this.listOfDescriptions.findIndex(description => description.indexIdDescription === selectedDescription.indexIdDescription);
+    this.moveElementDown(this.listOfDescriptions,indexToMove)
+  }
+
+  deleteDescription(selectedDescription:ProjectDescription){
+    const indexToRemove = this.listOfDescriptions.findIndex(description => description.indexIdDescription === selectedDescription.indexIdDescription);
+    
+    if (indexToRemove !== -1) {
+      this.listOfDescriptions.splice(indexToRemove,1);
+      return
+    }
+  }
+
+  moveElementUp = (arr:ProjectDescription[], index:number) => {
+    console.log(index)
+    console.log(arr)
+    if (index > 0 && index < arr.length) {
+      [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]];
+    }
+  };
+
+  moveElementDown = (arr:ProjectDescription[], index:number) => {
+    console.log(index)
+    console.log(arr)
+    if (index > -1 && index < arr.length-1) {
+      [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+    }
+  };
+
+  addDescriptioElementText():void{
+    this.numberOfDescriptions+=1
+    let description:ProjectDescription = {
+      indexIdDescription:this.numberOfDescriptions,
+      description:"",
+      type:"TEXT"
+    }
+    this.listOfDescriptions.push(description)
   }
 
   addOrRemove(selectedTag:Tag):void{

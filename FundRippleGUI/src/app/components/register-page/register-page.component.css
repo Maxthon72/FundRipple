@@ -50,27 +50,35 @@
     margin-right: 10px;
 }
 
+
 /* Style for registration form */
+
 .registration-form {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.tool-bar {
+    padding-bottom: 40px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 mat-form-field {
-  width: 100%;
+    width: 100%;
 }
 
+
 /* Center the registration form */
+
 @media (max-width: 600px) {
-  .registration-form {
-    width: 100%;
-  }
+    .registration-form {
+        width: 100%;
+    }
 }

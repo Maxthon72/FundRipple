@@ -32,6 +32,10 @@
     justify-content: flex-end;
 }
 
+.tool-bar {
+    padding-bottom: 40px;
+}
+
 
 /* Center the logo container */
 

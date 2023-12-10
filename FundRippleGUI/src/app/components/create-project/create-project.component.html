@@ -1,42 +1,44 @@
-<mat-toolbar color="primary">
-    <nav class="left-nav">
-        <div *ngIf="!logedIn">
-            <a mat-button routerLink="/discover">Discover</a>
-            <span class="nav-space"></span>
-            <!-- Add a spacer -->
-            <a mat-button routerLink="/search">Search</a>
-            <span class="nav-tab"></span>
-            <!-- Add a spacer -->
-        </div>
+<div class="tool-bar">
+    <mat-toolbar color="primary">
+        <nav class="left-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/discover">Discover</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/search">Search</a>
+                <span class="nav-tab"></span>
+                <!-- Add a spacer -->
+            </div>
 
-        <div *ngIf="logedIn">
-            <a mat-button routerLink="/discover">Discover</a>
-            <span class="nav-space"></span>
-            <a mat-button routerLink="/search">Search</a>
-            <span class="nav-space"></span>
-            <a mat-button routerLink="/userProjects">My Projects</a>
-            <span class="nav-space"></span>
-            <a mat-button routerLink="/createProject">Create Project</a>
-            <span class="nav-tab"></span>
+            <div *ngIf="logedIn">
+                <a mat-button routerLink="/discover">Discover</a>
+                <span class="nav-space"></span>
+                <a mat-button routerLink="/search">Search</a>
+                <span class="nav-space"></span>
+                <a mat-button routerLink="/userProjects">My Projects</a>
+                <span class="nav-space"></span>
+                <a mat-button routerLink="/createProject">Create Project</a>
+                <span class="nav-tab"></span>
+            </div>
+        </nav>
+        <div class="header-content" (click)="navigateToHome()">
+            <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
         </div>
-    </nav>
-    <div class="header-content" (click)="navigateToHome()">
-        <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
-    </div>
-    <nav class="right-nav">
-        <div *ngIf="!logedIn">
-            <a mat-button routerLink="/login">Login</a>
-            <span class="nav-space"></span>
-            <!-- Add a spacer -->
-            <a mat-button routerLink="/register">Register</a>
-        </div>
-        <div *ngIf="logedIn">
-            <a mat-button routerLink="/user">{{getUserName()}}</a>
-            <span class="nav-space"></span>
-            <a mat-button (click)="logOut()">Logout</a>
-        </div>
-    </nav>
-</mat-toolbar>
+        <nav class="right-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/login">Login</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/register">Register</a>
+            </div>
+            <div *ngIf="logedIn">
+                <a mat-button routerLink="/user">{{getUserName()}}</a>
+                <span class="nav-space"></span>
+                <a mat-button (click)="logOut()">Logout</a>
+            </div>
+        </nav>
+    </mat-toolbar>
+</div>
 <div class="project-info-input-area">
     <div *ngIf="currentStep === 1" class="page-one">
         <h2>Project information</h2>
@@ -71,8 +73,8 @@
 
 
             <mat-form-field appearance="fill">
-                <mat-label for="projectName">Summary</mat-label>
-                <textarea matInput id="projectName" name="Project name" [(ngModel)]="project.summery" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
+                <mat-label for="projectSummery">Summary</mat-label>
+                <textarea matInput id="projectSummery" name="Project summery" [(ngModel)]="project.summery" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
             </textarea>
             </mat-form-field>
 
@@ -87,9 +89,54 @@
         </form>
     </div>
 
-    <div *ngIf="currentStep === 3" class="page-two">
+    <div *ngIf="currentStep === 3" class="page-three">
         <h2>Project description</h2>
         <form (ngSubmit)="finish()" #formStep2="ngForm">
+            <div class="description">
+                <div class="description-elements" *ngFor="let description of listOfDescriptions">
+                    <div class="text-input" *ngIf="description.type=='TEXT'">
+                        <div class="description-content">
+                            <div class="description-text-input">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Text description</mat-label>
+                                    <textarea matInput name="Project description{{description.indexIdDescription}}" [(ngModel)]="description.description" required maxlength="400" rows="2"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="description-buttons">
+                                <div class="button-column">
+                                    <button type="button" mat-mini-fab color="accent" (click)="descriptionUp(description)">
+                                        <mat-icon>keyboard_arrow_up</mat-icon>
+                                    </button>
+                                    <button type="button" mat-mini-fab color="accent" (click)="deleteDescription(description)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button type="button" mat-mini-fab color="accent" (click)="descriptionDown(description)">
+                                        <mat-icon>keyboard_arrow_down</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-input" *ngIf="description.type=='URL'">
+                        <div class="description-buttons">
+                            <div class="description-buttons">
+                                <button type="button" mat-mini-fab color="accent" (click)="descriptionUp(description)">
+                                    <mat-icon>keyboard_arrow_up</mat-icon>
+                                </button>
+                                <button type="button" mat-mini-fab color="accent" (click)="deleteDescription(description)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button type="button" mat-mini-fab color="accent" (click)="descriptionDown(description)">
+                                    <mat-icon>keyboard_arrow_down</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" mat-raised-button color="accent" (click)="addDescriptioElementText()">
+                    Add text
+                </button>
+            </div>
             <div class="finish-back-button">
                 <button mat-raised-button color="warn" class="back-button" (click)="goBack()">Back</button>
                 <button mat-raised-button color="accent" class="submit-button" type="submit">Finish</button>
