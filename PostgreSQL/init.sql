@@ -1,8 +1,5 @@
 -- Create a database
-CREATE DATABASE fundripple;
-
--- Switch to the newly created database
-\c fundripple;
+CREATE DATABASE FundRipple;
 
 -- Create tables and perform other database initialization steps
 -- Your SQL statements here
