@@ -58,12 +58,11 @@ public class ProjectService {
     }
 
     public ProjectReadModel addDescriptionToProject(
-            Long projectId,
+            String projectName,
             List<ProjectDescriptionWriteModel> projectDescriptionWriteModels) {
         Project project = new Project();
-        if(projectRepository.findById(projectId).isPresent()){
-            project=projectRepository.findById(projectId).get();
-        }
+
+        project=projectRepository.findProjectByProjectName(projectName);
         for(ProjectDescriptionWriteModel projectDescriptionWriteModel:projectDescriptionWriteModels){
             ProjectDescription projectDescription = projectDescriptionMapper.toEntity(projectDescriptionWriteModel);
             projectDescription.setProject(project);

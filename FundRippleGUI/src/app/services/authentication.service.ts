@@ -32,4 +32,8 @@ export class AuthenticationService {
     return this.http.get<boolean>(`${environment.apiBaseUrl}/test`, { headers });
   }
 
+  public testOrigin():void{
+    this.http.get<void>(`${environment.apiBaseUrl}/test/print-origin`)
+  }
+
 }

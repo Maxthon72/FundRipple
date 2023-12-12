@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProjectDescriptionWriteModel {
 
-    private Long projectId;
     private Long indexIdDescription;
     private String description;
     private String type;

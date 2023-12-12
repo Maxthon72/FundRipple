@@ -29,11 +29,11 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.addProject(projectWriteModel,header));
     }
 
-    @PostMapping("/description/{projectId}")
+    @PostMapping("/description/{projectName}")
     public ResponseEntity<ProjectReadModel> setDescriptionToProject(
-            @PathVariable Long projectId,
+            @PathVariable String projectName,
             @RequestBody List<ProjectDescriptionWriteModel> projectDescriptionWriteModels){
-        return ResponseEntity.ok(projectService.addDescriptionToProject(projectId,projectDescriptionWriteModels));
+        return ResponseEntity.ok(projectService.addDescriptionToProject(projectName,projectDescriptionWriteModels));
     }
 
 }

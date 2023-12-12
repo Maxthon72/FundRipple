@@ -2,8 +2,10 @@ import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import { Tag } from 'src/app/interfaces/Project/ProjectTags';
 import { User } from 'src/app/interfaces/User/fullUser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,12 +18,17 @@ export class HomePageComponent implements OnInit{
   logedIn = false
   user:User|null=null;
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
-    private userService:UserService){}
+    private userService:UserService,private projectService:ProjectService){}
   ngOnInit(): void {
     const storedToken = localStorage.getItem('token');
-    
+    this.projectService.getAllTags().subscribe(
+      (res:Tag[])=>{
+        console.log(res)
+      }
+    )
     if (storedToken) {
       this.token = storedToken;
+      this.authenticationService.testOrigin();
       // Use the retrieved token with the authentication service
       this.authenticationService.testUser(this.token).subscribe(
         (res: boolean) => {
