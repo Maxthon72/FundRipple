@@ -29,6 +29,7 @@ public interface ProjectMapper {
 
     //void updateProjectFromDto(ProjectWriteModel projectWriteModel);
 
+
     List<ProjectReadModel> map(List<Project> projectList);
 
     ProjectSLElement toSLElementModel(Project project);
