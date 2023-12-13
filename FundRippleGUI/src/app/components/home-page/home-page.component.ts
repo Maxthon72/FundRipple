@@ -21,11 +21,6 @@ export class HomePageComponent implements OnInit{
     private userService:UserService,private projectService:ProjectService){}
   ngOnInit(): void {
     const storedToken = localStorage.getItem('token');
-    this.projectService.getAllTags().subscribe(
-      (res:Tag[])=>{
-        console.log(res)
-      }
-    )
     if (storedToken) {
       this.token = storedToken;
       this.authenticationService.testOrigin();
@@ -43,7 +38,7 @@ export class HomePageComponent implements OnInit{
             (error) => {
               console.error('Error getting user info:', error);
             }
-          );        
+          );
         }
       );
     } else {

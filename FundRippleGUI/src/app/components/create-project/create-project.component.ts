@@ -34,7 +34,7 @@ export class CreateProjectComponent implements OnInit{
   listOfDescriptions:ProjectDescription[]=[]
 
   announcer = Inject(LiveAnnouncer);
-  
+
 
   constructor (private router: Router,private authenticationService:AuthenticationService,private userService:UserService,
       private projectService:ProjectService){
@@ -72,7 +72,7 @@ export class CreateProjectComponent implements OnInit{
               localStorage.clear()
               this.router.navigate(['home']);
             }
-          );        
+          );
         }
       );
     } else {
@@ -94,7 +94,7 @@ export class CreateProjectComponent implements OnInit{
 
   deleteDescription(selectedDescription:ProjectDescription){
     const indexToRemove = this.listOfDescriptions.findIndex(description => description.indexIdDescription === selectedDescription.indexIdDescription);
-    
+
     if (indexToRemove !== -1) {
       this.listOfDescriptions.splice(indexToRemove,1);
       return
@@ -129,7 +129,7 @@ export class CreateProjectComponent implements OnInit{
 
   addOrRemove(selectedTag:Tag):void{
     const indexToRemove = this.selectedTags.findIndex(tag => tag.tagName === selectedTag.tagName);
-    
+
     if (indexToRemove !== -1) {
       this.selectedTags.splice(indexToRemove,1);
       this.totalSelected-=1
@@ -168,6 +168,15 @@ export class CreateProjectComponent implements OnInit{
 
   finish() {
     // Add logic to submit the form data
+    this.projectService.addProject(this.project).subscribe(
+      (res:Project)=>{
+        this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe(
+          (fullRes:Project)=>{
+            console.log(fullRes)
+          }
+        )
+      }
+    )
   }
 
   formatGoal() {
