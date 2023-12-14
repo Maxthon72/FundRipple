@@ -91,8 +91,7 @@ public class ProjectService {
         Project project = new Project();
         project=projectRepository.findProjectByProjectName(projectName);
         for(TagWriteModel tagWriteModel:tags){
-            Tag tag = new Tag();
-            tag = tagRepository.findTagByTagName(tag.getTagName());
+            Tag tag = tagRepository.findTagByTagName(tagWriteModel.getTagName());
             tag.getProjects().add(project);
             project.getTags().add(tag);
             tagRepository.save(tag);

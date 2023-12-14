@@ -32,4 +32,12 @@ export class ProjectService {
     });
       return this.http.post<Project>(`${environment.apiBaseUrl}/project/description/${projectName}`,descriptions,{headers});
   }
+
+  public addTagsToProject(tags:Tag[],projectName:string):Observable<Project>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+      return this.http.post<Project>(`${environment.apiBaseUrl}/project/tag/${projectName}`,tags,{headers});
+  }
 }

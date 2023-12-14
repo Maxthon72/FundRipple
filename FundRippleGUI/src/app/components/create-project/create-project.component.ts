@@ -171,8 +171,12 @@ export class CreateProjectComponent implements OnInit{
     this.projectService.addProject(this.project).subscribe(
       (res:Project)=>{
         this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe(
-          (fullRes:Project)=>{
-            console.log(fullRes)
+          (descRes:Project)=>{
+            this.projectService.addTagsToProject(this.selectedTags,this.project.projectName).subscribe(
+              (fullProject:Project)=>{
+                console.log(fullProject)
+              }
+            )
           }
         )
       }
