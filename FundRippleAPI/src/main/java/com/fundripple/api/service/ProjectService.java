@@ -1,21 +1,20 @@
 package com.fundripple.api.service;
 
+import com.fundripple.api.error.CustomException;
 import com.fundripple.api.mapper.ProjectMapper;
 import com.fundripple.api.mapper.ProjectDescriptionMapper;
-import com.fundripple.api.mapper.UserMapper;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
 import com.fundripple.api.model.dto.read.ProjectSLElement;
-import com.fundripple.api.model.dto.write.PaymentWriteModel;
 import com.fundripple.api.model.dto.write.ProjectDescriptionWriteModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.dto.write.TagWriteModel;
-import com.fundripple.api.model.entity.Payment;
 import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.model.entity.ProjectDescription;
 import com.fundripple.api.model.entity.Tag;
 import com.fundripple.api.model.enums.ProjectDescriptionElementType;
 import com.fundripple.api.model.enums.ProjectStatus;
 import com.fundripple.api.repository.*;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,10 +54,14 @@ public class ProjectService {
 
         return projectReadModels;
     }
-    public ProjectReadModel addProject(ProjectWriteModel projectWriteModel,String header){
-        Project project = projectMapper.toEntity(projectWriteModel);
-        project.setResponsibleUser(userService.getUserEntityByToken(header));
-        return projectMapper.toReadModel(projectRepository.save(project));
+    public ProjectReadModel addProject(ProjectWriteModel projectWriteModel, String header) {
+        try {
+            Project project = projectMapper.toEntity(projectWriteModel);
+            project.setResponsibleUser(userService.getUserEntityByToken(header));
+            return projectMapper.toReadModel(projectRepository.save(project));
+        } catch (Exception e) {
+            throw new CustomException("Failed to add project due to: " + e.getMessage());
+        }
     }
 
     public List<ProjectSLElement> getAllProjectsSLE(String status){

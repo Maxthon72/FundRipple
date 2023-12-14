@@ -168,8 +168,24 @@ export class CreateProjectComponent implements OnInit{
 
   finish() {
     // Add logic to submit the form data
-    this.projectService.addProject(this.project).subscribe(
-      (res:Project)=>{
+    // this.projectService.addProject(this.project).subscribe(
+    //   (res:Project)=>{
+    //     this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe(
+    //       (descRes:Project)=>{
+    //         this.projectService.addTagsToProject(this.selectedTags,this.project.projectName).subscribe(
+    //           (fullProject:Project)=>{
+    //             console.log(fullProject)
+    //           }
+    //         )
+    //       }
+    //     )
+    //   }
+    // )
+    this.projectService.addProject(this.project).subscribe({
+      next: (data:Project) => {
+        // Handle successful response
+        console.log('Project added successfully', data);
+
         this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe(
           (descRes:Project)=>{
             this.projectService.addTagsToProject(this.selectedTags,this.project.projectName).subscribe(
@@ -179,8 +195,14 @@ export class CreateProjectComponent implements OnInit{
             )
           }
         )
+
+      },
+      error: (error: any) => {
+        // Handle error response
+        console.error('Error adding project:', error);
+        // Optionally display the error message in the UI
       }
-    )
+    });
   }
 
   formatGoal() {

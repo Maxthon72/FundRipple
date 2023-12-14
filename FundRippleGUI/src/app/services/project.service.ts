@@ -1,10 +1,11 @@
 import { Project } from './../interfaces/Project/Project';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable , throwError} from 'rxjs';
 import { Tag } from '../interfaces/Project/ProjectTags';
 import { environment } from '../environments/environment';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient , HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { ProjectDescription } from '../interfaces/Project/ProjectDescription';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,29 @@ export class ProjectService {
       return this.http.get<Tag[]>(`${environment.apiBaseUrl}/tag`);
   }
 
-  public addProject(project:Project):Observable<Project>{
+  public addProject(project: Project): Observable<Project> {
     const storedToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${storedToken}`,
     });
-      return this.http.post<Project>(`${environment.apiBaseUrl}/project`,project,{headers});
+
+    return this.http.post<Project>(`${environment.apiBaseUrl}/project`, project, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = error.error || `Server returned code: ${error.status}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 
   public addDescriptionsToProject(descriptions:ProjectDescription[],projectName:string):Observable<Project>{

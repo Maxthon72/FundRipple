@@ -1,5 +1,6 @@
 package com.fundripple.api.controller;
 
+import com.fundripple.api.error.CustomException;
 import com.fundripple.api.model.authentication.AuthenticationResponse;
 import com.fundripple.api.model.authentication.RegisterRequest;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
@@ -11,6 +12,7 @@ import com.fundripple.api.model.dto.write.TagWriteModel;
 import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.tags.form.TagWriter;
@@ -23,12 +25,18 @@ import java.util.List;
 public class ProjectController {
 
     private final ProjectService projectService;
-    @PostMapping()
-    public ResponseEntity<ProjectReadModel> addProject(
+    @PostMapping("")
+    public ResponseEntity<?> addProject(
             @RequestBody ProjectWriteModel projectWriteModel,
             @RequestHeader("Authorization") String header
-    ){
-        return ResponseEntity.ok(projectService.addProject(projectWriteModel,header));
+    ) {
+        try {
+            return ResponseEntity.ok(projectService.addProject(projectWriteModel, header));
+        } catch (CustomException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping()
