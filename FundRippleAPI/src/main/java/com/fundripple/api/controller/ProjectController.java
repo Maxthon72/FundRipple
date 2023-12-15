@@ -1,21 +1,15 @@
 package com.fundripple.api.controller;
 
-import com.fundripple.api.error.CustomException;
-import com.fundripple.api.model.authentication.AuthenticationResponse;
-import com.fundripple.api.model.authentication.RegisterRequest;
+import com.fundripple.api.error.ProjectException;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
-import com.fundripple.api.model.dto.read.ProjectSLElement;
-import com.fundripple.api.model.dto.write.PaymentWriteModel;
 import com.fundripple.api.model.dto.write.ProjectDescriptionWriteModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.dto.write.TagWriteModel;
-import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.tags.form.TagWriter;
 
 import java.util.List;
 
@@ -32,7 +26,7 @@ public class ProjectController {
     ) {
         try {
             return ResponseEntity.ok(projectService.addProject(projectWriteModel, header));
-        } catch (CustomException e) {
+        } catch (ProjectException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
@@ -44,25 +38,31 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.getAllProjects());
     }
 
-    @GetMapping("/{projectName}")
-    public ResponseEntity<ProjectReadModel>getSpecificProject(
-            @PathVariable String projectName
-    ){
-        return ResponseEntity.ok(projectService.getspecificProjects(projectName));
-    }
-
     @PostMapping("/description/{projectName}")
-    public ResponseEntity<ProjectReadModel> setDescriptionToProject(
+    public ResponseEntity<?> setDescriptionToProject(
             @PathVariable String projectName,
             @RequestBody List<ProjectDescriptionWriteModel> projectDescriptionWriteModels){
-        return ResponseEntity.ok(projectService.addDescriptionToProject(projectName,projectDescriptionWriteModels));
+        try {
+            return ResponseEntity.ok(projectService.addDescriptionToProject(projectName, projectDescriptionWriteModels));
+        }catch (ProjectException e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/tag/{projectName}")
-    public ResponseEntity<ProjectReadModel> setTagsToProject(
+    public ResponseEntity<?> setTagsToProject(
             @PathVariable String projectName,
             @RequestBody List<TagWriteModel> tags){
-        return ResponseEntity.ok(projectService.addTagsToProject(projectName,tags));
+        try {
+            return ResponseEntity.ok(projectService.addTagsToProject(projectName, tags));
+        }
+        catch (ProjectException e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
 }

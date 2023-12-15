@@ -1,6 +1,6 @@
 package com.fundripple.api.service;
 
-import com.fundripple.api.error.CustomException;
+import com.fundripple.api.error.ProjectException;
 import com.fundripple.api.mapper.ProjectMapper;
 import com.fundripple.api.mapper.ProjectDescriptionMapper;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
@@ -14,7 +14,6 @@ import com.fundripple.api.model.entity.Tag;
 import com.fundripple.api.model.enums.ProjectDescriptionElementType;
 import com.fundripple.api.model.enums.ProjectStatus;
 import com.fundripple.api.repository.*;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,19 +27,21 @@ public class ProjectService {
     private final ProjectDescriptionMapper projectDescriptionMapper;
     private final ProjectDescriptionRepository projectDescriptionRepository;
     private final TagRepository tagRepository;
+    private final CleanService cleanService;
 
 
     public ProjectService(JwtService jwtService, UserService userService,
                           ProjectMapper projectMapper, ProjectRepository projectRepository,
                           ProjectDescriptionMapper projectDescriptionMapper,
                           ProjectDescriptionRepository projectDescriptionRepository,
-                          TagRepository tagRepository) {
+                          TagRepository tagRepository, CleanService cleanService) {
         this.userService = userService;
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
         this.projectDescriptionMapper = projectDescriptionMapper;
         this.projectDescriptionRepository = projectDescriptionRepository;
         this.tagRepository = tagRepository;
+        this.cleanService = cleanService;
     }
 
     public List<ProjectReadModel> getAllProjects(){
@@ -60,7 +61,7 @@ public class ProjectService {
             project.setResponsibleUser(userService.getUserEntityByToken(header));
             return projectMapper.toReadModel(projectRepository.save(project));
         } catch (Exception e) {
-            throw new CustomException("Failed to add project due to: " + e.getMessage());
+            throw new ProjectException("Failed to add project due to: " + e.getMessage());
         }
     }
 
@@ -73,6 +74,7 @@ public class ProjectService {
     public ProjectReadModel addDescriptionToProject(
             String projectName,
             List<ProjectDescriptionWriteModel> projectDescriptionWriteModels) {
+        try{
         Project project = new Project();
 
         project=projectRepository.findProjectByProjectName(projectName);
@@ -85,12 +87,17 @@ public class ProjectService {
         ProjectReadModel projectReadModel = projectMapper.toReadModel(project);
         projectReadModel.setDescription(projectDescriptionMapper.map(projectDescriptionRepository.findAllByProject(project)));
         return projectReadModel;
+    } catch (Exception e) {
+            cleanService.clearProjectWhenAddingTagsOrDescription(projectName);
+        throw new ProjectException("Failed to add project due to: " + e.getMessage());
+    }
     }
 
     public ProjectReadModel addTagsToProject(
             String projectName,
             List<TagWriteModel> tags
     ){
+        try{
         Project project = new Project();
         project=projectRepository.findProjectByProjectName(projectName);
         for(TagWriteModel tagWriteModel:tags){
@@ -103,12 +110,10 @@ public class ProjectService {
         ProjectReadModel projectReadModel = projectMapper.toReadModel(project);
         projectReadModel.setDescription(projectDescriptionMapper.map(projectDescriptionRepository.findAllByProject(project)));
         return projectReadModel;
+        } catch (Exception e) {
+            cleanService.clearProjectWhenAddingTagsOrDescription(projectName);
+            throw new ProjectException("Failed to add project due to: " + e.getMessage());
+        }
     }
 
-    public ProjectReadModel getspecificProjects(String projectName) {
-        Project project = projectRepository.findProjectByProjectName(projectName);
-        ProjectReadModel projectReadModel = projectMapper.toReadModel(project);
-        projectReadModel.setDescription(projectDescriptionMapper.map(projectDescriptionRepository.findAllByProject(project)));
-        return projectReadModel;
-    }
 }

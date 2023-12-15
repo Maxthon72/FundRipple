@@ -11,11 +11,11 @@ import org.springframework.http.HttpStatus;
     @RestControllerAdvice
     public class GlobalExceptionHandler {
 
-        @ExceptionHandler(CustomException.class)
-        public ResponseEntity<ErrorResponse> handleCustomException(CustomException ex) {
+        @ExceptionHandler(ProjectException.class)
+        public ResponseEntity<ErrorResponse> handleProjectException(ProjectException ex) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setMessage(ex.getMessage());
-            errorResponse.setErrorCode("CUSTOM_ERROR_CODE");
+            errorResponse.setErrorCode("CUSTOM_PROJECT_ERROR_CODE");
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 

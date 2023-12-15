@@ -17,11 +17,15 @@ services:
       - postgres
     ports:
       - "8080:8080"
-
+    volumes:
+      - shared-data:/app/resources
   frontend:
     build:
       context: ./FundRippleGUI
     ports:
       - "80:80"
+    volumes:
+      - shared-data:/app/resources
 volumes:
   postgres-data:
+  shared-data:

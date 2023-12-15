@@ -117,6 +117,16 @@ export class CreateProjectComponent implements OnInit{
     }
   };
 
+  addDescriptioElementImage():void{
+    this.numberOfDescriptions+=1
+    let description:ProjectDescription = {
+      indexIdDescription:this.numberOfDescriptions,
+      description:"",
+      type:"URL"
+    }
+    this.listOfDescriptions.push(description)
+  }
+
   addDescriptioElementText():void{
     this.numberOfDescriptions+=1
     let description:ProjectDescription = {
@@ -167,33 +177,33 @@ export class CreateProjectComponent implements OnInit{
   }
 
   finish() {
-    // Add logic to submit the form data
-    // this.projectService.addProject(this.project).subscribe(
-    //   (res:Project)=>{
-    //     this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe(
-    //       (descRes:Project)=>{
-    //         this.projectService.addTagsToProject(this.selectedTags,this.project.projectName).subscribe(
-    //           (fullProject:Project)=>{
-    //             console.log(fullProject)
-    //           }
-    //         )
-    //       }
-    //     )
-    //   }
-    // )
     this.projectService.addProject(this.project).subscribe({
       next: (data:Project) => {
         // Handle successful response
-        console.log('Project added successfully', data);
 
-        this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe(
-          (descRes:Project)=>{
-            this.projectService.addTagsToProject(this.selectedTags,this.project.projectName).subscribe(
-              (fullProject:Project)=>{
-                console.log(fullProject)
+        this.projectService.addDescriptionsToProject(this.listOfDescriptions,this.project.projectName).subscribe({
+          next: (data:Project) => {
+            // Handle successful response
+            this.projectService.addTagsToProject(this.selectedTags,this.project.projectName).subscribe({
+              next: (data:Project) => {
+                console.log(data)
+                this.router.navigate(['home']);
+              },
+              error: (error: any) => {
+                // Handle error response
+                console.error('Error adding project:', error);
+                // Optionally display the error message in the UI
               }
+            }
+
             )
+          },
+          error: (error: any) => {
+            // Handle error response
+            console.error('Error adding project:', error);
+            // Optionally display the error message in the UI
           }
+        }
         )
 
       },

@@ -39,7 +39,7 @@ export class ProjectService {
       // Server-side error
       errorMessage = error.error || `Server returned code: ${error.status}`;
     }
-    console.error(errorMessage);
+
     return throwError(errorMessage);
   }
 
@@ -48,7 +48,9 @@ export class ProjectService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${storedToken}`,
     });
-      return this.http.post<Project>(`${environment.apiBaseUrl}/project/description/${projectName}`,descriptions,{headers});
+      return this.http.post<Project>(`${environment.apiBaseUrl}/project/description/${projectName}`,descriptions,{headers}).pipe(
+        catchError(this.handleError)
+      );
   }
 
   public addTagsToProject(tags:Tag[],projectName:string):Observable<Project>{
@@ -56,6 +58,8 @@ export class ProjectService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${storedToken}`,
     });
-      return this.http.post<Project>(`${environment.apiBaseUrl}/project/tag/${projectName}`,tags,{headers});
+      return this.http.post<Project>(`${environment.apiBaseUrl}/project/tag/${projectName}`,tags,{headers}).pipe(
+        catchError(this.handleError)
+      );
   }
 }
