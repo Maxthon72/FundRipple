@@ -34,6 +34,7 @@ export class CreateProjectComponent implements OnInit {
   numberOfDescriptions = 0;
   listOfDescriptions: ProjectDescription[] = []
   listOfDescriptionsToSend: ProjectDescription[] = []
+  bannerImage:File|null=null;
 
   announcer = Inject(LiveAnnouncer);
 
@@ -182,6 +183,13 @@ export class CreateProjectComponent implements OnInit {
     this.projectService.addProject(this.project).subscribe({
       next: (data: Project) => {
         // Handle successful response
+        if(this.bannerImage!=null){
+          this.fileService.uploadImageProjectBanner(this.bannerImage,this.user!.userName,this.project.projectName,this.bannerImage?.name).subscribe(
+            (response:string)=>{
+              console.log(response)
+            }
+          )
+        }
         let index = 0;
         for(let projectDescription of this.listOfDescriptions){
           if (projectDescription.description instanceof File) {
@@ -258,6 +266,12 @@ export class CreateProjectComponent implements OnInit {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       description.description = file;
+    }
+  }
+  onFileSelectedBanner(event: any):void{
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.bannerImage = file;
     }
   }
 

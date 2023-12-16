@@ -49,6 +49,11 @@
                 <input matInput type="text" id="projectName" name="Project name" [(ngModel)]="project.projectName" required>
             </mat-form-field>
 
+            <div class="banner-image-input">
+                <label>Upload Banner Image</label>
+                <input id="imageBannerInput" type="file" accept="image/*" name="Project banner" (change)="onFileSelectedBanner($event)">
+            </div>
+
             <div class="tag-selection">
                 <div *ngFor="let tag of allTags">
                     <button type="button" mat-raised-button [color]="isSelected(tag) ? 'primary' : 'cold'" (click)="addOrRemove(tag)">
@@ -118,23 +123,25 @@
                         </div>
                     </div>
                     <div class="image-input" *ngIf="description.type=='IMAGE'">
-                        <div class="description-image-input">
-                            <label for="imageInput">Upload Image</label>
-                            <input id="imageInput" type="file" accept="image/*" name="Project description{{description.indexIdDescription}}" (change)="onFileSelected($event, description)">
-                        </div>
+                        <div class="description-content">
+                            <div class="description-image-input">
+                                <label>Upload Image</label>
+                                <input type="file" accept="image/*" name="Project description{{description.indexIdDescription}}" (change)="onFileSelected($event, description)">
+                            </div>
 
 
-                        <div class="description-buttons">
                             <div class="description-buttons">
-                                <button type="button" mat-mini-fab color="accent" (click)="descriptionUp(description)">
+                                <div class="button-column">
+                                    <button type="button" mat-mini-fab color="accent" (click)="descriptionUp(description)">
                                     <mat-icon>keyboard_arrow_up</mat-icon>
                                 </button>
-                                <button type="button" mat-mini-fab color="accent" (click)="deleteDescription(description)">
+                                    <button type="button" mat-mini-fab color="accent" (click)="deleteDescription(description)">
                                     <mat-icon>delete</mat-icon>
                                 </button>
-                                <button type="button" mat-mini-fab color="accent" (click)="descriptionDown(description)">
+                                    <button type="button" mat-mini-fab color="accent" (click)="descriptionDown(description)">
                                     <mat-icon>keyboard_arrow_down</mat-icon>
                                 </button>
+                                </div>
                             </div>
                         </div>
                     </div>

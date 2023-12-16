@@ -25,4 +25,19 @@ export class FileService {
     // Set 'responseType' to 'text' to handle plain text response
     return this.http.post(url, formData, { headers, responseType: 'text' });
   }
+
+  public uploadImageProjectBanner(imageFile: File|string, userName: string, projectName: string, imgName: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', imageFile);
+  
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`
+    });
+  
+    const url = `${environment.apiBaseUrl}/image/upload/banner/${userName}/${projectName}/${imgName}`;
+  
+    // Set 'responseType' to 'text' to handle plain text response
+    return this.http.post(url, formData, { headers, responseType: 'text' });
+  }
 }
