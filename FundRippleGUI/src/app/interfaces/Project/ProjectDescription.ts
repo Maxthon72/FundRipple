@@ -1,5 +1,5 @@
 export interface ProjectDescription{
     indexIdDescription:number
-    description:string|File
+    description:string|File|null
     type:string
 }

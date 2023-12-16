@@ -18,14 +18,15 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - shared-data:/app/resources
+      - "C:/Users/Macie/shared:/app/resources"
+
   frontend:
     build:
       context: ./FundRippleGUI
     ports:
       - "80:80"
     volumes:
-      - shared-data:/app/resources
+      - "C:/Users/Macie/shared:/app/resources"
+
 volumes:
   postgres-data:
-  shared-data:

@@ -1,9 +1,18 @@
 package com.fundripple.api.config;
 
+import com.fundripple.api.mapper.UserMapper;
+import com.fundripple.api.model.authentication.RegisterRequest;
+import com.fundripple.api.model.dto.write.UserWriteModel;
+import com.fundripple.api.model.entity.Authentication;
 import com.fundripple.api.model.entity.Tag;
+import com.fundripple.api.model.entity.User;
+import com.fundripple.api.model.enums.Role;
+import com.fundripple.api.repository.AuthenticationRepository;
 import com.fundripple.api.repository.TagRepository;
+import com.fundripple.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +23,17 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private AuthenticationRepository authenticationRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -31,6 +51,26 @@ public class DataInitializer implements CommandLineRunner {
             });
 
             System.out.println("Initial data inserted into the 'tags' table.");
+        }
+        if(userRepository.count()==0){
+            RegisterRequest request = new RegisterRequest();
+            request.setEmail("email@gmail.com");
+            request.setPassword("password");
+            request.setFirstName("first");
+            request.setLastName("last");
+            request.setUserName("user");
+            Authentication authentication = new Authentication();
+            authentication.setPassword(passwordEncoder.encode(request.getPassword()));
+            authenticationRepository.save(authentication);
+            User user = User.builder()
+                    .userName(request.getUserName())
+                    .firstName(request.getFirstName())
+                    .lastName(request.getLastName())
+                    .email(request.getEmail())
+                    .authentication(authentication)
+                    .role(Role.USER)
+                    .build();
+            userRepository.save(user);
         }
     }
 }

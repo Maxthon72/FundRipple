@@ -117,13 +117,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="image-input" *ngIf="description.type=='URL'">
-                      <div class="description-image-input">
-                        <mat-form-field appearance="fill">
-                          <mat-label>Upload Image</mat-label>
-                          <input type="file" accept="image/*" name="Project description{{description.indexIdDescription}}" [(ngModel)]="description.description"  #imageInput>
-                      </mat-form-field>
-                    </div>
+                    <div class="image-input" *ngIf="description.type=='IMAGE'">
+                        <div class="description-image-input">
+                            <label for="imageInput">Upload Image</label>
+                            <input id="imageInput" type="file" accept="image/*" name="Project description{{description.indexIdDescription}}" (change)="onFileSelected($event, description)">
+                        </div>
+
+
                         <div class="description-buttons">
                             <div class="description-buttons">
                                 <button type="button" mat-mini-fab color="accent" (click)="descriptionUp(description)">

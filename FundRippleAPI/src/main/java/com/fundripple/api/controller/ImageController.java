@@ -1,6 +1,7 @@
 package com.fundripple.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,17 +19,31 @@ public class ImageController {
     public ResponseEntity<String> uploadImage(
             @RequestParam("image") MultipartFile imageFile,
             @PathVariable String userName,
-            @PathVariable String imgName,
-            @PathVariable String projectName) throws IOException {
-        String directory = "/app/resources/"+userName+"/"+projectName+"/description";
-        String fileName = imgName+ ".jpg"; // You can use a dynamic name
+            @PathVariable String projectName,
+            @PathVariable String imgName) throws IOException {
 
-        File file = new File(directory + fileName);
-        file.createNewFile();
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            fos.write(imageFile.getBytes());
+        // Directory path updated to use the mapped volume in Docker
+        String directoryPath = "/app/resources" + File.separator + userName + File.separator + projectName + File.separator + "description";
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs(); // Create directories if they don't exist
         }
 
-        return ResponseEntity.ok(directory+"/"+fileName);
+        File file = new File(directory, imgName);
+        if (!file.exists()) {
+            file.createNewFile();
+        } else {
+            // Handle the case where file already exists (e.g., rename, throw an error, etc.)
+        }
+
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(imageFile.getBytes());
+        } catch (IOException e) {
+            // Handle exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving file");
+        }
+
+        // Return a generic success message or a URL to access the file
+        return ResponseEntity.ok("File uploaded successfully");
     }
 }
