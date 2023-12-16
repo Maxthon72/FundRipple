@@ -38,4 +38,7 @@ public class Benefit {
 
     @Column()
     private String description;
+
+    @Column()
+    private String name;
 }
