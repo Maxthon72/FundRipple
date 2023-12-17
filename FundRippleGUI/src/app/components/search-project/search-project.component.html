@@ -1,1 +1,58 @@
-<p>search-project works!</p>
+<div class="tool-bar">
+    <mat-toolbar color="primary">
+        <nav class="left-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/discover">Discover</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/search">Search</a>
+                <span class="nav-tab"></span>
+                <!-- Add a spacer -->
+            </div>
+
+            <div *ngIf="logedIn">
+                <div *ngIf="role=='USER'">
+                    <a mat-button routerLink="/discover">Discover</a>
+                    <span class="nav-space"></span>
+                    <a mat-button routerLink="/search">Search</a>
+                    <span class="nav-space"></span>
+                    <a mat-button routerLink="/userProjects">My Projects</a>
+                    <span class="nav-space"></span>
+                    <a mat-button routerLink="/createProject">Create Project</a>
+                    <span class="nav-tab"></span>
+                </div>
+                <div *ngIf="role=='ADMIN'">
+                    <a mat-button routerLink="/search">Search</a>
+                    <span class="nav-space"></span>
+                    <a mat-button routerLink="/suspicions">Suspicions</a>
+                    <span class="nav-space"></span>
+                    <a mat-button routerLink="/verify">Verify</a>
+                    <span class="nav-space"></span>
+                </div>
+            </div>
+        </nav>
+        <div class="header-content" (click)="navigateToHome()">
+            <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
+        </div>
+        <nav class="right-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/login">Login</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/register">Register</a>
+            </div>
+            <div *ngIf="logedIn">
+                <a mat-button routerLink="/user">{{getUserName()}}</a>
+                <span class="nav-space"></span>
+                <a mat-button (click)="logOut()">Logout</a>
+            </div>
+        </nav>
+    </mat-toolbar>
+</div>
+<div class="container">
+    <div *ngFor="let project of projects">
+        <div>
+            <a routerLink="/project/{{project.projectName}}">Go to {{project.projectName}}</a>
+        </div>
+    </div>
+</div>

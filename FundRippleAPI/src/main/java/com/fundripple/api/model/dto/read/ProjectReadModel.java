@@ -23,6 +23,7 @@ public class ProjectReadModel {
     private LocalDate planedDateOfClosing;
     private List<ProjectDescriptionReadModel> description;
     private List<TagReadModel> tags;
+    private String bannerURL;
     private String summery;
     private String status;
 }

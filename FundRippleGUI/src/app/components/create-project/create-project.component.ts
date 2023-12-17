@@ -254,7 +254,7 @@ export class CreateProjectComponent implements OnInit {
                   next: (data: Project) => {
                     this.projectService.addSubGoalsToProject(this.projectSubGoal,this.project.projectName).subscribe({
                       next: (data: Project) => {
-                        
+                        this.router.navigate(['home']);
                       },
                       error: (error: any) => {
                         // Handle error response

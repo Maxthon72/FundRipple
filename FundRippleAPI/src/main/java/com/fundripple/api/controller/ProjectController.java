@@ -2,6 +2,7 @@ package com.fundripple.api.controller;
 
 import com.fundripple.api.error.ProjectException;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
+import com.fundripple.api.model.dto.read.ProjectSLElement;
 import com.fundripple.api.model.dto.write.ProjectDescriptionWriteModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.dto.write.TagWriteModel;

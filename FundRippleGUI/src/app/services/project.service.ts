@@ -1,4 +1,4 @@
-import { Project } from './../interfaces/Project/Project';
+import { FullProject, Project } from './../interfaces/Project/Project';
 import { Injectable } from '@angular/core';
 import { Observable , throwError} from 'rxjs';
 import { Tag } from '../interfaces/Project/ProjectTags';
@@ -8,6 +8,7 @@ import { ProjectDescription } from '../interfaces/Project/ProjectDescription';
 import { catchError } from 'rxjs/operators';
 import { ProjectBenefit } from '../interfaces/Project/ProjectBenefit';
 import { ProjectSubGoal } from '../interfaces/Project/ProjectSubGoal';
+import { ProjectSLE } from '../interfaces/Project/ProjectSLE';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,20 @@ export class ProjectService {
       return this.http.post<Project>(`${environment.apiBaseUrl}/subGoal/forProject/${projectName}`,subGoals,{headers}).pipe(
         catchError(this.handleError)
       );
+  }
+
+  public getAllProjectSLE():Observable<ProjectSLE[]>{
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/public/projects`);
+  }
+
+  public getProjectByProjectName(projectName:string):Observable<FullProject>{
+    return this.http.get<FullProject>(`${environment.apiBaseUrl}/public/project/${projectName}`);
+  }
+
+  public getSubGoalsForProject(projectName:string):Observable<ProjectSubGoal[]>{
+    return this.http.get<ProjectSubGoal[]>(`${environment.apiBaseUrl}/subGoal/forProject/${projectName}`);
+  }
+  public getBenefitsForProject(projectName:string):Observable<ProjectBenefit[]>{
+    return this.http.get<ProjectBenefit[]>(`${environment.apiBaseUrl}/benefit/forProject/${projectName}`);
   }
 }

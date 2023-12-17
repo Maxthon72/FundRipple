@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,5 +18,7 @@ public class ProjectSLElement {
     private Long numberOfSupporters;
     private LocalDateTime dateCreated;
     private LocalDateTime planedDateOfClosing;
+    private List<TagReadModel> tags;
     private String summery;
+    private String bannerURL;
 }

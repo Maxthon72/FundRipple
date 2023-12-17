@@ -116,4 +116,10 @@ public class ProjectService {
         }
     }
 
+
+    public ProjectReadModel getProjectByProjectName(String projectName) {
+        ProjectReadModel projectReadModel = projectMapper.toReadModel(projectRepository.findProjectByProjectName(projectName));
+        projectReadModel.setDescription(projectDescriptionMapper.map(projectDescriptionRepository.findAllByProject(projectRepository.findProjectByProjectName(projectName))));
+        return projectReadModel;
+    }
 }

@@ -1,5 +1,6 @@
 package com.fundripple.api.controller;
 
+import com.fundripple.api.model.dto.read.ProjectReadModel;
 import com.fundripple.api.model.dto.read.ProjectSLElement;
 import com.fundripple.api.model.entity.User;
 import com.fundripple.api.repository.UserRepository;
@@ -33,9 +34,16 @@ public class PublicController {
 
     @GetMapping("/projects")
     public ResponseEntity<List<ProjectSLElement>> getAllProjectInSLE(
-            @RequestParam(name = "status", defaultValue = "OPEN") String status
+            @RequestParam(name = "status", defaultValue = "TO_VERIFY") String status
     ){
         return ResponseEntity.ok(projectService.getAllProjectsSLE(status));
+    }
+
+    @GetMapping("/project/{projectName}")
+    public ResponseEntity<ProjectReadModel> getProject(
+            @PathVariable String projectName
+    ){
+        return ResponseEntity.ok(projectService.getProjectByProjectName(projectName));
     }
 
 //    // Endpoint to retrieve all users
