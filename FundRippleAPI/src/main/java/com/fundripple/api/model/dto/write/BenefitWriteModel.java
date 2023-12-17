@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BenefitWriteModel {
+    private Long id;
     private Long moneyGoal;
 
     private String description;

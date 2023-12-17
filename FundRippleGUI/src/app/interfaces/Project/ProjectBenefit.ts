@@ -1,6 +1,8 @@
 export interface ProjectBenefit {
-    projectName:string
-    goal:number
-    summery:string
-    planedDateOfClosing:string
+  id:number
+  moneyGoal:number
+
+  description:string
+
+  name:string
   }

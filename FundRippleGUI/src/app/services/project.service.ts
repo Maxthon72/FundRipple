@@ -6,6 +6,8 @@ import { environment } from '../environments/environment';
 import { HttpClient , HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { ProjectDescription } from '../interfaces/Project/ProjectDescription';
 import { catchError } from 'rxjs/operators';
+import { ProjectBenefit } from '../interfaces/Project/ProjectBenefit';
+import { ProjectSubGoal } from '../interfaces/Project/ProjectSubGoal';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,26 @@ export class ProjectService {
       Authorization: `Bearer ${storedToken}`,
     });
       return this.http.post<Project>(`${environment.apiBaseUrl}/project/tag/${projectName}`,tags,{headers}).pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public addBenefitsToProject(benefits:ProjectBenefit[],projectName:string):Observable<Project>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+      return this.http.post<Project>(`${environment.apiBaseUrl}/benefit/forProject/${projectName}`,benefits,{headers}).pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public addSubGoalsToProject(subGoals:ProjectSubGoal[],projectName:string):Observable<Project>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+      return this.http.post<Project>(`${environment.apiBaseUrl}/subGoal/forProject/${projectName}`,subGoals,{headers}).pipe(
         catchError(this.handleError)
       );
   }

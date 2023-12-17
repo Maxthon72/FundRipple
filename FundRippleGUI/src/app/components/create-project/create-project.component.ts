@@ -14,6 +14,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ProjectDescription } from 'src/app/interfaces/Project/ProjectDescription';
 import { FileService } from 'src/app/services/file.service';
+import { ProjectBenefit } from 'src/app/interfaces/Project/ProjectBenefit';
+import { ProjectSubGoal } from 'src/app/interfaces/Project/ProjectSubGoal';
 
 
 @Component({
@@ -32,7 +34,11 @@ export class CreateProjectComponent implements OnInit {
   maxTags = 4;
   totalSelected = 0;
   numberOfDescriptions = 0;
+  numberOfBenefits = 0
+  numberOfSubGoals=0
   listOfDescriptions: ProjectDescription[] = []
+  projectBenefits:ProjectBenefit[]=[]
+  projectSubGoal:ProjectSubGoal[]=[]
   listOfDescriptionsToSend: ProjectDescription[] = []
   bannerImage:File|null=null;
 
@@ -49,6 +55,9 @@ export class CreateProjectComponent implements OnInit {
     }
   }
 
+  trackByIndex(index: number, item: any): number {
+    return index;
+}
   ngOnInit(): void {
     const storedToken = localStorage.getItem('token');
 
@@ -139,6 +148,29 @@ export class CreateProjectComponent implements OnInit {
     }
     this.listOfDescriptions.push(description)
   }
+  
+  addBenefit(){
+    this.numberOfBenefits+=1
+    let benefit:ProjectBenefit={
+      moneyGoal:0,
+      name:"",
+      description:"",
+      id:this.numberOfBenefits
+    }
+    this.projectBenefits.push(benefit)
+  }
+
+  addSubGoal(){
+    this.numberOfSubGoals+=1
+    let subGoal:ProjectSubGoal={
+      moneyGoal:0,
+      name:"",
+      description:"",
+      id:this.numberOfSubGoals
+    }
+    this.projectSubGoal.push(subGoal)
+    console.log(this.projectSubGoal)
+  }
 
   addOrRemove(selectedTag: Tag): void {
     const indexToRemove = this.selectedTags.findIndex(tag => tag.tagName === selectedTag.tagName);
@@ -218,10 +250,27 @@ export class CreateProjectComponent implements OnInit {
             // Handle successful response
             this.projectService.addTagsToProject(this.selectedTags, this.project.projectName).subscribe({
               next: (data: Project) => {
-                console.log("4")
-                console.log(data)
-                this.listOfDescriptionsToSend=[]
-                this.router.navigate(['home']);
+                this.projectService.addBenefitsToProject(this.projectBenefits,this.project.projectName).subscribe({
+                  next: (data: Project) => {
+                    this.projectService.addSubGoalsToProject(this.projectSubGoal,this.project.projectName).subscribe({
+                      next: (data: Project) => {
+                        
+                      },
+                      error: (error: any) => {
+                        // Handle error response
+                        this.listOfDescriptionsToSend=[]
+                        console.error('Error adding project:', error);
+                        // Optionally display the error message in the UI
+                      }
+                    })
+                  },
+                  error: (error: any) => {
+                    // Handle error response
+                    this.listOfDescriptionsToSend=[]
+                    console.error('Error adding project:', error);
+                    // Optionally display the error message in the UI
+                  }
+                })
               },
               error: (error: any) => {
                 // Handle error response

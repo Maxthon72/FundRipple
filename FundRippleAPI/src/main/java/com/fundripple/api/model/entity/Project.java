@@ -46,6 +46,10 @@ public class Project {
     @GeneratedValue()
     private LocalDate dateCreated;
 
+    @Column(nullable = false)
+    @GeneratedValue()
+    private Long suspicions;
+
     @Column(name = "date_closed")
     private LocalDate dateClosed;
 
@@ -70,6 +74,7 @@ public class Project {
         dateCreated = LocalDate.now();
         moneyCollected = 0.00;
         numberOfSupporters = 0L;
-        status = ProjectStatus.OPEN;
+        status = ProjectStatus.TO_VERIFY;
+        suspicions=0L;
     }
 }

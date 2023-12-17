@@ -4,6 +4,7 @@ import com.fundripple.api.model.dto.read.BenefitReadModel;
 import com.fundripple.api.model.dto.write.BenefitWriteModel;
 import com.fundripple.api.model.entity.Benefit;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public interface BenefitMapper {
     BenefitMapper INSTANCE = Mappers.getMapper(BenefitMapper.class);
 
+    @Mapping(target = "id", ignore = true)
     Benefit toEntity(BenefitWriteModel benefitWriteModel);
 
     BenefitReadModel toDto(Benefit benefit);

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubGoalWriteModel {
-
+    private Long id;
     private Long moneyGoal;
 
     private String description;

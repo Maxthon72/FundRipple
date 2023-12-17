@@ -71,6 +71,18 @@ public class DataInitializer implements CommandLineRunner {
                     .role(Role.USER)
                     .build();
             userRepository.save(user);
+            Authentication authentication2 = new Authentication();
+            authentication2.setPassword(passwordEncoder.encode("123"));
+            authenticationRepository.save(authentication2);
+            User user2 = User.builder()
+                    .userName("admin")
+                    .email("admin@gmail.com")
+                    .firstName("admin")
+                    .lastName("admin")
+                    .authentication(authentication2)
+                    .role(Role.ADMIN)
+                    .build();
+            userRepository.save(user2);
         }
     }
 }

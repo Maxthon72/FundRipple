@@ -96,7 +96,7 @@
 
     <div *ngIf="currentStep === 3" class="page-three">
         <h2>Project description</h2>
-        <form (ngSubmit)="finish()" #formStep2="ngForm">
+        <form (ngSubmit)="nextStep()" #formStep2="ngForm">
             <div class="description">
                 <div class="description-elements" *ngFor="let description of listOfDescriptions">
                     <div class="text-input" *ngIf="description.type=='TEXT'">
@@ -153,10 +153,79 @@
                   Add image
               </button>
             </div>
+            <div class="next-back-button">
+                <button mat-raised-button color="warn" class="back-button" (click)="goBack()">Back</button>
+                <button mat-raised-button color="primary" class="next-button" type="submit">Next</button>
+            </div>
+
+        </form>
+    </div>
+    <div *ngIf="currentStep === 4" class="page-three">
+        <h2>Project benefits</h2>
+        <form (ngSubmit)="nextStep()" #formStep2="ngForm">
+            <div class="benefits">
+                <div class="benefit-elements" *ngFor="let benefit of projectBenefits">
+                    <div class="benefit-content">
+                        <div class="benefit">
+                            <mat-form-field appearance="fill">
+                                <mat-label for="userName">Benefit name</mat-label>
+                                <input matInput type="text" name="Benefit name{{benefit.id}}" [(ngModel)]="benefit.name" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label for="goal">Benefit goal in PLN</mat-label>
+                                <input matInput type="number" name="Benefit goal{{benefit.id}}" [(ngModel)]="benefit.moneyGoal" required step="0.01" (ngModelChange)="formatGoal()">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label for="projectSummery">Benefit summary</mat-label>
+                                <textarea matInput id="projectSummery" name="Benefit summery{{benefit.id}}" [(ngModel)]="benefit.description" required maxlength="300" rows="3"> <!-- Set the number of visible rows -->
+                                </textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" mat-raised-button color="accent" (click)="addBenefit()">
+                    Add benefit
+                </button>
+            </div>
+            <div class="next-back-button">
+                <button mat-raised-button color="warn" class="back-button" (click)="goBack()">Back</button>
+                <button mat-raised-button color="primary" class="next-button" type="submit">Next</button>
+            </div>
+
+        </form>
+    </div>
+    <div *ngIf="currentStep === 5" class="page-three">
+        <h2>Project description</h2>
+        <form (ngSubmit)="finish()" #formStep2="ngForm">
+            <div class="sub-goals">
+                <div class="sub-goals-elements" *ngFor="let subGoal of projectSubGoal">
+                    <div class="sub-goals-content">
+                        <div class="sub-goal">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Sub goal project name</mat-label>
+                                <input matInput type="text" name="Sub goal name {{subGoal.id}}" [(ngModel)]="subGoal.name" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Sub goal in PLN</mat-label>
+                                <input matInput type="number" name="Sub goal goal {{subGoal.id}}" [(ngModel)]="subGoal.moneyGoal" required step="0.01" (ngModelChange)="formatGoal()">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label for="projectSummery">Sub goal xummary</mat-label>
+                                <textarea matInput id="projectSummery" name="Sub goal summery {{subGoal.id}}" [(ngModel)]="subGoal.description" required maxlength="300" rows="3"> <!-- Set the number of visible rows -->
+                                </textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" mat-raised-button color="accent" (click)="addSubGoal()">
+                    Add sub goal
+                </button>
+            </div>
             <div class="finish-back-button">
                 <button mat-raised-button color="warn" class="back-button" (click)="goBack()">Back</button>
                 <button mat-raised-button color="accent" class="submit-button" type="submit">Finish</button>
             </div>
+
         </form>
     </div>
 </div>

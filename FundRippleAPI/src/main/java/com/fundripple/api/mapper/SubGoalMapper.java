@@ -4,6 +4,7 @@ import com.fundripple.api.model.dto.read.SubGoalReadModel;
 import com.fundripple.api.model.dto.write.SubGoalWriteModel;
 import com.fundripple.api.model.entity.SubGoal;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -16,6 +17,7 @@ public interface SubGoalMapper {
 
     SubGoalReadModel toDto(SubGoal subGoal);
 
+    @Mapping(target = "id", ignore = true)
     SubGoal toEntity(SubGoalWriteModel subGoalWriteModel);
 
     List<SubGoalReadModel> mapToDto(List<SubGoal> subGoals);

@@ -8,7 +8,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.control.MappingControl;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -22,9 +21,8 @@ public interface UserMapper {
     User toEntity(UserSLElement userSLElement);
 
 
-    default UserReadModel toReadModel(User user){
-        return new UserReadModel(user.getUsername(), user.getEmail(), user.getFirstName(),user.getLastName(),user.getDescription(),user.getRole());
-    }
+    @Mapping(source = "username", target = "userName")
+    UserReadModel toDto(User user);
     void updateUserFromDto(UserWriteModel userWriteModel, @MappingTarget User user);
 
     List<UserReadModel> map(List<User> users);

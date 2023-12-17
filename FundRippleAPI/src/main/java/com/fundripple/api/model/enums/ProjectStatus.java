@@ -3,5 +3,6 @@ package com.fundripple.api.model.enums;
 public enum ProjectStatus {
     OPEN,
     CLOSED,
-    EARLY_CLOSE
+    EARLY_CLOSE,
+    TO_VERIFY
 }
