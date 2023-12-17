@@ -27,4 +27,13 @@ export class UserService {
       return of(null);
     }
   }
+
+  public getUserRole(userName:string):Observable<string>{
+    const storedToken = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+        Authorization: `Bearer ${storedToken}`,
+      });
+      return this.http.get(`${environment.apiBaseUrl}/user/role/${userName}`, { headers, responseType: 'text'  });
+  }
 }

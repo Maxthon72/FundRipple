@@ -5,6 +5,7 @@ import com.fundripple.api.model.dto.read.UserReadModel;
 import com.fundripple.api.model.entity.User;
 import com.fundripple.api.model.enums.Role;
 import com.fundripple.api.repository.UserRepository;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,5 +37,9 @@ public class UserService {
         User user = userRepository.findByUserName(userName).get();
         user.setRole(Role.ADMIN);
         userRepository.save(user);
+    }
+
+    public String getUserRole(String userName) {
+        return userRepository.findByUserName(userName).get().getRole().name();
     }
 }

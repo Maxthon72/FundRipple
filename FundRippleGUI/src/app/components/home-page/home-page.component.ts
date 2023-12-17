@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit{
   token:string|null = null
   logedIn = false
   user:User|null=null;
+  role:string=""
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
     private userService:UserService,private projectService:ProjectService){}
   ngOnInit(): void {
@@ -32,6 +33,12 @@ export class HomePageComponent implements OnInit{
             (user: User | null) => {
               if (user !== null) {
                 this.user = user;
+                this.userService.getUserRole(this.user.userName).subscribe(
+                  (res:string)=>{
+                    this.role=res;
+                    console.log(this.role)
+                  }
+                )
               } else {
               }
             },

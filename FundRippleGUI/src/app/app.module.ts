@@ -18,6 +18,9 @@ import { CreateProjectComponent } from './components/create-project/create-proje
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
 import { UserPageComponent } from './components/user-page/user-page.component'; // Import MatButtonModule for buttons
 import { MatChipsModule } from '@angular/material/chips';
+import { VerifyProjectComponent } from './components/verify-project/verify-project.component';
+import { SuspicionsProjectComponent } from './components/suspicions-project/suspicions-project.component';
+import { SearchProjectComponent } from './components/search-project/search-project.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { MatChipsModule } from '@angular/material/chips';
     RegisterPageComponent,
     CreateProjectComponent,
     SpecificProjectComponent,
-    UserPageComponent
+    UserPageComponent,
+    VerifyProjectComponent,
+    SuspicionsProjectComponent,
+    SearchProjectComponent
   ],
   imports: [
     MatChipsModule,

@@ -20,4 +20,9 @@ public class UserController {
     public ResponseEntity<UserReadModel> GetUserByToken(@RequestHeader("Authorization") String header){
         return new ResponseEntity<>(userService.getUserDtoByToken(header), HttpStatus.OK);
     }
+
+    @GetMapping("/role/{userName}")
+    public ResponseEntity<String> getUserRole(@PathVariable String userName){
+        return  new ResponseEntity<>(userService.getUserRole(userName),HttpStatus.OK);
+    }
 }
