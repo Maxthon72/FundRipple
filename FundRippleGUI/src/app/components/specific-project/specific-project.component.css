@@ -48,3 +48,261 @@
 .mat-button {
     margin-right: 10px;
 }
+
+.container {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.image {
+    border: 1px solid black;
+    height: 100px;
+    /* Example height */
+    width: 100%;
+    /* Full width of the container */
+    margin: 10px 0;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    /* Set the desired height */
+}
+
+.resized-banner-image {
+    padding: 10px;
+    max-width: 1120px;
+    max-height: 832px;
+    width: auto;
+    height: auto;
+}
+
+mat-progress-bar {
+    width: 100%;
+    /* Full-width progress bar */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    /* Add some margin above and below the progress bar */
+}
+
+.content {
+    width: 100%;
+    max-width: 90%;
+    /* Adjust the width as needed */
+    margin: auto;
+    /* Center the container */
+    padding: 20px;
+}
+
+.image-description {
+    max-width: 800px;
+    max-height: 600px;
+    align-content: center;
+    width: auto;
+    height: auto;
+}
+
+
+/* Project Header with banner and info side by side */
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.banner-image {
+    flex: 1;
+    /* Adjust size as necessary, currently taking equal space with info */
+    padding-right: 10px;
+    /* Spacing between banner and info */
+}
+
+.info-and-buttons {
+    flex: 1;
+    /* Adjust size as necessary, currently taking equal space with banner */
+    padding-left: 10px;
+    /* Spacing between info and banner */
+    max-width: 35%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+/* Project info and buttons stacked */
+
+.project-info {
+    margin-bottom: 10px;
+}
+
+.project-info-card {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* Space between card and buttons */
+}
+
+.project-info-card div {
+    margin-bottom: 5px;
+    /* Space between text elements */
+    color: #333;
+    /* Dark grey color for text for readability */
+    font-size: 14px;
+    /* Set font size */
+}
+
+
+/* Description and Benefits/Subgoals sections */
+
+.description-and-benefits-and-subgoals {
+    display: flex;
+    justify-content: space-between;
+}
+
+.description {
+    flex: 2;
+    /* Description takes up twice as much space as benefits/subgoals */
+    margin-right: 10px;
+}
+
+.sub-goal-list,
+.benefit-list {
+    flex: 1;
+    /* Both sub-goals and benefits take equal space */
+    margin-bottom: 10px;
+}
+
+.buttons mat-card {
+    display: flex;
+    /* Establishes a flex container */
+    flex-direction: row;
+    /* Aligns children (buttons) in a row */
+    justify-content: center;
+    /* Centers buttons horizontally */
+    align-items: center;
+    /* Centers buttons vertically */
+    border: none;
+    box-shadow: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    /* Distribute buttons evenly */
+    padding: 0 20px;
+    /* Padding on sides */
+}
+
+
+/* Button styling */
+
+.buttons a[mat-button] {
+    background-color: #007bff;
+    /* Example primary color */
+    color: white;
+    padding: 10px 20px;
+    /* Padding inside the button */
+    margin: 0 10px;
+    /* Space between buttons */
+    border-radius: 4px;
+    /* Rounded corners */
+    text-transform: uppercase;
+    /* Uppercase button text */
+    text-decoration: none;
+    /* Remove underline from links */
+    transition: background-color 0.3s;
+    /* Smooth background color transition */
+}
+
+.buttons a[mat-button]:hover {
+    background-color: #0056b3;
+    /* Darken color on hover */
+}
+
+
+/* Posts and Comments section */
+
+.posts-and-comments {
+    margin-top: 20px;
+}
+
+
+/* Styles for Angular Material components */
+
+.image-card,
+.nested-card {
+    margin-bottom: 10px;
+}
+
+
+/* Loading spinner */
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    /* Example height */
+}
+
+
+/* Utilize Angular Material button styles */
+
+.benefits-and-subgoals {
+    flex: 1;
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.nested-cards {
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sub-goal,
+.benefit {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #eeeeee;
+    background-color: #fafafa;
+}
+
+.mat-card-content {
+    padding: 10px;
+    color: #333;
+    font-size: 1rem;
+}
+
+.mat-card-title {
+    padding: 10px;
+    font-size: 1.25rem;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+}
+
+
+/* Responsive behavior */
+
+@media (max-width: 768px) {
+    .project-header,
+    .description-and-benefits-and-subgoals {
+        flex-direction: column;
+    }
+    .banner-image,
+    .info-and-buttons,
+    .description,
+    .benefits-and-subgoals {
+        padding: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}

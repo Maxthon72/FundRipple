@@ -21,6 +21,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { VerifyProjectComponent } from './components/verify-project/verify-project.component';
 import { SuspicionsProjectComponent } from './components/suspicions-project/suspicions-project.component';
 import { SearchProjectComponent } from './components/search-project/search-project.component';
+import {MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { SearchProjectComponent } from './components/search-project/search-proje
     SearchProjectComponent
   ],
   imports: [
+    MatProgressBarModule,
+    MatListModule,
+    MatCardModule,
     MatChipsModule,
     MatIconModule,
     BrowserModule,

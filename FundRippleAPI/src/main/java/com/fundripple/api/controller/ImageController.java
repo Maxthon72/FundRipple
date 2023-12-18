@@ -28,8 +28,8 @@ public class ImageController {
 
         // Directory path updated to use the mapped volume in Docker
         //Path when not in docker
-        String directoryPath = "C:" + File.separator + "Users" + File.separator + "Macie" + File.separator + "shared" + File.separator + userName + File.separator + projectName + File.separator + "description";
-        //String directoryPath = "/app/resources" + File.separator + userName + File.separator + projectName + File.separator + "description";
+        //String directoryPath = "C:" + File.separator + "Users" + File.separator + "Macie" + File.separator + "shared" + File.separator + userName + File.separator + projectName + File.separator + "description";
+        String directoryPath = "/app/resources" + File.separator + userName + File.separator + projectName + File.separator + "description";
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs(); // Create directories if they don't exist
@@ -62,8 +62,8 @@ public class ImageController {
 
         // Directory path updated to use the mapped volume in Docker
         //Path when not in docker
-        String directoryPath = "C:" + File.separator + "Users" + File.separator + "Macie" + File.separator + "shared" + File.separator + userName + File.separator + projectName + File.separator + "banner";
-        //String directoryPath = "/app/resources" + File.separator + userName + File.separator + projectName + File.separator + "banner";
+        //String directoryPath = "C:" + File.separator + "Users" + File.separator + "Macie" + File.separator + "shared" + File.separator + userName + File.separator + projectName + File.separator + "banner";
+        String directoryPath = "/app/resources" + File.separator + userName + File.separator + projectName + File.separator + "banner";
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs(); // Create directories if they don't exist

@@ -23,6 +23,7 @@ export class SpecificProjectComponent {
   benefits:ProjectBenefit[]=[]
   subGoals:ProjectSubGoal[]=[]
   projectName=""
+  loading: boolean = true;
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
     private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute){}
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class SpecificProjectComponent {
       this.projectService.getProjectByProjectName(this.projectName).subscribe(
         (fullProjectResp:FullProject)=>{
           this.project=fullProjectResp
+          this.loading=false
             this.projectService.getBenefitsForProject(this.projectName).subscribe(
               (benefitResp:ProjectBenefit[])=>{
                 this.benefits=benefitResp
@@ -84,7 +86,9 @@ export class SpecificProjectComponent {
     }
     return ''
   }
-
+  get percentageCollected() {
+    return (this.project!.moneyCollected / this.project!.goal) * 100;
+  }
   navigateToHome(){
     console.log(this.project)
     this.router.navigate(['home']);

@@ -21,6 +21,11 @@ export class SearchProjectComponent {
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
     private userService:UserService,private projectService:ProjectService){}
   ngOnInit(): void {
+    this.projectService.getAllProjectSLE().subscribe(
+      (projectsResponse:ProjectSLE[])=>{
+        this.projects=projectsResponse;
+      }
+    )
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       this.token = storedToken;
@@ -36,11 +41,6 @@ export class SearchProjectComponent {
                 this.userService.getUserRole(this.user.userName).subscribe(
                   (res:string)=>{
                     this.role=res;
-                    this.projectService.getAllProjectSLE().subscribe(
-                      (projectsResponse:ProjectSLE[])=>{
-                        this.projects=projectsResponse;
-                      }
-                    )
                   }
                 )
               } else {

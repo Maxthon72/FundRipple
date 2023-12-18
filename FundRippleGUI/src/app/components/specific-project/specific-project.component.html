@@ -49,3 +49,91 @@
         </nav>
     </mat-toolbar>
 </div>
+<div class="content">
+    <div class="project-header">
+        <div class="banner-image">
+            <mat-card class="image-card" *ngIf="project!=null">
+                <mat-card-header>
+                    <mat-card-title>{{project.projectName}}</mat-card-title>
+                    <!-- Add other header content like subtitle, avatar here -->
+                </mat-card-header>
+                <div *ngIf="loading" class="loading-spinner">Loading...</div>
+                <div *ngIf="!loading">
+                    <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/banner/{{this.project.bannerURL}}" alt="Descriptive Image Text">
+                </div>
+            </mat-card>
+        </div>
+        <div class="info-and-buttons">
+            <div class="project-info" *ngIf="project!=null">
+                <mat-card class="project-info-card">
+                    <div>{{project.summery}}</div>
+                    <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
+                    <div>{{ project.moneyCollected }} PLN / {{ project.goal }} PLN</div>
+                    <div>Ending date: {{project.planedDateOfClosing}}</div>
+                    <div>Started by {{project.responsibleUser.userName}}</div>
+                </mat-card>
+            </div>
+            <div class="buttons" *ngIf="project!=null">
+                <mat-card>
+                    <a mat-button>Support</a>
+                    <a mat-button>Report</a>
+                    <a mat-button>Ok</a>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>
+    <div class="description-and-benefits-and-subgoals">
+        <div class="description" *ngIf="project!=null">
+            <!-- Angular Material List for repeated items -->
+            <mat-list>
+                <mat-card>
+                    <mat-list-item *ngFor="let description of project?.description; index as i">
+                        <div *ngIf="description.type=='TEXT'">
+                            <div class="text-description">
+                                {{description.description}}
+                            </div>
+                        </div>
+                        <div *ngIf="description.type=='IMAGE'">
+                            <div class="image-description">
+                                <img mat-card-image class="resized-description-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/description/{{description.description}}" alt="Descriptive Image Text">
+                            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-card>
+            </mat-list>
+        </div>
+        <div class="benefits-and-subgoals" *ngIf="project!=null">
+            <!-- Nested Angular Material Cards -->
+            <div class="sub-goal-list">
+                <mat-card class="nested-cards">
+                    <mat-card-title>Sub-Goals</mat-card-title>
+                    <mat-card *ngFor="let subGoal of subGoals; index as i" class="nested-card">
+                        <div class="sub-goal">
+                            <mat-card-content>
+                                {{subGoal.name}}
+                            </mat-card-content>
+                        </div>
+                    </mat-card>
+                </mat-card>
+            </div>
+
+            <div class="benefit-list">
+                <mat-card class="nested-cards">
+                    <mat-card-title>Benefits</mat-card-title>
+                    <mat-card *ngFor="let benefit of benefits; index as i" class="nested-card">
+                        <div class="benefit">
+                            <mat-card-content>
+                                {{benefit.name}}
+                            </mat-card-content>
+                        </div>
+                    </mat-card>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>
+    <div class="posts-and-comments">
+
+    </div>
+</div>
