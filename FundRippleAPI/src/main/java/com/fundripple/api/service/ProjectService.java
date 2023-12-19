@@ -10,6 +10,7 @@ import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.dto.write.TagWriteModel;
 import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.model.entity.ProjectDescription;
+import com.fundripple.api.model.entity.Suspicion;
 import com.fundripple.api.model.entity.Tag;
 import com.fundripple.api.model.enums.ProjectDescriptionElementType;
 import com.fundripple.api.model.enums.ProjectStatus;
@@ -28,13 +29,14 @@ public class ProjectService {
     private final ProjectDescriptionRepository projectDescriptionRepository;
     private final TagRepository tagRepository;
     private final CleanService cleanService;
+    private final SuspicionRepository suspicionRepository;
 
 
     public ProjectService(JwtService jwtService, UserService userService,
                           ProjectMapper projectMapper, ProjectRepository projectRepository,
                           ProjectDescriptionMapper projectDescriptionMapper,
                           ProjectDescriptionRepository projectDescriptionRepository,
-                          TagRepository tagRepository, CleanService cleanService) {
+                          TagRepository tagRepository, CleanService cleanService, SuspicionRepository suspicionRepository) {
         this.userService = userService;
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
@@ -42,6 +44,7 @@ public class ProjectService {
         this.projectDescriptionRepository = projectDescriptionRepository;
         this.tagRepository = tagRepository;
         this.cleanService = cleanService;
+        this.suspicionRepository = suspicionRepository;
     }
 
     public List<ProjectReadModel> getAllProjects(){
@@ -121,5 +124,23 @@ public class ProjectService {
         ProjectReadModel projectReadModel = projectMapper.toReadModel(projectRepository.findProjectByProjectName(projectName));
         projectReadModel.setDescription(projectDescriptionMapper.map(projectDescriptionRepository.findAllByProject(projectRepository.findProjectByProjectName(projectName))));
         return projectReadModel;
+    }
+
+    public String suspectProjectByUser(String projectName, String userName) {
+        if(suspicionRepository.getSuspicionsByProjectAndUser(projectName,userName)==null){
+            Suspicion suspicion = new Suspicion();
+            suspicion.setProjectName(projectName);
+            suspicion.setUserName(userName);
+            suspicionRepository.save(suspicion);
+            Project project = projectRepository.findProjectByProjectName(projectName);
+            project.setSuspicions(project.getSuspicions()+1);
+            projectRepository.save(project);
+            return project.getSuspicions().toString();
+        }
+        return "0";
+    }
+
+    public Boolean alreadySuspected(String projectName, String userName) {
+        return suspicionRepository.getSuspicionsByProjectAndUser(projectName, userName) != null;
     }
 }

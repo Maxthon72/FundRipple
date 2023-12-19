@@ -66,4 +66,32 @@ public class ProjectController {
         }
     }
 
+    @PostMapping("/suspect/{projectName}/{userName}")
+    public ResponseEntity<?> suspectProjectByUser(
+            @PathVariable String projectName,
+            @PathVariable String userName
+    ){
+        try{
+            return ResponseEntity.ok(projectService.suspectProjectByUser(projectName,userName));
+        }catch (ProjectException e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/suspect/{projectName}/{userName}")
+    public ResponseEntity<?> checkIfAlreadySuspects(
+            @PathVariable String projectName,
+            @PathVariable String userName
+    ){
+        try{
+            return ResponseEntity.ok(projectService.suspectProjectByUser(projectName,userName));
+        }catch (ProjectException e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
 }
