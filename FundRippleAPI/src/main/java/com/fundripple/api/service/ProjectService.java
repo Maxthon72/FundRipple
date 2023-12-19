@@ -30,13 +30,14 @@ public class ProjectService {
     private final TagRepository tagRepository;
     private final CleanService cleanService;
     private final SuspicionRepository suspicionRepository;
+    private final JwtService jwtService;
 
 
     public ProjectService(JwtService jwtService, UserService userService,
                           ProjectMapper projectMapper, ProjectRepository projectRepository,
                           ProjectDescriptionMapper projectDescriptionMapper,
                           ProjectDescriptionRepository projectDescriptionRepository,
-                          TagRepository tagRepository, CleanService cleanService, SuspicionRepository suspicionRepository) {
+                          TagRepository tagRepository, CleanService cleanService, SuspicionRepository suspicionRepository, JwtService jwtService1) {
         this.userService = userService;
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
@@ -45,6 +46,7 @@ public class ProjectService {
         this.tagRepository = tagRepository;
         this.cleanService = cleanService;
         this.suspicionRepository = suspicionRepository;
+        this.jwtService = jwtService1;
     }
 
     public List<ProjectReadModel> getAllProjects(){
@@ -126,21 +128,4 @@ public class ProjectService {
         return projectReadModel;
     }
 
-    public String suspectProjectByUser(String projectName, String userName) {
-        if(suspicionRepository.getSuspicionsByProjectAndUser(projectName,userName)==null){
-            Suspicion suspicion = new Suspicion();
-            suspicion.setProjectName(projectName);
-            suspicion.setUserName(userName);
-            suspicionRepository.save(suspicion);
-            Project project = projectRepository.findProjectByProjectName(projectName);
-            project.setSuspicions(project.getSuspicions()+1);
-            projectRepository.save(project);
-            return project.getSuspicions().toString();
-        }
-        return "0";
-    }
-
-    public Boolean alreadySuspected(String projectName, String userName) {
-        return suspicionRepository.getSuspicionsByProjectAndUser(projectName, userName) != null;
-    }
 }

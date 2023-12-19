@@ -63,7 +63,7 @@ export class SpecificProjectComponent {
                 this.user = user;
                 this.userService.getUserRole(this.user.userName).subscribe(
                   (res:string)=>{
-                    
+                    this.role=res
                   }
                 )
               } else {
@@ -92,6 +92,22 @@ export class SpecificProjectComponent {
   navigateToHome(){
     console.log(this.project)
     this.router.navigate(['home']);
+  }
+  support(){
+    if(this.logedIn){
+
+    }
+    else{
+      this.router.navigate(['login']);
+    }
+  }
+  suspect(){
+    if(this.logedIn){
+      
+    }
+    else{
+      this.router.navigate(['login']);
+    }
   }
 
   public logOut(){

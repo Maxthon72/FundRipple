@@ -21,4 +21,5 @@ export interface FullProject{
   summery:string
   tags:Tag[]
   bannerURL:string
+  suspicions:number
 }

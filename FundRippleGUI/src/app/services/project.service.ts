@@ -100,4 +100,29 @@ export class ProjectService {
   public getBenefitsForProject(projectName:string):Observable<ProjectBenefit[]>{
     return this.http.get<ProjectBenefit[]>(`${environment.apiBaseUrl}/benefit/forProject/${projectName}`);
   }
+  public checkIfSuspect(projectName:string,userName:string):Observable<boolean>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    // Make the GET request with the custom headers
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/suspect/${projectName}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  public suspect(projectName:string,userName:string):Observable<boolean>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    console.log(storedToken)
+    console.log(headers)
+    console.log(projectName)
+    // Make the GET request with the custom headers
+    return this.http.put<boolean>(`${environment.apiBaseUrl}/suspect/${projectName}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

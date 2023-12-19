@@ -71,13 +71,18 @@
                     <div>{{ project.moneyCollected }} PLN / {{ project.goal }} PLN</div>
                     <div>Ending date: {{project.planedDateOfClosing}}</div>
                     <div>Started by {{project.responsibleUser.userName}}</div>
+                    <div>Suspicions {{project.suspicions}}</div>
                 </mat-card>
             </div>
             <div class="buttons" *ngIf="project!=null">
                 <mat-card>
-                    <a mat-button>Support</a>
-                    <a mat-button>Report</a>
-                    <a mat-button>Ok</a>
+                    <div *ngIf="role!='ADMIN'">
+                        <a mat-button (click)="support()">Support</a>
+                        <a mat-button (click)="suspect()">Report</a>
+                    </div>
+                    <div *ngIf="role=='ADMIN'">
+                        <a mat-button>Ok</a>
+                    </div>
                 </mat-card>
             </div>
 

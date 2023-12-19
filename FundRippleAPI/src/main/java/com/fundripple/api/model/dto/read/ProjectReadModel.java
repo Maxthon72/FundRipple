@@ -20,6 +20,7 @@ public class ProjectReadModel {
     private Long numberOfSupporters;
     private LocalDate dateCreated;
     private LocalDate dateClosed;
+    private Long suspicions;
     private LocalDate planedDateOfClosing;
     private List<ProjectDescriptionReadModel> description;
     private List<TagReadModel> tags;
