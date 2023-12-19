@@ -1,5 +1,6 @@
 package com.fundripple.api.service;
 
+import com.fundripple.api.model.dto.write.OnlyProjectName;
 import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.model.entity.Suspicion;
 import com.fundripple.api.repository.ProjectRepository;
@@ -16,18 +17,22 @@ public class SuspectService {
         this.projectRepository = projectRepository;
     }
 
-    public Boolean addSus(String projectName, String userName) {
-        if(suspicionRepository.getSuspicionsByProjectAndUser(projectName, userName)==null){
+    public Boolean addSus(OnlyProjectName onlyProjectName, String userName) {
+        if(suspicionRepository.getSuspicionsByProjectAndUser(onlyProjectName.getProjectName(), userName)==null){
             Suspicion suspicion = new Suspicion();
             suspicion.setUserName(userName);
-            suspicion.setProjectName(projectName);
+            suspicion.setProjectName(onlyProjectName.getProjectName());
             suspicion.setId(1L);
             suspicionRepository.save(suspicion);
-            Project project = projectRepository.findProjectByProjectName(projectName);
+            Project project = projectRepository.findProjectByProjectName(onlyProjectName.getProjectName());
             project.setSuspicions(project.getSuspicions()+1);
             projectRepository.save(project);
             return true;
         }
         return false;
+    }
+
+    public Boolean checkIfSus(String projectName, String userName){
+        return suspicionRepository.getSuspicionsByProjectAndUser(projectName, userName) != null;
     }
 }

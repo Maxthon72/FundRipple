@@ -103,7 +103,13 @@ export class SpecificProjectComponent {
   }
   suspect(){
     if(this.logedIn){
-      
+      this.projectService.suspect(this.project!.projectName,this.user!.userName).subscribe(
+        (res:boolean)=>{
+          if(res){
+            this.project!.suspicions+=1;
+          }
+        }
+      )
     }
     else{
       this.router.navigate(['login']);

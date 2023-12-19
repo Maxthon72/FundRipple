@@ -8,6 +8,9 @@ export interface Project {
     summery:string
     planedDateOfClosing:string
   }
+  export interface OnlyProjectName{
+    projectName:string
+  }
 export interface FullProject{
   projectName:string
   responsibleUser:PartUser
