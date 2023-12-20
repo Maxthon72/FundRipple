@@ -27,6 +27,7 @@
                 <mat-label for="userName">Username</mat-label>
                 <input matInput type="text" id="userName" name="userName" [(ngModel)]="user.userName" required>
             </mat-form-field>
+            <mat-error *ngIf="userNameFlag">User name should't include special characters</mat-error>
         </div>
         <div class="form-group">
             <mat-form-field appearance="fill">

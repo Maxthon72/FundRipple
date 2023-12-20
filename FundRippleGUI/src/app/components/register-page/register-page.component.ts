@@ -18,6 +18,7 @@ export class RegisterPageComponent implements OnInit{
   constructor(private auth:AuthenticationService,private router:Router,private localStorage: LocalStorage){}
 
   hidePassword = true;
+  userNameFlag=false
   ngOnInit(): void {
     this.user = {
       userName: '',
@@ -30,14 +31,23 @@ export class RegisterPageComponent implements OnInit{
 
   onSubmit() {
     console.log(this.user)
-    this.auth.registerNormalUser(this.user).subscribe(
-      (response:Token)=>{
-        this.token = response
-        this.localStorage.clear()
-        this.localStorage.setItem('token',response)
-        this.router.navigate(['/']);
-      }
-    )
+    if (this.user.userName.includes(' ')) {
+      this.userNameFlag = true;
+    } else {
+      this.userNameFlag = false;
+    }
+    console.log(this.userNameFlag)
+    if(!this.userNameFlag){
+      this.auth.registerNormalUser(this.user).subscribe(
+        (response:Token)=>{
+          this.token = response
+          this.localStorage.clear()
+          this.localStorage.setItem('token',response)
+          this.userNameFlag=false;
+          this.router.navigate(['/']);
+        }
+      )
+    }
     console.log('Registration submitted:', this.user)
   }
   navigateToHome(){

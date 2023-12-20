@@ -105,22 +105,20 @@ export class ProjectService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${storedToken}`,
     });
-    const OnlyProjectName={projectName:projectNameSus}
-    // Make the GET request with the custom headers
-    return this.http.get<boolean>(`${environment.apiBaseUrl}/suspect/${userName}`, { headers }).pipe(
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/sus/${userName}/${projectNameSus}`, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
 
   public suspect(projectNameSus:string,userName:string):Observable<boolean>{
+
     const storedToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${storedToken}`,
     });
-    OnlyProjectName project ={projectName:projectNameSus}
     // Make the GET request with the custom headers
-    return this.http.put<boolean>(`${environment.apiBaseUrl}/suspect/${userName}`,OnlyProjectName, { headers }).pipe(
+    return this.http.put<boolean>(`${environment.apiBaseUrl}/sus/${userName}/${projectNameSus}`, { headers }).pipe(
       catchError(this.handleError)
     );
   }
