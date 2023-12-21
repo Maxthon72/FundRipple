@@ -17,14 +17,14 @@ public class SuspectService {
         this.projectRepository = projectRepository;
     }
 
-    public Boolean addSus(OnlyProjectName onlyProjectName, String userName) {
-        if(suspicionRepository.getSuspicionsByProjectAndUser(onlyProjectName.getProjectName(), userName)==null){
+    public Boolean addSus(String projectName, String userName) {
+        if(suspicionRepository.getSuspicionsByProjectAndUser(projectName, userName)==null){
             Suspicion suspicion = new Suspicion();
             suspicion.setUserName(userName);
-            suspicion.setProjectName(onlyProjectName.getProjectName());
+            suspicion.setProjectName(projectName);
             suspicion.setId(1L);
             suspicionRepository.save(suspicion);
-            Project project = projectRepository.findProjectByProjectName(onlyProjectName.getProjectName());
+            Project project = projectRepository.findProjectByProjectName(projectName);
             project.setSuspicions(project.getSuspicions()+1);
             projectRepository.save(project);
             return true;

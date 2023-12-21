@@ -24,6 +24,7 @@ import { SearchProjectComponent } from './components/search-project/search-proje
 import {MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     SearchProjectComponent
   ],
   imports: [
+    MatSelectModule,
     MatProgressBarModule,
     MatListModule,
     MatCardModule,

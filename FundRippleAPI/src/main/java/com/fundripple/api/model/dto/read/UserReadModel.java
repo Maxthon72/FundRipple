@@ -23,12 +23,3 @@ public class UserReadModel {
 
     private String role;
 }
-
-//    public UserReadModel(User user){
-//        this.userName=user.getUsername();
-//        this.email=user.getEmail();
-//        this.firstName=user.getFirstName();
-//        this.lastName=user.getLastName();
-//        this.description=user.getDescription();
-//        this.role=user.getRole().name();
-//    }

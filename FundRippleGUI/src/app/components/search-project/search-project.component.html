@@ -50,9 +50,74 @@
     </mat-toolbar>
 </div>
 <div class="container">
-    <div *ngFor="let project of projects">
-        <div>
-            <a routerLink="/project/{{project.projectName}}">Go to {{project.projectName}}</a>
+    <div class="filters-and-serch">
+        <div class="search">
+            <mat-form-field appearance="fill">
+                <mat-label>Search projects</mat-label>
+                <input matInput [(ngModel)]="searchTerm" (keyup)="applyFilters()" placeholder="Type to search...">
+            </mat-form-field>
+        </div>
+
+        <div class="filters">
+            <div class="project-type">
+                <mat-form-field appearance="fill">
+                    <mat-label>Project Type</mat-label>
+                    <mat-select [(ngModel)]="selectedFilter" (selectionChange)="applyFilters()">
+                        <mat-option *ngFor="let status of projectStatus" [value]="status">{{ status }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="sort-by">
+                <mat-form-field appearance="fill">
+                    <mat-label>Sort by</mat-label>
+                    <mat-select [(ngModel)]="selectedProjectElement" (selectionChange)="applyFilters()">
+                        <mat-option *ngFor="let element of projectElements" [value]="element">{{ element }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="sorting-direction">
+                <mat-form-field appearance="fill">
+                    <mat-label>Direction of sorting</mat-label>
+                    <mat-select [(ngModel)]="selectedDirection" (selectionChange)="applyFilters()">
+                        <mat-option *ngFor="let direction of direction" [value]="direction">{{ direction }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="project-tags">
+                <mat-form-field appearance="fill">
+                    <mat-label>Project Tags</mat-label>
+                    <mat-select multiple (selectionChange)="onTagSelect($event)">
+                        <mat-option *ngFor="let tag of allTags" [value]="tag">{{ tag.tagName }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </div>
+    <div class="projects">
+        <div *ngFor="let project of filteredAndSearchedProjects">
+            <mat-card (click)="onCardClick(project.projectName)">
+                <div class="project-banner">
+                    <div *ngIf="loading" class="loading-spinner">Loading...</div>
+                    <div *ngIf="!loading">
+                        <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{project.projectName}}/banner/{{project.bannerURL}}" alt="Descriptive Image Text">
+                    </div>
+                </div>
+
+
+
+                <div class="project-info">
+                    <mat-card>
+                        <span>{{project.projectName}}</span>
+                        <span>{{project.summery}}</span>
+                        <span>{{project.planedDateOfClosing}}</span>
+                        <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
+                    </mat-card>
+                </div>
+            </mat-card>
         </div>
     </div>
 </div>

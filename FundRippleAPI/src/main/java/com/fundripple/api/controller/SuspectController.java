@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SuspectController {
     private final SuspectService suspectService;
-    @PutMapping("/{userName}")
+    @PutMapping("/{userName}/{projectName}")
     ResponseEntity<Boolean> addSus(
-            @RequestBody OnlyProjectName onlyProjectName,
+            @PathVariable("projectName") String projectName,
             @PathVariable("userName") String userName
     ){
-        return ResponseEntity.ok(suspectService.addSus(onlyProjectName,userName));
+        return ResponseEntity.ok(suspectService.addSus(projectName,userName));
     }
 
     @GetMapping("/{userName}/{projectName}")

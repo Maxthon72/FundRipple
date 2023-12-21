@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface SuspicionRepository extends JpaRepository<Suspicion, Long> {
 
-    @Query(value = "SELECT * FROM suspicions where project_name =?1 and user_name=?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM suspicions where project_name =?1 and user_name=?2",nativeQuery = true)
     Suspicion getSuspicionsByProjectAndUser(String projectName,String userName);
 }

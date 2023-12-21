@@ -48,3 +48,102 @@
 .mat-button {
     margin-right: 10px;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1200px;
+    /* Adjust based on your layout */
+    padding: 20px;
+}
+
+.filters-and-search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search,
+.filters {
+    flex: 1;
+    min-width: 250px;
+    /* Adjust minimum width as needed */
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    /* Align items vertically */
+}
+
+.project-type,
+.sort-by,
+.sorting-direction,
+.project-tags {
+    flex-grow: 1;
+    flex-basis: calc(25% - 20px);
+    /* Adjust the percentage based on number of filters */
+}
+
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+    .project-type,
+    .sort-by,
+    .sorting-direction,
+    .project-tags {
+        flex-basis: 100%;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+    /* Full width of their container */
+}
+
+.resized-banner-image {
+    width: 100%;
+    /* Make image take full width */
+    height: 100%;
+    /* Make image take full height */
+    object-fit: cover;
+    /* This ensures the image covers the area without distorting aspect ratio */
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Responsive grid for projects */
+    gap: 20px;
+    /* Space between projects */
+}
+
+.project-banner {
+    height: 150px;
+    /* Set a fixed height */
+    width: 100%;
+    /* Ensure it takes full width of the card */
+    position: relative;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    /* Hide overflow to maintain the size */
+}
+
+.project-info {
+    padding: 10px;
+}
+
+.mat-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.mat-progress-bar {
+    margin-top: 10px;
+    /* Space above the progress bar */
+}
