@@ -25,6 +25,8 @@ import {MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
     SearchProjectComponent
   ],
   imports: [
+    MatPaginatorModule,
+    MatTableModule,
     MatSelectModule,
     MatProgressBarModule,
     MatListModule,

@@ -49,7 +49,7 @@
         </nav>
     </mat-toolbar>
 </div>
-<div class="container">
+<mat-card class="container">
     <div class="filters-and-serch">
         <div class="search">
             <mat-form-field appearance="fill">
@@ -97,27 +97,30 @@
 
         </div>
     </div>
+    <mat-paginator [length]="totalLength" [pageSize]="pageSize" [pageSizeOptions]="[4, 8, 12,16]" (page)="onPageChange($event)">
+    </mat-paginator>
     <div class="projects">
-        <div *ngFor="let project of filteredAndSearchedProjects">
+        <div *ngFor="let project of paginatedProjects">
             <mat-card (click)="onCardClick(project.projectName)">
-                <div class="project-banner">
-                    <div *ngIf="loading" class="loading-spinner">Loading...</div>
-                    <div *ngIf="!loading">
-                        <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{project.projectName}}/banner/{{project.bannerURL}}" alt="Descriptive Image Text">
+                <div class="project">
+                    <div class="project-banner">
+                        <div *ngIf="loading" class="loading-spinner">Loading...</div>
+                        <div *ngIf="!loading">
+                            <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{project.projectName}}/banner/{{project.bannerURL}}" alt="Descriptive Image Text">
+                        </div>
                     </div>
-                </div>
 
 
 
-                <div class="project-info">
-                    <mat-card>
-                        <span>{{project.projectName}}</span>
-                        <span>{{project.summery}}</span>
-                        <span>{{project.planedDateOfClosing}}</span>
+                    <div class="project-info">
+                        <span>{{project.projectName}}</span><br>
+                        <span>{{project.summery}}</span><br>
+                        <span>{{project.planedDateOfClosing}}</span><br>
+                        <span *ngFor="let tag of project.tags">{{tag.tagName}} </span>
                         <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
-                    </mat-card>
+                    </div>
                 </div>
             </mat-card>
         </div>
     </div>
-</div>
+</mat-card>

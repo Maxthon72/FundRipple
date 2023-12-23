@@ -118,9 +118,14 @@ mat-form-field {
 .projects {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    margin-top: 20px;
     /* Responsive grid for projects */
     gap: 20px;
     /* Space between projects */
+}
+
+.container {
+    background-color: #f5f2f2;
 }
 
 .project-banner {

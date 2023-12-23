@@ -212,93 +212,97 @@ export class CreateProjectComponent implements OnInit {
   }
 
   finish() {
-    this.projectService.addProject(this.project).subscribe({
-      next: (data: Project) => {
-        // Handle successful response
-        if(this.bannerImage!=null){
-          this.fileService.uploadImageProjectBanner(this.bannerImage,this.user!.userName,this.project.projectName,this.bannerImage?.name).subscribe(
-            (response:string)=>{
-              console.log(response)
+    for(let i =0;i<10;i++){
+      this.project.projectName=this.project.projectName+i.toFixed()
+      this.projectService.addProject(this.project).subscribe({
+        next: (data: Project) => {
+          // Handle successful response
+          if(this.bannerImage!=null){
+            this.fileService.uploadImageProjectBanner(this.bannerImage,this.user!.userName,this.project.projectName,this.bannerImage?.name).subscribe(
+              (response:string)=>{
+                console.log(response)
+              }
+            )
+          }
+          let index = 0;
+          for(let projectDescription of this.listOfDescriptions){
+            if (projectDescription.description instanceof File) {
+              this.fileService.uploadImageProjectDescription(projectDescription.description!, 
+                this.user!.userName, this.project.projectName, (projectDescription.description as File).name).subscribe(
+                (res: string) => {
+                  console.log(res)
+                }
+              )
+              let newDescription: ProjectDescription = {
+                indexIdDescription: index,
+                description: (projectDescription.description as File).name.toString(),
+                type: "IMAGE"
+              };
+              this.listOfDescriptionsToSend.push(newDescription)
             }
+            else{
+              projectDescription.indexIdDescription=index
+              this.listOfDescriptionsToSend.push(projectDescription)
+  
+            }
+            index=index+1
+          }
+          this.projectService.addDescriptionsToProject(this.listOfDescriptionsToSend, this.project.projectName).subscribe({
+            next: (data: Project) => {
+              // Handle successful response
+              this.projectService.addTagsToProject(this.selectedTags, this.project.projectName).subscribe({
+                next: (data: Project) => {
+                  this.projectService.addBenefitsToProject(this.projectBenefits,this.project.projectName).subscribe({
+                    next: (data: Project) => {
+                      this.projectService.addSubGoalsToProject(this.projectSubGoal,this.project.projectName).subscribe({
+                        next: (data: Project) => {
+                          this.router.navigate(['home']);
+                        },
+                        error: (error: any) => {
+                          // Handle error response
+                          this.listOfDescriptionsToSend=[]
+                          console.error('Error adding project:', error);
+                          // Optionally display the error message in the UI
+                        }
+                      })
+                    },
+                    error: (error: any) => {
+                      // Handle error response
+                      this.listOfDescriptionsToSend=[]
+                      console.error('Error adding project:', error);
+                      // Optionally display the error message in the UI
+                    }
+                  })
+                },
+                error: (error: any) => {
+                  // Handle error response
+                  this.listOfDescriptionsToSend=[]
+                  console.error('Error adding project:', error);
+                  // Optionally display the error message in the UI
+                }
+              }
+  
+              )
+            },
+            error: (error: any) => {
+              // Handle error response
+              this.listOfDescriptionsToSend=[]
+              console.error('Error adding project:', error);
+              // Optionally display the error message in the UI
+            }
+          }
           )
+  
+        },
+        error: (error: any) => {
+          // Handle error response
+          this.listOfDescriptionsToSend=[]
+          console.error('Error adding project:', error);
+          // Optionally display the error message in the UI
         }
-        let index = 0;
-        for(let projectDescription of this.listOfDescriptions){
-          if (projectDescription.description instanceof File) {
-            this.fileService.uploadImageProjectDescription(projectDescription.description!, 
-              this.user!.userName, this.project.projectName, (projectDescription.description as File).name).subscribe(
-              (res: string) => {
-                console.log(res)
-              }
-            )
-            let newDescription: ProjectDescription = {
-              indexIdDescription: index,
-              description: (projectDescription.description as File).name.toString(),
-              type: "IMAGE"
-            };
-            this.listOfDescriptionsToSend.push(newDescription)
-          }
-          else{
-            projectDescription.indexIdDescription=index
-            this.listOfDescriptionsToSend.push(projectDescription)
+      });
+    }
 
-          }
-          index=index+1
-        }
-        this.projectService.addDescriptionsToProject(this.listOfDescriptionsToSend, this.project.projectName).subscribe({
-          next: (data: Project) => {
-            // Handle successful response
-            this.projectService.addTagsToProject(this.selectedTags, this.project.projectName).subscribe({
-              next: (data: Project) => {
-                this.projectService.addBenefitsToProject(this.projectBenefits,this.project.projectName).subscribe({
-                  next: (data: Project) => {
-                    this.projectService.addSubGoalsToProject(this.projectSubGoal,this.project.projectName).subscribe({
-                      next: (data: Project) => {
-                        this.router.navigate(['home']);
-                      },
-                      error: (error: any) => {
-                        // Handle error response
-                        this.listOfDescriptionsToSend=[]
-                        console.error('Error adding project:', error);
-                        // Optionally display the error message in the UI
-                      }
-                    })
-                  },
-                  error: (error: any) => {
-                    // Handle error response
-                    this.listOfDescriptionsToSend=[]
-                    console.error('Error adding project:', error);
-                    // Optionally display the error message in the UI
-                  }
-                })
-              },
-              error: (error: any) => {
-                // Handle error response
-                this.listOfDescriptionsToSend=[]
-                console.error('Error adding project:', error);
-                // Optionally display the error message in the UI
-              }
-            }
-
-            )
-          },
-          error: (error: any) => {
-            // Handle error response
-            this.listOfDescriptionsToSend=[]
-            console.error('Error adding project:', error);
-            // Optionally display the error message in the UI
-          }
-        }
-        )
-
-      },
-      error: (error: any) => {
-        // Handle error response
-        this.listOfDescriptionsToSend=[]
-        console.error('Error adding project:', error);
-        // Optionally display the error message in the UI
-      }
-    });
   }
 
   formatGoal() {

@@ -12,4 +12,5 @@ export interface ProjectSLE{
     summery:string
     tags:Tag[]
     bannerURL:string
+    status:string
 }
