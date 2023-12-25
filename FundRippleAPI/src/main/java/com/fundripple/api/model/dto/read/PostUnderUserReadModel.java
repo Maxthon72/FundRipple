@@ -1,4 +1,11 @@
-package com.fundripple.api.model.dto.write;
+package com.fundripple.api.model.dto.read;
 
-public class PostUnderUserWriteModel {
+import java.time.LocalDate;
+
+public class PostUnderUserReadModel {
+    private Long id;
+    private String post;
+    private String url;
+    private Long likes;
+    private LocalDate dateCreated;
 }

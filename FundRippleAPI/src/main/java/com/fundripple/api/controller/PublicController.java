@@ -1,9 +1,12 @@
 package com.fundripple.api.controller;
 
+import com.fundripple.api.model.dto.read.PostUnderProjectReadModel;
+import com.fundripple.api.model.dto.read.PostUnderUserReadModel;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
 import com.fundripple.api.model.dto.read.ProjectSLElement;
 import com.fundripple.api.model.entity.User;
 import com.fundripple.api.repository.UserRepository;
+import com.fundripple.api.service.PostService;
 import com.fundripple.api.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,11 +21,13 @@ public class PublicController {
 
     private final UserRepository userRepository;
     private final ProjectService projectService;
+    private final PostService postService;
 
     @Autowired
-    public PublicController(UserRepository userRepository, ProjectService projectService) {
+    public PublicController(UserRepository userRepository, ProjectService projectService, PostService postService) {
         this.userRepository = userRepository;
         this.projectService = projectService;
+        this.postService = postService;
     }
 
     // Endpoint to create a new user
@@ -37,6 +42,20 @@ public class PublicController {
             @RequestParam(name = "status", defaultValue = "TO_VERIFY") String status
     ){
         return ResponseEntity.ok(projectService.getAllProjectsSLE(status));
+    }
+
+    @GetMapping("/postUnderProject/{projectName}")
+    public ResponseEntity<List<PostUnderProjectReadModel>> getAllPostsForProject(
+            @PathVariable String projectName
+    ){
+        return ResponseEntity.ok(postService.getPostsForProject(projectName));
+    }
+
+    @GetMapping("/postUnderUser/{userName}")
+    public ResponseEntity<List<PostUnderUserReadModel>> getAllPostsForUser(
+            @PathVariable String userName
+    ){
+        return ResponseEntity.ok(postService.getPostsForUser(userName));
     }
 
     @GetMapping("/project/{projectName}")

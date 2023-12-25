@@ -7,10 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -21,19 +26,24 @@ public class Post {
 
     @Column(nullable = false,name = "date_created")
     @GeneratedValue()
-    private LocalDateTime dateCreated;
+    private LocalDate dateCreated;
 
     @Column(nullable = false)
+    @GeneratedValue()
     private PostStatus status;
 
     @Column(name = "image")
     private String url;
 
     @Column(nullable = false)
+    @GeneratedValue()
     private Long likes;
 
     @PrePersist
     public void prePersist() {
-        dateCreated = LocalDateTime.now();
+
+        dateCreated = LocalDate.now();
+        likes=0L;
+        status = PostStatus.OK;
     }
 }
