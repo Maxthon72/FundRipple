@@ -27,6 +27,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,11 @@ import { MatTableModule } from '@angular/material/table';
     UserPageComponent,
     VerifyProjectComponent,
     SuspicionsProjectComponent,
-    SearchProjectComponent
+    SearchProjectComponent,
+    PopupComponent
   ],
   imports: [
+    MatDialogModule,
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,

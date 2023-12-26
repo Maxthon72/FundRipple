@@ -8,6 +8,9 @@ import { User } from 'src/app/interfaces/User/fullUser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
+import { PopupComponent } from '../popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PostUnderProjectRead, PostUnderProjectWrite } from 'src/app/interfaces/Project/PostUnderProject';
 
 @Component({
   selector: 'app-specific-project',
@@ -23,9 +26,10 @@ export class SpecificProjectComponent {
   benefits:ProjectBenefit[]=[]
   subGoals:ProjectSubGoal[]=[]
   projectName=""
+  posts:PostUnderProjectRead[]=[]
   loading: boolean = true;
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
-    private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute){}
+    private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute,private dialog:MatDialog){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       console.log('Route parameter:', params['projectName']);
@@ -44,6 +48,11 @@ export class SpecificProjectComponent {
               (subGoalResp:ProjectSubGoal[])=>{
                 this.subGoals=subGoalResp
                 console.log(this.subGoals)
+              }
+            )
+            this.projectService.getPostsUnderProject(this.project.projectName).subscribe(
+              (postsResp:PostUnderProjectRead[])=>{
+                this.posts=postsResp.reverse();
               }
             )
         }
@@ -78,6 +87,22 @@ export class SpecificProjectComponent {
     } else {
       console.log('Token not found in localStorage');
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '500px',
+      data: { myParam: 'P' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      let post:PostUnderProjectWrite=result
+      this.projectService.addPostUnderProject(this.projectName,post).subscribe(
+        (postResp:PostUnderProjectRead)=>{
+          console.log(postResp)
+        }
+      )
+    });
   }
 
   getUserName():string{

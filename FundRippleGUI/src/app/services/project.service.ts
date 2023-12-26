@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 import { ProjectBenefit } from '../interfaces/Project/ProjectBenefit';
 import { ProjectSubGoal } from '../interfaces/Project/ProjectSubGoal';
 import { ProjectSLE } from '../interfaces/Project/ProjectSLE';
+import { PostUnderProjectRead, PostUnderProjectWrite } from '../interfaces/Project/PostUnderProject';
 
 @Injectable({
   providedIn: 'root'
@@ -119,6 +120,25 @@ export class ProjectService {
     });
     // Make the GET request with the custom headers
     return this.http.put<boolean>(`${environment.apiBaseUrl}/sus/${userName}/${projectNameSus}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getPostsUnderProject(projectName:string):Observable<PostUnderProjectRead[]>{
+    // Make the GET request with the custom headers
+    return this.http.get<PostUnderProjectRead[]>(`${environment.apiBaseUrl}/public/postUnderProject/${projectName}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public addPostUnderProject(projectName:string,post:PostUnderProjectWrite):Observable<PostUnderProjectRead>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    // Make the GET request with the custom headers
+    console.log(post)
+    return this.http.post<PostUnderProjectRead>(`${environment.apiBaseUrl}/posts/project/${projectName}`,post, { headers }).pipe(
       catchError(this.handleError)
     );
   }

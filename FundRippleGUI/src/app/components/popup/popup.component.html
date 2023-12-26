@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Enter Your Details</h2>
+<mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label for="post">Post</mat-label>
+        <textarea matInput id="projectSummery" name="Project summery" [(ngModel)]="post.post" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
+    </textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="post">Post</button>
+</mat-dialog-actions>

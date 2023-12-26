@@ -72,6 +72,11 @@
     /* Set the desired height */
 }
 
+body {
+    background-color: #eeeeee;
+    /* Light purple color, known as lavender */
+}
+
 .resized-banner-image {
     padding: 10px;
     max-width: 1120px;

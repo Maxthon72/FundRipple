@@ -1,81 +1,81 @@
-<div class="tool-bar">
-    <mat-toolbar color="primary">
-        <nav class="left-nav">
-            <div *ngIf="!logedIn">
-                <a mat-button routerLink="/discover">Discover</a>
-                <span class="nav-space"></span>
-                <!-- Add a spacer -->
-                <a mat-button routerLink="/search">Search</a>
-                <span class="nav-tab"></span>
-                <!-- Add a spacer -->
-            </div>
-
-            <div *ngIf="logedIn">
-                <div *ngIf="role=='USER'">
+<body>
+    <div class="tool-bar">
+        <mat-toolbar color="primary">
+            <nav class="left-nav">
+                <div *ngIf="!logedIn">
                     <a mat-button routerLink="/discover">Discover</a>
                     <span class="nav-space"></span>
+                    <!-- Add a spacer -->
                     <a mat-button routerLink="/search">Search</a>
-                    <span class="nav-space"></span>
-                    <a mat-button routerLink="/userProjects">My Projects</a>
-                    <span class="nav-space"></span>
-                    <a mat-button routerLink="/createProject">Create Project</a>
                     <span class="nav-tab"></span>
+                    <!-- Add a spacer -->
                 </div>
-                <div *ngIf="role=='ADMIN'">
-                    <a mat-button routerLink="/search">Search</a>
-                    <span class="nav-space"></span>
-                    <a mat-button routerLink="/suspicions">Suspicions</a>
-                    <span class="nav-space"></span>
-                    <a mat-button routerLink="/verify">Verify</a>
-                    <span class="nav-space"></span>
+
+                <div *ngIf="logedIn">
+                    <div *ngIf="role=='USER'">
+                        <a mat-button routerLink="/discover">Discover</a>
+                        <span class="nav-space"></span>
+                        <a mat-button routerLink="/search">Search</a>
+                        <span class="nav-space"></span>
+                        <a mat-button routerLink="/userProjects">My Projects</a>
+                        <span class="nav-space"></span>
+                        <a mat-button routerLink="/createProject">Create Project</a>
+                        <span class="nav-tab"></span>
+                    </div>
+                    <div *ngIf="role=='ADMIN'">
+                        <a mat-button routerLink="/search">Search</a>
+                        <span class="nav-space"></span>
+                        <a mat-button routerLink="/suspicions">Suspicions</a>
+                        <span class="nav-space"></span>
+                        <a mat-button routerLink="/verify">Verify</a>
+                        <span class="nav-space"></span>
+                    </div>
                 </div>
+            </nav>
+            <div class="header-content" (click)="navigateToHome()">
+                <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
             </div>
-        </nav>
-        <div class="header-content" (click)="navigateToHome()">
-            <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
-        </div>
-        <nav class="right-nav">
-            <div *ngIf="!logedIn">
-                <a mat-button routerLink="/login">Login</a>
-                <span class="nav-space"></span>
-                <!-- Add a spacer -->
-                <a mat-button routerLink="/register">Register</a>
-            </div>
-            <div *ngIf="logedIn">
-                <a mat-button routerLink="/user">{{getUserName()}}</a>
-                <span class="nav-space"></span>
-                <a mat-button (click)="logOut()">Logout</a>
-            </div>
-        </nav>
-    </mat-toolbar>
-</div>
-<div class="content">
-    <div class="project-header">
-        <div class="banner-image">
-            <mat-card class="image-card" *ngIf="project!=null">
-                <mat-card-header>
-                    <mat-card-title>{{project.projectName}}</mat-card-title>
-                    <!-- Add other header content like subtitle, avatar here -->
-                </mat-card-header>
-                <div *ngIf="loading" class="loading-spinner">Loading...</div>
-                <div *ngIf="!loading">
-                    <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/banner/{{this.project.bannerURL}}" alt="Descriptive Image Text">
+            <nav class="right-nav">
+                <div *ngIf="!logedIn">
+                    <a mat-button routerLink="/login">Login</a>
+                    <span class="nav-space"></span>
+                    <!-- Add a spacer -->
+                    <a mat-button routerLink="/register">Register</a>
                 </div>
-            </mat-card>
-        </div>
-        <div class="info-and-buttons">
-            <div class="project-info" *ngIf="project!=null">
-                <mat-card class="project-info-card">
-                    <div>{{project.summery}}</div>
-                    <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
-                    <div>{{ project.moneyCollected }} PLN / {{ project.goal }} PLN</div>
-                    <div>Ending date: {{project.planedDateOfClosing}}</div>
-                    <div>Started by {{project.responsibleUser.userName}}</div>
-                    <div>Suspicions {{project.suspicions}}</div>
+                <div *ngIf="logedIn">
+                    <a mat-button routerLink="/user">{{getUserName()}}</a>
+                    <span class="nav-space"></span>
+                    <a mat-button (click)="logOut()">Logout</a>
+                </div>
+            </nav>
+        </mat-toolbar>
+    </div>
+    <div class="content">
+        <div class="project-header">
+            <div class="banner-image">
+                <mat-card class="image-card" *ngIf="project!=null">
+                    <mat-card-header>
+                        <mat-card-title>{{project.projectName}}</mat-card-title>
+                        <!-- Add other header content like subtitle, avatar here -->
+                    </mat-card-header>
+                    <div *ngIf="loading" class="loading-spinner">Loading...</div>
+                    <div *ngIf="!loading">
+                        <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/banner/{{this.project.bannerURL}}" alt="Descriptive Image Text">
+                    </div>
                 </mat-card>
             </div>
-            <div class="buttons" *ngIf="project!=null">
-                <mat-card>
+            <div class="info-and-buttons">
+                <div class="project-info" *ngIf="project!=null">
+                    <mat-card class="project-info-card">
+                        <div>{{project.summery}}</div>
+                        <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
+                        <div>{{ project.moneyCollected }} PLN / {{ project.goal }} PLN</div>
+                        <div>Ending date: {{project.planedDateOfClosing}}</div>
+                        <div>Started by {{project.responsibleUser.userName}}</div>
+                        <div>Suspicions {{project.suspicions}}</div>
+                    </mat-card>
+                </div>
+                <div class="buttons" *ngIf="project!=null">
                     <div *ngIf="role!='ADMIN'">
                         <a mat-button (click)="support()">Support</a>
                         <a mat-button (click)="suspect()">Report</a>
@@ -83,62 +83,80 @@
                     <div *ngIf="role=='ADMIN'">
                         <a mat-button>Ok</a>
                     </div>
-                </mat-card>
-            </div>
+                </div>
 
+            </div>
         </div>
-    </div>
-    <div class="description-and-benefits-and-subgoals">
-        <div class="description" *ngIf="project!=null">
-            <!-- Angular Material List for repeated items -->
-            <mat-list>
-                <mat-card>
-                    <mat-list-item *ngFor="let description of project?.description; index as i">
-                        <div *ngIf="description.type=='TEXT'">
-                            <div class="text-description">
-                                {{description.description}}
+        <div class="description-and-benefits-and-subgoals">
+            <div class="description" *ngIf="project!=null">
+                <!-- Angular Material List for repeated items -->
+                <mat-list>
+                    <mat-card>
+                        <mat-list-item *ngFor="let description of project?.description; index as i">
+                            <div *ngIf="description.type=='TEXT'">
+                                <div class="text-description">
+                                    {{description.description}}
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="description.type=='IMAGE'">
-                            <div class="image-description">
-                                <img mat-card-image class="resized-description-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/description/{{description.description}}" alt="Descriptive Image Text">
+                            <div *ngIf="description.type=='IMAGE'">
+                                <div class="image-description">
+                                    <img mat-card-image class="resized-description-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/description/{{description.description}}" alt="Descriptive Image Text">
+                                </div>
                             </div>
-                        </div>
-                    </mat-list-item>
-                </mat-card>
-            </mat-list>
+                        </mat-list-item>
+                    </mat-card>
+                </mat-list>
+            </div>
+            <div class="benefits-and-subgoals" *ngIf="project!=null">
+                <!-- Nested Angular Material Cards -->
+                <div class="sub-goal-list" *ngIf="subGoals.length>0">
+                    <mat-card class="nested-cards">
+                        <mat-card-title>Sub-Goals</mat-card-title>
+                        <mat-card *ngFor="let subGoal of subGoals; index as i" class="nested-card">
+                            <div class="sub-goal">
+                                <mat-card-content>
+                                    {{subGoal.name}}
+                                </mat-card-content>
+                            </div>
+                        </mat-card>
+                    </mat-card>
+                </div>
+
+                <div class="benefit-list">
+                    <div class="benefits-list" *ngIf="benefits.length>0">
+                        <mat-card class="nested-cards">
+                            <mat-card-title>Benefits</mat-card-title>
+                            <mat-card *ngFor="let benefit of benefits; index as i" class="nested-card">
+                                <div class="benefit">
+                                    <mat-card-content>
+                                        {{benefit.name}}
+                                    </mat-card-content>
+                                </div>
+                            </mat-card>
+                        </mat-card>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="benefits-and-subgoals" *ngIf="project!=null">
-            <!-- Nested Angular Material Cards -->
-            <div class="sub-goal-list">
-                <mat-card class="nested-cards">
-                    <mat-card-title>Sub-Goals</mat-card-title>
-                    <mat-card *ngFor="let subGoal of subGoals; index as i" class="nested-card">
-                        <div class="sub-goal">
-                            <mat-card-content>
-                                {{subGoal.name}}
-                            </mat-card-content>
-                        </div>
-                    </mat-card>
-                </mat-card>
+        <div class="posts-and-comments">
+            <div *ngIf="user?.userName==project?.responsibleUser?.userName">
+                <a mat-button (click)="openDialog()">Post</a>
             </div>
-
-            <div class="benefit-list">
-                <mat-card class="nested-cards">
-                    <mat-card-title>Benefits</mat-card-title>
-                    <mat-card *ngFor="let benefit of benefits; index as i" class="nested-card">
-                        <div class="benefit">
-                            <mat-card-content>
-                                {{benefit.name}}
-                            </mat-card-content>
-                        </div>
+            <div class="post-and-comments" *ngIf="project!=null">
+                <!-- Angular Material List for repeated items -->
+                <mat-list>
+                    <mat-card>
+                        <mat-list-item *ngFor="let post of posts; index as i">
+                            <div class="post">
+                                <div class="text-description">
+                                    {{post.post}}
+                                </div>
+                            </div>
+                        </mat-list-item>
                     </mat-card>
-                </mat-card>
+                </mat-list>
             </div>
-
         </div>
     </div>
-    <div class="posts-and-comments">
-
-    </div>
-</div>
+</body>
