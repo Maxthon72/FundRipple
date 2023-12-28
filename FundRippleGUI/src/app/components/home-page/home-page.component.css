@@ -53,3 +53,131 @@
 .mat-button {
     margin-right: 10px;
 }
+
+.carousel-container-closest-to-end-date,
+.carousel-container-closest-to-goal,
+.carousel-container-newest {
+    position: relative;
+    max-width: 1300px;
+    margin: 20px auto;
+}
+
+.project {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Align vertically at the center */
+}
+
+.carousel-prev {
+    left: 20px;
+}
+
+.carousel-next {
+    right: 20px;
+}
+
+.resized-banner-image {
+    padding: 10px;
+    max-width: 640px;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+}
+
+.project-spec {
+    display: flex;
+    align-items: flex-start;
+    /* Align items at the start of the container */
+}
+
+.project-banner,
+.project-info {
+    flex: 1;
+    /* Both children will take up equal width */
+}
+
+.carousel-header-a {
+    text-align: center;
+    padding: 24px;
+    background-color: #ff8a65;
+    /* Vibrant orange */
+    border-bottom: 3px solid #d84315;
+    /* Deep orange border */
+    margin-bottom: 30px;
+}
+
+.carousel-title-a {
+    margin: 0;
+    color: #fff;
+    /* White for contrast */
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.carousel-description-a {
+    color: #ffecb3;
+    /* Light cream for the description */
+    font-size: 1em;
+    margin-top: 8px;
+}
+
+.carousel-header-b {
+    text-align: center;
+    padding: 24px;
+    background-color: #3b7aad;
+    /* Light blue */
+    border-bottom: 3px solid #1e88e5;
+    /* Stronger blue border */
+    margin-bottom: 30px;
+}
+
+.carousel-title-b {
+    margin: 0;
+    color: #fff;
+    /* White for contrast */
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.carousel-description-b {
+    color: #bbdefb;
+    /* Very light blue for the description */
+    font-size: 1em;
+    margin-top: 8px;
+}
+
+.carousel-header-c {
+    text-align: center;
+    padding: 24px;
+    background-color: #9575cd;
+    /* Soft purple */
+    border-bottom: 3px solid #673ab7;
+    /* Deeper purple border */
+    margin-bottom: 30px;
+}
+
+.carousel-title-c {
+    margin: 0;
+    color: #fff;
+    /* White for contrast */
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.carousel-description-c {
+    color: #d1c4e9;
+    /* Light lavender for the description */
+    font-size: 1em;
+    margin-top: 8px;
+}

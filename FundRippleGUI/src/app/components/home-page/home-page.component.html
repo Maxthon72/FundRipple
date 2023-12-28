@@ -50,7 +50,119 @@
     </mat-toolbar>
 </div>
 <div class="home">
-    <h1>Welcome to My Angular App</h1>
-    <p>This is the home page of my Angular application.</p>
-    <p>Here's some sample content for your home page.</p>
+    <div class="carousel-container-newest">
+
+        <div class="carousel-header-a">
+            <h2 class="carousel-title-a">Newest projects</h2>
+            <p class="carousel-description-a">Some new projects that may catch your attention.</p>
+        </div>
+
+        <mat-card class="project">
+            <button mat-icon-button class="carousel-prev" (click)="previous(1)">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+
+            <div class="carousel-item" *ngIf="currentItem1">
+                <div class="project-spec" (click)="moveToProject(currentItem1.projectName)">
+                    <div class="project-banner">
+                        <div *ngIf="loading" class="loading-spinner">
+                            <img mat-card-image class="resized-banner-image" src="assets/No-Image-Placeholder.png" alt="Descriptive Image Text">
+                        </div>
+                        <div *ngIf="!loading">
+                            <img mat-card-image class="resized-banner-image" src="assets/{{currentItem1.responsibleUser.userName}}/{{currentItem1.projectName}}/banner/{{currentItem1.bannerURL}}" alt="Descriptive Image Text">
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <span>{{currentItem1.projectName}}</span><br>
+                        <span>{{currentItem1.summery}}</span><br>
+                        <span>{{currentItem1.planedDateOfClosing}}</span><br>
+                        <span *ngFor="let tag of currentItem1.tags">{{tag.tagName}} </span>
+                        <mat-progress-bar mode="determinate" [value]="currentItem1.moneyCollected" [bufferValue]="currentItem1.goal"></mat-progress-bar>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-icon-button class="carousel-next" (click)="next(1)">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </mat-card>
+    </div>
+
+    <div class="carousel-container-closest-to-goal">
+
+        <div class="carousel-header-b">
+            <h2 class="carousel-title-b">Soon closing</h2>
+            <p class="carousel-description-b">Projects that are soon closing but still haven't met their goals.</p>
+        </div>
+
+        <mat-card class="project">
+            <button mat-icon-button class="carousel-prev" (click)="previous(2)">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+
+            <div class="carousel-item" *ngIf="currentItem2">
+                <div class="project-spec" (click)="moveToProject(currentItem2.projectName)">
+                    <div class="project-banner">
+                        <div *ngIf="loading" class="loading-spinner">
+                            <img mat-card-image class="resized-banner-image" src="assets/No-Image-Placeholder.png" alt="Descriptive Image Text">
+                        </div>
+                        <div *ngIf="!loading">
+                            <img mat-card-image class="resized-banner-image" src="assets/{{currentItem2.responsibleUser.userName}}/{{currentItem2.projectName}}/banner/{{currentItem2.bannerURL}}" alt="Descriptive Image Text">
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <span>{{currentItem2.projectName}}</span><br>
+                        <span>{{currentItem2.summery}}</span><br>
+                        <span>{{currentItem2.planedDateOfClosing}}</span><br>
+                        <span *ngFor="let tag of currentItem2.tags">{{tag.tagName}} </span>
+                        <mat-progress-bar mode="determinate" [value]="currentItem2.moneyCollected" [bufferValue]="currentItem2.goal"></mat-progress-bar>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-icon-button class="carousel-next" (click)="next(2)">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </mat-card>
+    </div>
+    <div class="carousel-container-closest-to-end-date">
+
+        <div class="carousel-header-c">
+            <h2 class="carousel-title-c">Closest to goal</h2>
+            <p class="carousel-description-c">Projects that are really close to meet their goal.</p>
+        </div>
+
+        <mat-card class="project">
+            <button mat-icon-button class="carousel-prev" (click)="previous(3)">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+
+            <div class="carousel-item" *ngIf="currentItem3">
+                <div class="project-spec" (click)="moveToProject(currentItem3.projectName)">
+                    <div class="project-banner">
+                        <div *ngIf="loading" class="loading-spinner">
+                            <img mat-card-image class="resized-banner-image" src="assets/No-Image-Placeholder.png" alt="Descriptive Image Text">
+                        </div>
+                        <div *ngIf="!loading">
+                            <img mat-card-image class="resized-banner-image" src="assets/{{currentItem3.responsibleUser.userName}}/{{currentItem3.projectName}}/banner/{{currentItem3.bannerURL}}" alt="Descriptive Image Text">
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <span>{{currentItem3.projectName}}</span><br>
+                        <span>{{currentItem3.summery}}</span><br>
+                        <span>{{currentItem3.planedDateOfClosing}}</span><br>
+                        <span *ngFor="let tag of currentItem3.tags">{{tag.tagName}} </span>
+                        <mat-progress-bar mode="determinate" [value]="currentItem3.moneyCollected" [bufferValue]="currentItem3.goal"></mat-progress-bar>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-icon-button class="carousel-next" (click)="next(3)">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </mat-card>
+    </div>
 </div>
