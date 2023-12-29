@@ -49,16 +49,35 @@ export class SearchProjectComponent {
 
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
     private userService:UserService,private projectService:ProjectService){}
+
+
   ngOnInit(): void {
-    this.projectService.getAllProjectSLE().subscribe(
-      (projectsResponse:ProjectSLE[])=>{
-        this.projects=projectsResponse;
-        this.loading=false
-        this.filteredAndSearchedProjects=projectsResponse;
-        this.totalLength = this.filteredAndSearchedProjects.length;
-        this.paginateProjects(0, this.pageSize);
-      }
-    )
+    const currentUrl = this.router.url;
+    if(currentUrl=="/list/suspicion"){
+
+    }
+    else if(currentUrl=="/list/verify"){
+      this.projectService.getProjectSLEToVerify().subscribe(
+        (projectsResponse:ProjectSLE[])=>{
+          this.projects=projectsResponse;
+          this.loading=false
+          this.filteredAndSearchedProjects=projectsResponse;
+          this.totalLength = this.filteredAndSearchedProjects.length;
+          this.paginateProjects(0, this.pageSize);
+        }
+      )
+    }
+    else{
+      this.projectService.getOpenAndClosedProjectSLE().subscribe(
+        (projectsResponse:ProjectSLE[])=>{
+          this.projects=projectsResponse;
+          this.loading=false
+          this.filteredAndSearchedProjects=projectsResponse;
+          this.totalLength = this.filteredAndSearchedProjects.length;
+          this.paginateProjects(0, this.pageSize);
+        }
+      )
+    }
     this.projectService.getAllTags().subscribe(
       (tags: Tag[]) => {
         this.allTags = tags;
@@ -93,6 +112,8 @@ export class SearchProjectComponent {
     } else {
       console.log('Token not found in localStorage');
     }
+
+
   }
 
   

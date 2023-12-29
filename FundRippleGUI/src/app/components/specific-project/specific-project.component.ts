@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 import { PopupComponent } from '../popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PostUnderProjectRead, PostUnderProjectWrite } from 'src/app/interfaces/Project/PostUnderProject';
+import { ProjectSLE } from 'src/app/interfaces/Project/ProjectSLE';
+import { Reason } from 'src/app/interfaces/reason';
 
 @Component({
   selector: 'app-specific-project',
@@ -31,6 +33,7 @@ export class SpecificProjectComponent {
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
     private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute,private dialog:MatDialog){}
   ngOnInit(): void {
+
     this.route.params.subscribe(params => {
       console.log('Route parameter:', params['projectName']);
       this.projectName=params['projectName']
@@ -87,8 +90,36 @@ export class SpecificProjectComponent {
     } else {
       console.log('Token not found in localStorage');
     }
-  }
 
+
+  }
+  verifyOk(){
+    this.projectService.setProjectStatusOk(this.project!.projectName).subscribe(
+      (resp:FullProject)=>{
+        this.project=resp
+        this.router.navigate(['/project', this.project!.projectName]);
+      }
+    )
+  }
+  verifyBad(){
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '500px',
+      data: { myParam: 'VB' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      let reasonBad:Reason ={
+        reason:result,
+        projectName:this.project!.projectName
+      }
+      this.projectService.setProjectStatusBad(reasonBad).subscribe(
+        (resp:FullProject)=>{
+          this.project=resp
+          this.router.navigate(['/project', this.project!.projectName]);
+        }
+      )
+    });
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '500px',

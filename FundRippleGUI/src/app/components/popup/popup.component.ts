@@ -12,8 +12,11 @@ export class PopupComponent {
     post:"",
     url:""
   }
+  reason:string=""
+  operation:string=""
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(data)
+    this.operation=data.myParam
+    console.log(this.operation)
   }
 
 }

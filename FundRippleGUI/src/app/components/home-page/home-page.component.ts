@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit{
     if (storedToken) {
       this.token = storedToken;
       this.authenticationService.testOrigin();
-      this.projectService.getAllProjectSLE().subscribe(
+      this.projectService.getOpenProjectSLE().subscribe(
         (resp:ProjectSLE[])=>{
           this.projects=resp
           this.projectsClosingDateClosest=this.getFutureItemsClosestToToday()

@@ -25,4 +25,5 @@ export interface FullProject{
   tags:Tag[]
   bannerURL:string
   suspicions:number
+  status:string
 }

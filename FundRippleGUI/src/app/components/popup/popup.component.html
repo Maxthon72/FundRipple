@@ -1,11 +1,26 @@
-<h2 mat-dialog-title>Enter Your Details</h2>
-<mat-dialog-content>
-    <mat-form-field appearance="fill">
-        <mat-label for="post">Post</mat-label>
-        <textarea matInput id="projectSummery" name="Project summery" [(ngModel)]="post.post" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
+<div *ngIf="operation=='P'">
+    <h2 mat-dialog-title>Enter Your Details</h2>
+    <mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label for="post">Post</mat-label>
+            <textarea matInput id="projectSummery" name="Project summery" [(ngModel)]="post.post" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
     </textarea>
-    </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="post">Post</button>
-</mat-dialog-actions>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="post">Post</button>
+    </mat-dialog-actions>
+</div>
+<div *ngIf="operation=='VB'">
+    <h2 mat-dialog-title>Enter Reason Why bad Validation</h2>
+    <mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label for="post">Reason</mat-label>
+            <textarea matInput id="reason" name="Reason" [(ngModel)]="reason" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
+    </textarea>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="reason">Send decision</button>
+    </mat-dialog-actions>
+</div>

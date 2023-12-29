@@ -25,9 +25,9 @@
                     <div *ngIf="role=='ADMIN'">
                         <a mat-button routerLink="/search">Search</a>
                         <span class="nav-space"></span>
-                        <a mat-button routerLink="/suspicions">Suspicions</a>
+                        <a mat-button routerLink="/list/suspicion">Suspicions</a>
                         <span class="nav-space"></span>
-                        <a mat-button routerLink="/verify">Verify</a>
+                        <a mat-button routerLink="/list/verify">Verify</a>
                         <span class="nav-space"></span>
                     </div>
                 </div>
@@ -60,7 +60,8 @@
                     </mat-card-header>
                     <div *ngIf="loading" class="loading-spinner">Loading...</div>
                     <div *ngIf="!loading">
-                        <img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{this.projectName}}/banner/{{this.project.bannerURL}}" alt="Descriptive Image Text">
+                        <!--<img mat-card-image class="resized-banner-image" src="assets/{{this.project.responsibleUser.userName}}/{{project.projectName}}/banner/{{project.bannerURL}}" alt="Descriptive Image Text">-->
+                        <img mat-card-image class="resized-banner-image" src="assets/No-Image-Placeholder.png" alt="Descriptive Image Text">
                     </div>
                 </mat-card>
             </div>
@@ -81,7 +82,10 @@
                         <a mat-button (click)="suspect()">Report</a>
                     </div>
                     <div *ngIf="role=='ADMIN'">
-                        <a mat-button>Ok</a>
+                        <div *ngIf="project.status=='TO_VERIFY'">
+                            <a mat-button (click)="verifyOk()">Verify Ok</a>
+                            <a mat-button (click)="verifyBad()">Verify Bad</a>
+                        </div>
                     </div>
                 </div>
 

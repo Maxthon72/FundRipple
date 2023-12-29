@@ -10,6 +10,7 @@ import { ProjectBenefit } from '../interfaces/Project/ProjectBenefit';
 import { ProjectSubGoal } from '../interfaces/Project/ProjectSubGoal';
 import { ProjectSLE } from '../interfaces/Project/ProjectSLE';
 import { PostUnderProjectRead, PostUnderProjectWrite } from '../interfaces/Project/PostUnderProject';
+import { Reason } from '../interfaces/reason';
 
 @Injectable({
   providedIn: 'root'
@@ -87,8 +88,49 @@ export class ProjectService {
       );
   }
 
-  public getAllProjectSLE():Observable<ProjectSLE[]>{
+  public getOpenAndClosedProjectSLE():Observable<ProjectSLE[]>{
     return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/public/projects`);
+  }
+
+  public getOpenProjectSLE():Observable<ProjectSLE[]>{
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/public/projects`);
+  }
+
+  public getSuspectProjectSLE():Observable<ProjectSLE[]>{
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/public/projects`);
+  }
+
+  public getProjectSLEToVerify():Observable<ProjectSLE[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/toVerify`, { headers });
+  }
+
+  public setProjectStatusOk(projectName: string): Observable<FullProject> {
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${storedToken}`
+    });
+  
+    // The headers need to be passed as an options object
+    const options = { headers: headers };
+  
+    // Now pass the options as the third argument in the put request
+    return this.http.put<FullProject>(`${environment.apiBaseUrl}/project/chStatus/open/${projectName}`, {}, options);
+  }
+
+  public setProjectStatusBad(reson:Reason):Observable<FullProject>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${storedToken}`
+    });
+  
+    // The headers need to be passed as an options object
+    const options = { headers: headers };
+    console.log(reson)
+    return this.http.put<FullProject>(`${environment.apiBaseUrl}/project/chStatus/earlyClose`, reson, options);
   }
 
   public getProjectByProjectName(projectName:string):Observable<FullProject>{

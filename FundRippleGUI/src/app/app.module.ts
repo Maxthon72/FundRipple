@@ -18,8 +18,6 @@ import { CreateProjectComponent } from './components/create-project/create-proje
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
 import { UserPageComponent } from './components/user-page/user-page.component'; // Import MatButtonModule for buttons
 import { MatChipsModule } from '@angular/material/chips';
-import { VerifyProjectComponent } from './components/verify-project/verify-project.component';
-import { SuspicionsProjectComponent } from './components/suspicions-project/suspicions-project.component';
 import { SearchProjectComponent } from './components/search-project/search-project.component';
 import {MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -39,8 +37,6 @@ import { PopupComponent } from './components/popup/popup.component';
     CreateProjectComponent,
     SpecificProjectComponent,
     UserPageComponent,
-    VerifyProjectComponent,
-    SuspicionsProjectComponent,
     SearchProjectComponent,
     PopupComponent
   ],

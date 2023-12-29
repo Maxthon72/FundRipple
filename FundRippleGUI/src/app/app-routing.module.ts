@@ -5,8 +5,6 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { SearchProjectComponent } from './components/search-project/search-project.component';
-import { SuspicionsProjectComponent } from './components/suspicions-project/suspicions-project.component';
-import { VerifyProjectComponent } from './components/verify-project/verify-project.component';
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
 
 const routes: Routes = [
@@ -16,8 +14,8 @@ const routes: Routes = [
   {path:'register', component:RegisterPageComponent},
   {path:'createProject',component:CreateProjectComponent},
   {path:'search',component:SearchProjectComponent},
-  {path:'suspicions',component:SuspicionsProjectComponent},
-  {path:'verify',component:VerifyProjectComponent},
+  {path:'list/suspicion',component:SearchProjectComponent},
+  {path:'list/verify',component:SearchProjectComponent},
   {path:'project/:projectName',component:SpecificProjectComponent}
 ];
 
