@@ -71,7 +71,7 @@ export class HomePageComponent implements OnInit{
     }
   }
   toUserProfile(userName:string){
-    this.router.navigate(['/user', userName]);
+    this.router.navigate(['/profile',userName]);
   }
   getUserName():string{
     if(this.user?.userName!==null){

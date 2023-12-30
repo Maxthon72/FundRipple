@@ -49,3 +49,30 @@
         </nav>
     </mat-toolbar>
 </div>
+<div class="content">
+    <div class="user-info">
+        <div class="user-name">
+            User name: {{userProfile?.userName}}
+        </div>
+        <div class="first-and-last-name">
+            First and last name: {{userProfile?.firstName}} {{userProfile?.lastName}}
+        </div>
+        <div class="role">
+            Role: {{roleProfile}}
+        </div>
+        <div class="email">
+            Email: {{userProfile?.email}}
+        </div>
+    </div>
+    <div class="user-projects">
+        <div>
+
+        </div>
+
+    </div>
+    <div class="user-benefits" *ngIf="userName==this.user?.userName">
+        <div>
+
+        </div>
+    </div>
+</div>
