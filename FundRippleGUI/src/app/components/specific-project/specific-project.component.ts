@@ -93,6 +93,9 @@ export class SpecificProjectComponent {
 
 
   }
+  toUserProfile(userName:string){
+    this.router.navigate(['/user', userName]);
+  }
   verifyOk(){
     this.projectService.setProjectStatusOk(this.project!.projectName).subscribe(
       (resp:FullProject)=>{

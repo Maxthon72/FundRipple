@@ -70,7 +70,9 @@ export class HomePageComponent implements OnInit{
       console.log('Token not found in localStorage');
     }
   }
-
+  toUserProfile(userName:string){
+    this.router.navigate(['/user', userName]);
+  }
   getUserName():string{
     if(this.user?.userName!==null){
       return this.user?.userName!

@@ -16,7 +16,6 @@ import { MatFormFieldModule } from '@angular/material/form-field'; // Import Mat
 import { MatButtonModule } from '@angular/material/button';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
-import { UserPageComponent } from './components/user-page/user-page.component'; // Import MatButtonModule for buttons
 import { MatChipsModule } from '@angular/material/chips';
 import { SearchProjectComponent } from './components/search-project/search-project.component';
 import {MatCardModule } from '@angular/material/card';
@@ -27,6 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +36,9 @@ import { PopupComponent } from './components/popup/popup.component';
     RegisterPageComponent,
     CreateProjectComponent,
     SpecificProjectComponent,
-    UserPageComponent,
     SearchProjectComponent,
-    PopupComponent
+    PopupComponent,
+    UserProfileComponent
   ],
   imports: [
     MatDialogModule,

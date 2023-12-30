@@ -32,6 +32,14 @@ export class AuthenticationService {
     return this.http.get<boolean>(`${environment.apiBaseUrl}/test`, { headers });
   }
 
+  public testUser2(): Observable<boolean> {
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${storedToken}`
+    });
+    // Make the GET request with the custom headers
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/test`, { headers });
+  }
   public testOrigin():void{
     this.http.get<void>(`${environment.apiBaseUrl}/test/print-origin`)
   }

@@ -170,6 +170,10 @@ export class SearchProjectComponent {
   onCardClick(projectName:string){
     this.router.navigate(['/project', projectName]);
   }
+
+  toUserProfile(userName:string){
+    this.router.navigate(['/user', userName]);
+  }
   getUserName():string{
     if(this.user?.userName!==null){
       return this.user?.userName!

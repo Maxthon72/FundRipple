@@ -304,7 +304,9 @@ export class CreateProjectComponent implements OnInit {
     }
 
   }
-
+  toUserProfile(userName:string){
+    this.router.navigate(['/user', userName]);
+  }
   formatGoal() {
     // Format the number to display two decimal places
     if (this.project.goal !== null && this.project.goal !== undefined) {
