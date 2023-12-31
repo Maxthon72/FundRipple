@@ -6,8 +6,8 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { SearchProjectComponent } from './components/search-project/search-project.component';
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserGuardService } from './services/user-guard.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path:'home', component:HomePageComponent},
@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'list/suspicion',component:SearchProjectComponent,canActivate:[UserGuardService]},
   {path:'list/verify',component:SearchProjectComponent,canActivate:[UserGuardService]},
   {path:'project/:projectName',component:SpecificProjectComponent},
-  {path:'user/:userName',component:UserProfileComponent,canActivate:[UserGuardService]}
+  {path:'profile/:userName',component:ProfileComponent,canActivate:[UserGuardService]},
 ];
 
 @NgModule({

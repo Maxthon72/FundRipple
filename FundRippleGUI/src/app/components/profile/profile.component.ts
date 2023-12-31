@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import { ProjectBenefit } from 'src/app/interfaces/Project/ProjectBenefit';
+import { ProjectBenefitForUser } from 'src/app/interfaces/Project/ProjectBenefitForUser';
+import { ProjectSLE } from 'src/app/interfaces/Project/ProjectSLE';
 import { User } from 'src/app/interfaces/User/fullUser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +24,13 @@ export class ProfileComponent implements OnInit{
   userName:string=""
   userProfile:User|null=null
   roleProfile:string=""
+  loading:boolean=false
+  userProjects:ProjectSLE[]=[]
+  userBenefits:ProjectBenefitForUser[]=[]
+  supportedProjects:ProjectSLE[]=[]
+  userDataToMod:User|null=null
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
-    private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute){}
+    private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute,private dialog:MatDialog){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       console.log('Route parameter:', params['userName']);
@@ -49,6 +59,25 @@ export class ProfileComponent implements OnInit{
                         this.roleProfile=res;
                       }
                     )
+                    if(this.user!.userName==this.userProfile?.userName){
+                      this.projectService.getAllProjectSLEForUserByHeader().subscribe(
+                        (resp:ProjectSLE[])=>{
+                          this.userProjects=resp
+                          
+                        }
+                      )
+                      this.projectService.getAllBenefitsForUserByUserName(this.userName).subscribe(
+                        (resp:ProjectBenefitForUser[])=>{
+                          this.userBenefits=resp
+                        }
+                      )
+                    }else{
+                      this.projectService.getOpenAndClosedProjectSLEForUserByUserName(this.userName).subscribe(
+                        (resp:ProjectSLE[])=>{
+                          this.userProjects=resp
+                        }
+                      )
+                    }
                   }
                 )
               }
@@ -57,12 +86,31 @@ export class ProfileComponent implements OnInit{
               console.error('Error getting user info:', error);
             }
           );
+
         }
       );
     } else {
       console.log('Token not found in localStorage');
     }
   })
+  }
+  modifayUser(){
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '500px',
+      data: { myParam: 'MU',user: {...this.userProfile} }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.userDataToMod=result
+      this.userService.updateUser(this.userDataToMod!).subscribe(
+        (resp:User)=>{
+          this.userProfile=resp
+        }
+      )
+    });
+  }
+  onCardClickProject(projectName:string){
+    this.router.navigate(['/project', projectName]);
   }
   toUserProfile(userName:string){
     this.router.navigate(['/profile',userName]);

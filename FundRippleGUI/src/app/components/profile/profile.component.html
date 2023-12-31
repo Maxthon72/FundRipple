@@ -50,7 +50,7 @@
     </mat-toolbar>
 </div>
 <div class="content">
-    <div class="user-info">
+    <mat-card class="user-info">
         <div class="user-name">
             User name: {{userProfile?.userName}}
         </div>
@@ -63,16 +63,72 @@
         <div class="email">
             Email: {{userProfile?.email}}
         </div>
-    </div>
-    <div class="user-projects">
-        <div>
+        <div *ngIf="userName==this.user?.userName">
+            <a mat-button type="button" (click)="modifayUser()">Chang data</a>
+        </div>
+    </mat-card>
 
+    <div class="if-user-profile" *ngIf="userName==this.user?.userName">
+        <div class="user-projects">
+            <div class="section-header ">User Projects</div>
+            <div class="projects" *ngFor="let project of userProjects">
+                <mat-card (click)="onCardClickProject(project.projectName) ">
+                    <div class="project ">
+                        <!-- <div class="project-banner ">
+                            <div *ngIf="loading " class="loading-spinner ">Loading...</div>
+                            <div *ngIf="!loading ">
+                                <>img mat-card-image class="resized-banner-image " src="assets/{{this.project.responsibleUser.userName}}/{{project.projectName}}/banner/{{project.bannerURL}} " alt="Descriptive Image Text ">
+                                <img mat-card-image class="resized-banner-image " src="assets/No-Image-Placeholder.png " alt="Descriptive Image Text ">
+                            </div>
+                        </div> -->
+                        <div class="project-info ">
+                            <span>{{project.projectName}}</span><br>
+                            <span>{{project.summery}}</span><br>
+                            <span>{{project.planedDateOfClosing}}</span><br>
+                            <span>{{project.status}}</span>
+                            <span *ngFor="let tag of project.tags ">{{tag.tagName}} </span>
+                            <mat-progress-bar mode="determinate" [value]="project.moneyCollected " [bufferValue]="project.goal "></mat-progress-bar>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
         </div>
 
+        <div class="user-benefits ">
+            <div class="section-header ">User Benefits</div>
+            <div class="benefits " *ngFor="let benfit of userBenefits ">
+                <mat-card (click)="onCardClickProject(benfit.project.projectName)">
+                    <span>{{benfit.project.projectName}}></span>
+                </mat-card>
+            </div>
+        </div>
     </div>
-    <div class="user-benefits" *ngIf="userName==this.user?.userName">
-        <div>
+    <div class="if-not-user-profile " *ngIf="userName!=this.user?.userName ">
+        <div class="user-projects">
+            <div class="section-header ">User Projects</div>
+            <div class="projects" *ngFor="let project of userProjects">
+                <mat-card (click)="onCardClickProject(project.projectName) ">
+                    <div class="project ">
+                        <div class="project-banner ">
+                            <div *ngIf="loading " class="loading-spinner ">Loading...</div>
+                            <div *ngIf="!loading ">
+                                <!--<img mat-card-image class="resized-banner-image " src="assets/{{this.project.responsibleUser.userName}}/{{project.projectName}}/banner/{{project.bannerURL}} " alt="Descriptive Image Text ">-->
+                                <img mat-card-image class="resized-banner-image " src="assets/No-Image-Placeholder.png " alt="Descriptive Image Text ">
+                            </div>
+                        </div>
 
+
+
+                        <div class="project-info ">
+                            <span>{{project.projectName}}</span><br>
+                            <span>{{project.summery}}</span><br>
+                            <span>{{project.planedDateOfClosing}}</span><br>
+                            <span *ngFor="let tag of project.tags ">{{tag.tagName}} </span>
+                            <mat-progress-bar mode="determinate" [value]="project.moneyCollected " [bufferValue]="project.goal "></mat-progress-bar>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>

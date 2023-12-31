@@ -11,6 +11,7 @@ import { ProjectSubGoal } from '../interfaces/Project/ProjectSubGoal';
 import { ProjectSLE } from '../interfaces/Project/ProjectSLE';
 import { PostUnderProjectRead, PostUnderProjectWrite } from '../interfaces/Project/PostUnderProject';
 import { Reason } from '../interfaces/reason';
+import { ProjectBenefitForUser } from '../interfaces/Project/ProjectBenefitForUser';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +91,46 @@ export class ProjectService {
 
   public getOpenAndClosedProjectSLE():Observable<ProjectSLE[]>{
     return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/public/projects`);
+  }
+
+  public getOpenAndClosedProjectSLEForUserByHeader():Observable<ProjectSLE[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/openAndClosed/forUser`, { headers });
+  }
+
+  public getOpenAndClosedProjectSLEForUserByUserName(userName:string):Observable<ProjectSLE[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/openAndClosed/forUser/${userName}`, { headers });
+  }
+
+  public getAllProjectSLEForUserByHeader():Observable<ProjectSLE[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/allProjects/forUser`, { headers });
+  }
+
+  public getAllProjectSLEForUserByUserName(userName:string):Observable<ProjectSLE[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/allProjects/forUser/${userName}`, { headers });
+  }
+
+  public getAllBenefitsForUserByUserName(userName:string):Observable<ProjectBenefitForUser[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectBenefitForUser[]>(`${environment.apiBaseUrl}/benefit/forUser/${userName}`, { headers });
   }
 
   public getOpenProjectSLE():Observable<ProjectSLE[]>{

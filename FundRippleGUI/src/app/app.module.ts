@@ -26,7 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     SpecificProjectComponent,
     SearchProjectComponent,
     PopupComponent,
-    UserProfileComponent
+    ProfileComponent
   ],
   imports: [
     MatDialogModule,

@@ -36,4 +36,21 @@ export class UserService {
       });
       return this.http.get(`${environment.apiBaseUrl}/user/role/${userName}`, { headers, responseType: 'text'  });
   }
+
+  public getUserByName(userName:string):Observable<User>{
+    const storedToken = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+        Authorization: `Bearer ${storedToken}`,
+      });
+      return this.http.get<User>(`${environment.apiBaseUrl}/user/${userName}`, { headers});
+  }
+  public updateUser(user:User):Observable<User>{
+    const storedToken = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+        Authorization: `Bearer ${storedToken}`,
+      });
+      return this.http.put<User>(`${environment.apiBaseUrl}/user`,user, { headers});
+  }
 }

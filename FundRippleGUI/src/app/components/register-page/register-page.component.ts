@@ -25,7 +25,8 @@ export class RegisterPageComponent implements OnInit{
       firstName: null,
       lastName: null,
       email: '',
-      password: ''
+      password: '',
+      description:''
     };
   }
 

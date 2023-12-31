@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PostUnderProjectWrite } from 'src/app/interfaces/Project/PostUnderProject';
+import { User } from 'src/app/interfaces/User/fullUser';
 
 @Component({
   selector: 'app-popup',
@@ -14,9 +15,12 @@ export class PopupComponent {
   }
   reason:string=""
   operation:string=""
+  user:User|null=null;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.operation=data.myParam
-    console.log(this.operation)
+    if(this.operation=='MU'){
+      this.user=data.user
+    }
   }
 
 }

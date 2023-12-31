@@ -15,12 +15,35 @@
     <h2 mat-dialog-title>Enter Reason Why bad Validation</h2>
     <mat-dialog-content>
         <mat-form-field appearance="fill">
-            <mat-label for="post">Reason</mat-label>
-            <textarea matInput id="reason" name="Reason" [(ngModel)]="reason" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
+            <mat-label for="reason">Reason</mat-label>
+            <textarea matInput id="reason" name="reason" [(ngModel)]="reason" required maxlength="400" rows="5"> <!-- Set the number of visible rows -->
     </textarea>
         </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button [mat-dialog-close]="reason">Send decision</button>
+    </mat-dialog-actions>
+</div>
+<div *ngIf="operation=='MU'">
+    <h2 mat-dialog-title>Update user info</h2>
+    <mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <textarea matInput id="firstName" name="firstName" [(ngModel)]="user!.firstName" required maxlength="20" rows="1"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <textarea matInput id="lastName" name="lastName" [(ngModel)]="user!.lastName" required maxlength="20" rows="1"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput id="description" name="description" [(ngModel)]="user!.description" required maxlength="400" rows="5"></textarea>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="user">Update user</button>
     </mat-dialog-actions>
 </div>

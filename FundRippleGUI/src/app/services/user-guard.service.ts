@@ -1,27 +1,39 @@
 import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuardService {
+export class UserGuardService implements CanActivate {
+  
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
-  constructor(private authService: AuthenticationService,
-    private router: Router) { }
-
-    canActivate(
-      route: ActivatedRouteSnapshot,
-      state: RouterStateSnapshot
-    ): boolean{
-      const targetRoute = state.url;
-      console.log(targetRoute)
-      if(this.authService.testUser2()) {
-        return true
-      } else {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | boolean {
+    return this.authService.testUser2().pipe(
+      map(response => {
+        if (response) {
+          console.log("Guard OK");
+          return true;
+        } else {
+          console.log("Guard Bad");
+          this.router.navigate(['/home']);
+          return false;
+        }
+      }),
+      catchError((error) => {
+        console.log("Error occurred", error);
         this.router.navigate(['/home']);
-        return false;
-      }
-      
-    }
+        return of(false);
+      })
+    );
+  }
 }

@@ -1,0 +1,59 @@
+/* General styles for each dialog content section */
+
+mat-dialog-content {
+    width: 100%;
+    /* Full width for the content */
+    max-width: 500px;
+    /* Maximum width, adjust as needed */
+    margin: 0 auto;
+    /* Center the content */
+    padding: 20px;
+    /* Padding inside the dialog content */
+}
+
+
+/* Styles for form fields */
+
+mat-form-field {
+    width: 100%;
+    /* Full width for form fields */
+    margin-bottom: 20px;
+    /* Space between form fields */
+}
+
+
+/* Style for the dialog actions */
+
+mat-dialog-actions {
+    justify-content: center;
+    /* Center the buttons */
+    margin-top: 20px;
+    /* Space above the buttons */
+}
+
+
+/* Style for the textareas */
+
+textarea {
+    width: 100%;
+    /* Full width */
+    padding: 10px;
+    /* Padding inside the text area */
+    border: 1px solid #ccc;
+    /* Border for the text area */
+    border-radius: 4px;
+    /* Rounded corners for the text area */
+}
+
+
+/* Style for dialog titles */
+
+h2[mat-dialog-title] {
+    text-align: center;
+    /* Center the dialog title */
+    margin-bottom: 20px;
+    /* Space below the title */
+}
+
+
+/* Add more specific styles as needed */

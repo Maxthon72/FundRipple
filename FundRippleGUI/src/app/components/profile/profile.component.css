@@ -1,24 +1,16 @@
 .nav-space {
     margin: 0 10px;
-    /* Adjust the margin for the desired space */
 }
 
 .nav-tab {
     margin: 0 40px;
-    /* Adjust the margin for the desired space */
 }
-
-
-/* Style the left navigation */
 
 .left-nav {
     flex: 1;
     display: flex;
     align-items: center;
 }
-
-
-/* Style the right navigation */
 
 .right-nav {
     flex: 1;
@@ -31,8 +23,40 @@
     padding-bottom: 40px;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Adds space between cards */
+    max-width: 70%;
+    /* Adjust as needed to prevent full width */
+    margin: 0 auto;
+    /* Centers the content within the page */
+}
 
-/* Center the logo container */
+.user-info {
+    padding: 16px;
+    /* Padding inside the card */
+    margin-bottom: 30px;
+    /* Additional space below the user-info card */
+}
+
+.left-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.right-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.tool-bar {
+    padding-bottom: 40px;
+}
 
 .header-content {
     width: 165px;
@@ -42,69 +66,64 @@
     flex: 1;
 }
 
-
-/* Adjust the margin between the navigation links */
-
 .mat-button {
     margin-right: 10px;
 }
 
-.content {
+.if-user-profile,
+.if-not-user-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* Space between projects and benefits */
+}
+
+.user-projects,
+.user-benefits {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    max-width: 600px;
-    /* Adjust the width as needed */
-    margin: auto;
-    gap: 16px;
-    /* Adjust the space between the boxes */
+    max-width: 400px;
+    /* Set a maximum width */
+    margin: 0 auto;
+    /* Center within their container */
+    gap: 8px;
+    /* Space between cards within the section */
 }
 
-.user-info,
-.user-projects,
-.user-benefits {
-    border: 1px solid black;
-    /* Simple border for demo */
-    padding: 8px;
-    /* Padding inside the boxes */
-    background-color: white;
-    /* Background color for the content */
+.section-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-
-/* Since user-info takes full width, we don't need to specify anything */
-
-
-/* Flex row for the projects and benefits */
-
-.user-projects,
-.user-benefits {
-    flex-basis: 0;
-    flex-grow: 1;
+.projects,
+.benefits {
+    margin-bottom: 20px;
 }
 
-
-/* Assuming user-projects and user-benefits are side by side */
-
-@media (min-width: 768px) {
-    /* Adjust breakpoint as needed */
-    .content {
-        flex-wrap: wrap;
-        /* Allow wrapping for smaller screens */
-    }
-    .user-projects,
-    .user-benefits {
-        flex: 1;
-        /* Take up half the width */
-    }
+.project,
+.benefits {
+    display: flex;
+    flex-direction: column;
 }
 
+.resized-banner-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
 
-/* Additional styling for inner divs if needed */
+.project-info {
+    font-size: 0.9em;
+    line-height: 0.7;
+}
 
-.user-name,
-.first-and-last-name,
-.role,
-.email {
-    margin-bottom: 8px;
-    /* Space between the inner divs */
+.project-info span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+mat-progress-bar {
+    margin-top: 10px;
 }
