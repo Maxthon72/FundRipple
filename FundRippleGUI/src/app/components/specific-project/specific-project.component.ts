@@ -13,6 +13,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostUnderProjectRead, PostUnderProjectWrite } from 'src/app/interfaces/Project/PostUnderProject';
 import { ProjectSLE } from 'src/app/interfaces/Project/ProjectSLE';
 import { Reason } from 'src/app/interfaces/reason';
+import { PaypalService } from 'src/app/services/paypal.service';
+import { Payment } from 'src/app/interfaces/payment';
+import { PayPal } from 'src/app/interfaces/PayPal';
 
 @Component({
   selector: 'app-specific-project',
@@ -30,8 +33,10 @@ export class SpecificProjectComponent {
   projectName=""
   posts:PostUnderProjectRead[]=[]
   loading: boolean = true;
+  userSupport:number=0;
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
-    private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute,private dialog:MatDialog){}
+    private userService:UserService,private projectService:ProjectService,private route: ActivatedRoute,private dialog:MatDialog,
+    private payPalService:PaypalService){}
   ngOnInit(): void {
 
     this.route.params.subscribe(params => {
@@ -56,6 +61,11 @@ export class SpecificProjectComponent {
             this.projectService.getPostsUnderProject(this.project.projectName).subscribe(
               (postsResp:PostUnderProjectRead[])=>{
                 this.posts=postsResp.reverse();
+              }
+            )
+            this.payPalService.getSupportOfProjectByUser(this.project.projectName).subscribe(
+              (resp:number)=>{
+                this.userSupport=resp
               }
             )
         }
@@ -154,7 +164,24 @@ export class SpecificProjectComponent {
   }
   support(){
     if(this.logedIn){
-
+      const dialogRef = this.dialog.open(PopupComponent, {
+        width: '500px',
+        data: { myParam: 'SP' }
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        let ammount:number=result
+        let payment:Payment={
+          userName:this.user!.userName,
+          projectName:this.projectName,
+          money:ammount
+        }
+        this.payPalService.initPayPalPayment(ammount,payment).subscribe(
+          (resp:PayPal)=>{
+            window.location.href = resp.approvalUrl
+          }
+        )
+      });
     }
     else{
       this.router.navigate(['login']);

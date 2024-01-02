@@ -267,3 +267,18 @@ mat-raised-button[color="accent"] {
     background-color: #fff;
     border-radius: 8px;
 }
+
+.sub-goal {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    padding-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.add-sub-goal,
+.add-benefit {
+    margin-top: 15px;
+}

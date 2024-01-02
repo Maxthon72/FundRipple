@@ -13,6 +13,7 @@ export class PopupComponent {
     post:"",
     url:""
   }
+  money:number=0
   reason:string=""
   operation:string=""
   user:User|null=null;

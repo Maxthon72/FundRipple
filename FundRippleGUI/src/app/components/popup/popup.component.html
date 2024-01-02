@@ -47,3 +47,15 @@
         <button mat-button [mat-dialog-close]="user">Update user</button>
     </mat-dialog-actions>
 </div>
+<div *ngIf="operation=='SP'">
+    <h2 mat-dialog-title>Support project</h2>
+    <mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label for="money">Benefit goal in PLN</mat-label>
+            <input matInput type="number" name="money" [(ngModel)]="money" required step="0.01">
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="money">Support</button>
+    </mat-dialog-actions>
+</div>

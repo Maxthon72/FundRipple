@@ -69,8 +69,10 @@
                 <div class="project-info" *ngIf="project!=null">
                     <mat-card class="project-info-card">
                         <div>{{project.summery}}</div>
-                        <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
+                        <mat-progress-bar mode="determinate" [value]="(project.moneyCollected / project.goal) * 100"></mat-progress-bar>
+
                         <div>{{ project.moneyCollected }} PLN / {{ project.goal }} PLN</div>
+                        <div>User support: {{userSupport}}</div>
                         <div>Ending date: {{project.planedDateOfClosing}}</div>
                         <div>Started by {{project.responsibleUser.userName}}</div>
                         <div>Suspicions {{project.suspicions}}</div>
@@ -84,6 +86,9 @@
                     <div *ngIf="role=='ADMIN'">
                         <div *ngIf="project.status=='TO_VERIFY'">
                             <a mat-button (click)="verifyOk()">Verify Ok</a>
+                            <a mat-button (click)="verifyBad()">Verify Bad</a>
+                        </div>
+                        <div *ngIf="project.status=='OPEN'">
                             <a mat-button (click)="verifyBad()">Verify Bad</a>
                         </div>
                     </div>
@@ -145,7 +150,7 @@
         </div>
         <div class="posts-and-comments">
             <div *ngIf="user?.userName==project?.responsibleUser?.userName">
-                <a mat-button (click)="openDialog()">Post</a>
+                <a mat-button (click)="openDialog()">Posts</a>
             </div>
             <div class="post-and-comments" *ngIf="project!=null">
                 <!-- Angular Material List for repeated items -->

@@ -27,6 +27,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     SpecificProjectComponent,
     SearchProjectComponent,
     PopupComponent,
-    ProfileComponent
+    ProfileComponent,
+    PaymentComponent
   ],
   imports: [
     MatDialogModule,

@@ -8,6 +8,7 @@ import { SearchProjectComponent } from './components/search-project/search-proje
 import { SpecificProjectComponent } from './components/specific-project/specific-project.component';
 import { UserGuardService } from './services/user-guard.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 const routes: Routes = [
   {path:'home', component:HomePageComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'list/verify',component:SearchProjectComponent,canActivate:[UserGuardService]},
   {path:'project/:projectName',component:SpecificProjectComponent},
   {path:'profile/:userName',component:ProfileComponent,canActivate:[UserGuardService]},
+  {path:'payment/:status/:projectName/:amount',component:PaymentComponent},
 ];
 
 @NgModule({

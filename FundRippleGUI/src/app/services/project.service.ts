@@ -199,10 +199,13 @@ export class ProjectService {
 
     const storedToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${storedToken}`,
+      'Authorization': `Bearer ${storedToken}`
     });
+  
+    // The headers need to be passed as an options object
+    const options = { headers: headers };
     // Make the GET request with the custom headers
-    return this.http.put<boolean>(`${environment.apiBaseUrl}/sus/${userName}/${projectNameSus}`, { headers }).pipe(
+    return this.http.put<boolean>(`${environment.apiBaseUrl}/sus/${userName}/${projectNameSus}`, {}, options).pipe(
       catchError(this.handleError)
     );
   }
