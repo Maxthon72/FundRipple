@@ -39,9 +39,8 @@ public class PublicController {
 
     @GetMapping("/projects")
     public ResponseEntity<List<ProjectSLElement>> getAllProjectInSLE(
-            @RequestParam(name = "status", defaultValue = "TO_VERIFY") String status
     ){
-        return ResponseEntity.ok(projectService.getAllProjectsSLE(status));
+        return ResponseEntity.ok(projectService.getAllOpenAndClosedProjectsSLE());
     }
 
     @GetMapping("/postUnderProject/{projectName}")

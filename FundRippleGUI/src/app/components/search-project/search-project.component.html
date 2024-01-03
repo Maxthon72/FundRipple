@@ -118,7 +118,7 @@
                         <span>{{project.summery}}</span><br>
                         <span>{{project.planedDateOfClosing}}</span><br>
                         <span *ngFor="let tag of project.tags">{{tag.tagName}} </span>
-                        <mat-progress-bar mode="determinate" [value]="project.moneyCollected" [bufferValue]="project.goal"></mat-progress-bar>
+                        <mat-progress-bar mode="determinate" [value]="(project.moneyCollected / project.goal) * 100"></mat-progress-bar>
                     </div>
                 </div>
             </mat-card>

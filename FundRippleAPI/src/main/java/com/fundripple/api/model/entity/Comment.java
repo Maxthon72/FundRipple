@@ -1,6 +1,7 @@
 package com.fundripple.api.model.entity;
 
 import com.fundripple.api.model.enums.CommentStatus;
+import com.fundripple.api.model.enums.PostStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class Comment {
     private LocalDateTime dateCreated;
 
     @Column(nullable = false)
+    @GeneratedValue()
+    @Enumerated(EnumType.STRING)
+    private CommentStatus status;
+    @Column(nullable = false)
     private String comment;
 
     @Column(nullable = false,name = "comment_status")
@@ -33,5 +38,6 @@ public class Comment {
     @PrePersist
     public void prePersist() {
         dateCreated = LocalDateTime.now();
+        status = CommentStatus.OK;
     }
 }

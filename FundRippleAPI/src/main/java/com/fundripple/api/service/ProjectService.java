@@ -5,18 +5,17 @@ import com.fundripple.api.mapper.ProjectMapper;
 import com.fundripple.api.mapper.ProjectDescriptionMapper;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
 import com.fundripple.api.model.dto.read.ProjectSLElement;
+import com.fundripple.api.model.dto.write.EarlyCloseWriteModel;
 import com.fundripple.api.model.dto.write.ProjectDescriptionWriteModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.dto.write.TagWriteModel;
-import com.fundripple.api.model.entity.Project;
-import com.fundripple.api.model.entity.ProjectDescription;
-import com.fundripple.api.model.entity.Suspicion;
-import com.fundripple.api.model.entity.Tag;
+import com.fundripple.api.model.entity.*;
 import com.fundripple.api.model.enums.ProjectDescriptionElementType;
 import com.fundripple.api.model.enums.ProjectStatus;
 import com.fundripple.api.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +30,14 @@ public class ProjectService {
     private final CleanService cleanService;
     private final SuspicionRepository suspicionRepository;
     private final JwtService jwtService;
+    private final EarlyCloseRepository  earlyCloseRepository;
 
 
     public ProjectService(JwtService jwtService, UserService userService,
                           ProjectMapper projectMapper, ProjectRepository projectRepository,
                           ProjectDescriptionMapper projectDescriptionMapper,
                           ProjectDescriptionRepository projectDescriptionRepository,
-                          TagRepository tagRepository, CleanService cleanService, SuspicionRepository suspicionRepository, JwtService jwtService1) {
+                          TagRepository tagRepository, CleanService cleanService, SuspicionRepository suspicionRepository, JwtService jwtService1, EarlyCloseRepository earlyCloseRepository) {
         this.userService = userService;
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
@@ -47,6 +47,7 @@ public class ProjectService {
         this.cleanService = cleanService;
         this.suspicionRepository = suspicionRepository;
         this.jwtService = jwtService1;
+        this.earlyCloseRepository = earlyCloseRepository;
     }
 
     public List<ProjectReadModel> getAllProjects(){
@@ -126,6 +127,68 @@ public class ProjectService {
         ProjectReadModel projectReadModel = projectMapper.toReadModel(projectRepository.findProjectByProjectName(projectName));
         projectReadModel.setDescription(projectDescriptionMapper.map(projectDescriptionRepository.findAllByProject(projectRepository.findProjectByProjectName(projectName))));
         return projectReadModel;
+    }
+
+    public List<ProjectSLElement> getProjectsWithSpecificStatus(String status,String header) {
+        List<Project> projects = projectRepository.findAllByStatus(ProjectStatus.valueOf(status));
+        return projectMapper.mapSLE(projects);
+    }
+
+    public Object setStatusOpen(String projectName,String header) {
+        Project project = projectRepository.findProjectByProjectName(projectName);
+        if(userService.getUserEntityByToken(header).getRole().name().equals("ADMIN")){
+            project.setStatus(ProjectStatus.OPEN);
+            projectRepository.save(project);
+        }
+        return projectMapper.toReadModel(project);
+    }
+
+    public Object setStatusEarlyClose(EarlyCloseWriteModel earlyCloseWriteModel,String header) {
+        Project project = projectRepository.findProjectByProjectName(earlyCloseWriteModel.getProjectName());
+        if(userService.getUserEntityByToken(header).getRole().name().equals("ADMIN")){
+            project.setStatus(ProjectStatus.EARLY_CLOSE);
+            EarlyClose earlyClose = new EarlyClose();
+            earlyClose.setProject(project);
+            earlyClose.setReason(earlyCloseWriteModel.getReason());
+            project.setDateClosed(LocalDate.now());
+            earlyCloseRepository.save(earlyClose);
+            projectRepository.save(project);
+        }
+        return projectMapper.toReadModel(project);
+    }
+
+    public void autoCloseProjects() {
+
+    }
+
+    public List<ProjectSLElement> getAllOpenAndClosedProjectsSLE() {
+        List<Project> projects = projectRepository.getOpenAndClosedProjects();
+        return projectMapper.mapSLE(projects);
+    }
+
+    public List<ProjectSLElement> getAllProjectsToVerify(){
+        List<Project> projects = projectRepository.getProjectsToVerify();
+        return projectMapper.mapSLE(projects);
+    }
+
+    public List<ProjectSLElement> getAllProjectsForUserByHeader(String header) {
+        List<Project> projects = projectRepository.getProjectsForUser(userService.getUserEntityByToken(header).getUsername());
+        return projectMapper.mapSLE(projects);
+    }
+
+    public List<ProjectSLElement> getOpenAndClosedProjects(String header){
+        List<Project> projects = projectRepository.getOpenAndClosedProjectsForUser(userService.getUserEntityByToken(header).getUsername());
+        return projectMapper.mapSLE(projects);
+    }
+
+    public List<ProjectSLElement> getAllProjectsForUserByUserName(String userName) {
+        List<Project> projects = projectRepository.getOpenAndClosedProjectsForUser(userName);
+        return projectMapper.mapSLE(projects);
+    }
+
+    public List<ProjectSLElement> getOpenAndClosedProjectsForUser(String userName) {
+        List<Project> projects = projectRepository.getOpenAndClosedProjectsForUser(userName);
+        return projectMapper.mapSLE(projects);
     }
 
 }

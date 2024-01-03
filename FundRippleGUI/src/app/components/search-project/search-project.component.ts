@@ -26,7 +26,7 @@ export class SearchProjectComponent {
   filteredAndSearchedProjects:ProjectSLE[]=[]
   allTags:Tag[]=[]
   selectedTags:Tag[]=[]
-  projectStatus:string[]=["active","completed","all"]
+  projectStatus:string[]=["OPEN","CLOSED","ALL"]
   projectElements:string[]=["Date of cloasing","Date started","Goal","Money collected","Number of supporters","Project name"]
   direction:string[]=["Ascending","Descending"]
   selectedProjectElement:string="Project name"

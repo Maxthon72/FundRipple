@@ -3,6 +3,7 @@ package com.fundripple.api.controller;
 import com.fundripple.api.error.ProjectException;
 import com.fundripple.api.model.dto.read.ProjectReadModel;
 import com.fundripple.api.model.dto.read.ProjectSLElement;
+import com.fundripple.api.model.dto.write.EarlyCloseWriteModel;
 import com.fundripple.api.model.dto.write.ProjectDescriptionWriteModel;
 import com.fundripple.api.model.dto.write.ProjectWriteModel;
 import com.fundripple.api.model.dto.write.TagWriteModel;
@@ -34,6 +35,13 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<ProjectSLElement>> getProjectWithSpecificStatus(
+            @PathVariable String status,
+            @RequestHeader("Authorization") String header
+    ){
+        return ResponseEntity.ok(projectService.getProjectsWithSpecificStatus(status,header));
+    }
     @GetMapping()
     public ResponseEntity<List<ProjectReadModel>>getAllProjects(){
         return ResponseEntity.ok(projectService.getAllProjects());
@@ -65,5 +73,55 @@ public class ProjectController {
                     .body(e.getMessage());
         }
     }
+
+    @GetMapping("/toVerify")
+    public ResponseEntity<?> getProjectsToVerify(){
+        return ResponseEntity.ok(projectService.getAllProjectsToVerify());
+    }
+    @PutMapping("/chStatus/open/{projectName}")
+    public ResponseEntity<?> setStatusOpen(
+            @PathVariable String projectName,
+            @RequestHeader("Authorization") String header
+    ){
+        return ResponseEntity.ok(projectService.setStatusOpen(projectName,header));
+    }
+
+    @PutMapping("/chStatus/earlyClose")
+    public ResponseEntity<?> setStatusEarlyClose(
+            @RequestBody EarlyCloseWriteModel earlyCloseWriteModel,
+            @RequestHeader("Authorization") String header
+    ){
+        return ResponseEntity.ok(projectService.setStatusEarlyClose(earlyCloseWriteModel,header));
+    }
+
+    @GetMapping("/allProjects/forUser")
+    public ResponseEntity<?> getAllProjectsForUserByHeader(
+            @RequestHeader("Authorization") String header
+    ){
+        return ResponseEntity.ok(projectService.getAllProjectsForUserByHeader(header));
+    }
+
+    @GetMapping("/allProjects/forUser/{userName}")
+    public ResponseEntity<?> getAllProjectsForUser(
+            @PathVariable String userName
+    ){
+        return ResponseEntity.ok(projectService.getAllProjectsForUserByUserName(userName));
+    }
+
+    @GetMapping("/openAndClosed/forUser")
+    public ResponseEntity<?> getOpenAndClosedProjectsForUser(
+            @RequestHeader("Authorization") String header
+    ){
+        return ResponseEntity.ok(projectService.getOpenAndClosedProjects(header));
+    }
+
+    @GetMapping("/openAndClosed/forUser/{userName}")
+    public ResponseEntity<?> getOpenAndClosedProjectsForUserByUserName(
+            @PathVariable String userName
+    ){
+        return ResponseEntity.ok(projectService.getOpenAndClosedProjectsForUser(userName));
+    }
+
+
 
 }

@@ -64,6 +64,7 @@ public class Project {
 
     @Column(name = "status",nullable = false)
     @GeneratedValue()
+    @Enumerated(EnumType.STRING)
     private ProjectStatus status;
 
     @ManyToMany(mappedBy = "projects")

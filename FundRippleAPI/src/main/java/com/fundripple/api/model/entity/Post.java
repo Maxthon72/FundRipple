@@ -30,6 +30,7 @@ public class Post {
 
     @Column(nullable = false)
     @GeneratedValue()
+    @Enumerated(EnumType.STRING)
     private PostStatus status;
 
     @Column(name = "image")

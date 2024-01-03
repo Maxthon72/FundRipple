@@ -13,8 +13,9 @@ public class SuspectController {
     private final SuspectService suspectService;
     @PutMapping("/{userName}/{projectName}")
     ResponseEntity<Boolean> addSus(
-            @PathVariable("projectName") String projectName,
-            @PathVariable("userName") String userName
+            @PathVariable("userName") String userName,
+            @PathVariable("projectName") String projectName
+
     ){
         return ResponseEntity.ok(suspectService.addSus(projectName,userName));
     }

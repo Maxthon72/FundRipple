@@ -20,7 +20,7 @@ public class PostsController {
     }
 
     @PostMapping("/project/{projectName}")
-    ResponseEntity<PostUnderProjectReadModel> addPostUnderProject(
+    public ResponseEntity<PostUnderProjectReadModel> addPostUnderProject(
             @PathVariable String projectName,
             @RequestBody PostUnderProjectWriteModel postUnderProjectWriteModel,
             @RequestHeader("Authorization") String header
@@ -29,7 +29,7 @@ public class PostsController {
     }
 
     @PostMapping("/user")
-    ResponseEntity<PostUnderUserReadModel> addPostUnderUser(
+    public ResponseEntity<PostUnderUserReadModel> addPostUnderUser(
             @RequestBody PostUnderUserWriteModel postUnderUserWriteModel,
             @RequestHeader("Authorization") String header
     ){

@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BenefitReadModel {
     private Long moneyGoal;
-
     private String description;
-
     private String name;
-    private ProjectReadModel projectReadModel;
+    private ProjectSLElement projectSLElement;
 }

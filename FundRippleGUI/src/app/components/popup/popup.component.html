@@ -8,7 +8,7 @@
         </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="post">Post</button>
+        <button mat-button color="primary" [mat-dialog-close]="post">Post</button>
     </mat-dialog-actions>
 </div>
 <div *ngIf="operation=='VB'">
@@ -21,7 +21,7 @@
         </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="reason">Send decision</button>
+        <button mat-button color="primary" [mat-dialog-close]="reason">Send decision</button>
     </mat-dialog-actions>
 </div>
 <div *ngIf="operation=='MU'">
@@ -44,18 +44,18 @@
 
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="user">Update user</button>
+        <button mat-button color="primary" [mat-dialog-close]="user">Update user</button>
     </mat-dialog-actions>
 </div>
 <div *ngIf="operation=='SP'">
     <h2 mat-dialog-title>Support project</h2>
     <mat-dialog-content>
         <mat-form-field appearance="fill">
-            <mat-label for="money">Benefit goal in PLN</mat-label>
+            <mat-label for="money">Support project in PLN</mat-label>
             <input matInput type="number" name="money" [(ngModel)]="money" required step="0.01">
         </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="money">Support</button>
+        <button mat-button color="primary" [mat-dialog-close]="money">Support</button>
     </mat-dialog-actions>
 </div>
