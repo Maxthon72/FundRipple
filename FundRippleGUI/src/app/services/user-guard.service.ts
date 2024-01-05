@@ -18,7 +18,7 @@ export class UserGuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
-    return this.authService.testUser2().pipe(
+    return this.authService.testUserByHeaderInStorage().pipe(
       map(response => {
         if (response) {
           console.log("Guard OK");

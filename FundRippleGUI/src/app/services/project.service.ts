@@ -138,7 +138,11 @@ export class ProjectService {
   }
 
   public getSuspectProjectSLE():Observable<ProjectSLE[]>{
-    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/public/projects`);
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/suspects`,{headers});
   }
 
   public getProjectSLEToVerify():Observable<ProjectSLE[]>{

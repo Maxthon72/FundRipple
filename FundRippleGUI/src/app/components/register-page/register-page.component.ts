@@ -19,37 +19,78 @@ export class RegisterPageComponent implements OnInit{
 
   hidePassword = true;
   userNameFlag=false
+  type:string=""
   ngOnInit(): void {
-    this.user = {
-      userName: '',
-      firstName: null,
-      lastName: null,
-      email: '',
-      password: '',
-      description:''
-    };
-  }
+    const currentUrl = this.router.url;
+    if(currentUrl=="/register/admin"){
+      this.type='SUPER'
+      this.user = {
+        userName: '',
+        firstName: null,
+        lastName: null,
+        email: '',
+        password: '',
+        description:''
+      };
+    }
+    else{
+      this.type='NORMAL'
+      this.user = {
+        userName: '',
+        firstName: null,
+        lastName: null,
+        email: '',
+        password: '',
+        description:''
+      };
+    }
 
+  }
+  public logOut(){
+    localStorage.clear()
+    this.navigateToHome()
+  }
   onSubmit() {
-    console.log(this.user)
-    if (this.user.userName.includes(' ')) {
-      this.userNameFlag = true;
-    } else {
-      this.userNameFlag = false;
+    if(this.type=='NORMAL'){
+      console.log(this.user)
+      if (this.user.userName.includes(' ')) {
+        this.userNameFlag = true;
+      } else {
+        this.userNameFlag = false;
+      }
+      console.log(this.userNameFlag)
+      if(!this.userNameFlag){
+        this.auth.registerNormalUser(this.user).subscribe(
+          (response:Token)=>{
+            this.token = response
+            this.localStorage.clear()
+            this.localStorage.setItem('token',response)
+            this.userNameFlag=false;
+            this.router.navigate(['/']);
+          }
+        )
+      }
+      console.log('Registration submitted:', this.user)
     }
-    console.log(this.userNameFlag)
-    if(!this.userNameFlag){
-      this.auth.registerNormalUser(this.user).subscribe(
-        (response:Token)=>{
-          this.token = response
-          this.localStorage.clear()
-          this.localStorage.setItem('token',response)
-          this.userNameFlag=false;
-          this.router.navigate(['/']);
-        }
-      )
+    else if(this.type=='SUPER'){
+      console.log(this.user)
+      if (this.user.userName.includes(' ')) {
+        this.userNameFlag = true;
+      } else {
+        this.userNameFlag = false;
+      }
+      if(!this.userNameFlag){
+        this.auth.registerNormalUser(this.user).subscribe(
+          (response:Token)=>{
+            this.token = response
+            this.localStorage.clear()
+            this.localStorage.setItem('token',response)
+            this.userNameFlag=false;
+            this.router.navigate(['/']);
+          }
+        )
+      }
     }
-    console.log('Registration submitted:', this.user)
   }
   navigateToHome(){
     this.router.navigate(['home']);

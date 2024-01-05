@@ -18,6 +18,14 @@ export class AuthenticationService {
     return this.http.post<Token>(`${environment.apiBaseUrl}/auth/register`,user);
   }
 
+  public registerAdminUser(user:User):Observable<Token>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${storedToken}`
+    });
+    return this.http.post<Token>(`${environment.apiBaseUrl}/user/register/admin`,user,{headers});
+  }
+
   public authenticateNormalUser(user:PartUser):Observable<Token>{
     return this.http.post<Token>(`${environment.apiBaseUrl}/auth/authenticate`,user);
   }
@@ -32,7 +40,7 @@ export class AuthenticationService {
     return this.http.get<boolean>(`${environment.apiBaseUrl}/test`, { headers });
   }
 
-  public testUser2(): Observable<boolean> {
+  public testUserByHeaderInStorage(): Observable<boolean> {
     const storedToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${storedToken}`

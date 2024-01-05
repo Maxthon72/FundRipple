@@ -55,6 +55,9 @@ export class HomePageComponent implements OnInit{
                   (res:string)=>{
                     this.role=res;
                     console.log(this.role)
+                    if(this.role=='SUPER'){
+                      
+                    }
                   }
                 )
               } else {

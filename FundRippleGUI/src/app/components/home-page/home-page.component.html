@@ -29,6 +29,10 @@
                     <a mat-button routerLink="/list/verify">Verify</a>
                     <span class="nav-space"></span>
                 </div>
+                <div *ngIf="role=='SUPER'">
+                    <a mat-button routerLink="/register/admin">Add admin</a>
+                    <span class="nav-space"></span>
+                </div>
             </div>
         </nav>
         <div class="header-content" (click)="navigateToHome()">

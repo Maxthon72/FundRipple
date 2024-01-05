@@ -1,0 +1,31 @@
+<div class="tool-bar">
+    <mat-toolbar color="primary">
+        <nav class="left-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/discover">Discover</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/search">Search</a>
+                <span class="nav-tab"></span>
+                <!-- Add a spacer -->
+            </div>
+        </nav>
+        <div class="header-content" (click)="navigateToHome()">
+            <img alt="logo" src="../assets/logo-white.png" style="width: 100px;" />
+        </div>
+        <nav class="right-nav">
+            <div *ngIf="!logedIn">
+                <a mat-button routerLink="/login">Login</a>
+                <span class="nav-space"></span>
+                <!-- Add a spacer -->
+                <a mat-button routerLink="/register">Register</a>
+            </div>
+        </nav>
+    </mat-toolbar>
+</div>
+
+<div class="error-message">
+    <h1>404</h1>
+    <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <a mat-button routerLink="/home">Go to Home Page</a>
+</div>

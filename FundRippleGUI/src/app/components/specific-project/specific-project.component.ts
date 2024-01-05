@@ -162,8 +162,9 @@ export class SpecificProjectComponent {
     console.log(this.project)
     this.router.navigate(['home']);
   }
+  
   support(){
-    if(this.logedIn){
+    if(this.role=='USER'){
       const dialogRef = this.dialog.open(PopupComponent, {
         width: '500px',
         data: { myParam: 'SP' }

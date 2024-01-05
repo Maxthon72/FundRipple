@@ -9,12 +9,14 @@ import { SpecificProjectComponent } from './components/specific-project/specific
 import { UserGuardService } from './services/user-guard.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { Page404Component } from './components/page-404/page-404.component';
 
 const routes: Routes = [
   {path:'home', component:HomePageComponent},
   {path:'', redirectTo: '/home', pathMatch: 'full' },
   {path:'login', component:LoginPageComponent},
   {path:'register', component:RegisterPageComponent},
+  {path:'register/admin', component:RegisterPageComponent,canActivate:[UserGuardService]},
   {path:'createProject',component:CreateProjectComponent,canActivate:[UserGuardService]},
   {path:'search',component:SearchProjectComponent},
   {path:'list/suspicion',component:SearchProjectComponent,canActivate:[UserGuardService]},
@@ -22,6 +24,7 @@ const routes: Routes = [
   {path:'project/:projectName',component:SpecificProjectComponent},
   {path:'profile/:userName',component:ProfileComponent,canActivate:[UserGuardService]},
   {path:'payment/:status/:projectName/:amount',component:PaymentComponent},
+  { path: '**', component: Page404Component },
 ];
 
 @NgModule({

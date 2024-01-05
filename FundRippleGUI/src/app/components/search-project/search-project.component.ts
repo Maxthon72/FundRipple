@@ -54,7 +54,15 @@ export class SearchProjectComponent {
   ngOnInit(): void {
     const currentUrl = this.router.url;
     if(currentUrl=="/list/suspicion"){
-
+      this.projectService.getSuspectProjectSLE().subscribe(
+        (projectsResponse:ProjectSLE[])=>{
+          this.projects=projectsResponse;
+          this.loading=false
+          this.filteredAndSearchedProjects=projectsResponse;
+          this.totalLength = this.filteredAndSearchedProjects.length;
+          this.paginateProjects(0, this.pageSize);
+        }
+      )
     }
     else if(currentUrl=="/list/verify"){
       this.projectService.getProjectSLEToVerify().subscribe(

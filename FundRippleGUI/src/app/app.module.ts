@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { Page404Component } from './components/page-404/page-404.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     SearchProjectComponent,
     PopupComponent,
     ProfileComponent,
-    PaymentComponent
+    PaymentComponent,
+    Page404Component
   ],
   imports: [
     MatDialogModule,
