@@ -26,4 +26,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(value = "SELECT * FROM projects where responsible_user = (SELECT id from users where user_name=?1) and (status = 'OPEN' or status='CLOSED')",nativeQuery = true)
     List<Project> getOpenAndClosedProjectsForUser(String userName);
 
+    @Query(value = "SELECT * FROM projects where suspicions > 10",nativeQuery = true)
+    List<Project> getMostSuspectProjects();
+
 }

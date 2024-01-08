@@ -21,7 +21,7 @@ import java.util.List;
 public class ProjectController {
 
     private final ProjectService projectService;
-    @PostMapping("")
+    @PostMapping("/add")
     public ResponseEntity<?> addProject(
             @RequestBody ProjectWriteModel projectWriteModel,
             @RequestHeader("Authorization") String header
@@ -77,6 +77,11 @@ public class ProjectController {
     @GetMapping("/toVerify")
     public ResponseEntity<?> getProjectsToVerify(){
         return ResponseEntity.ok(projectService.getAllProjectsToVerify());
+    }
+
+    @GetMapping("/suspects")
+    public ResponseEntity<?> getMostSuspectProjects(){
+        return ResponseEntity.ok(projectService.getMostSuspectProjects());
     }
     @PutMapping("/chStatus/open/{projectName}")
     public ResponseEntity<?> setStatusOpen(

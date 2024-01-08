@@ -12,6 +12,7 @@ import com.fundripple.api.model.dto.write.TagWriteModel;
 import com.fundripple.api.model.entity.*;
 import com.fundripple.api.model.enums.ProjectDescriptionElementType;
 import com.fundripple.api.model.enums.ProjectStatus;
+import com.fundripple.api.model.enums.Role;
 import com.fundripple.api.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -177,7 +178,13 @@ public class ProjectService {
     }
 
     public List<ProjectSLElement> getOpenAndClosedProjects(String header){
-        List<Project> projects = projectRepository.getOpenAndClosedProjectsForUser(userService.getUserEntityByToken(header).getUsername());
+        User user = userService.getUserEntityByToken(header);
+        List<Project> projects = new ArrayList<>();
+        if(user.getRole()== Role.USER){
+            projects = projectRepository.getOpenAndClosedProjectsForUser(user.getUsername());
+        } else if (user.getRole()==Role.ADMIN) {
+            projects = projectRepository.getOpenAndClosedProjects();
+        }
         return projectMapper.mapSLE(projects);
     }
 
@@ -191,4 +198,8 @@ public class ProjectService {
         return projectMapper.mapSLE(projects);
     }
 
+    public List<ProjectSLElement> getMostSuspectProjects() {
+        List<Project> projects = projectRepository.getMostSuspectProjects();
+        return projectMapper.mapSLE(projects);
+    }
 }

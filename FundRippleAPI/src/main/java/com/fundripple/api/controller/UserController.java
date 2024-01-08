@@ -1,6 +1,9 @@
 package com.fundripple.api.controller;
+import com.fundripple.api.model.authentication.AuthenticationResponse;
+import com.fundripple.api.model.authentication.RegisterRequest;
 import com.fundripple.api.model.dto.read.UserReadModel;
 import com.fundripple.api.model.dto.write.UserWriteModel;
+import com.fundripple.api.service.AuthenticationService;
 import com.fundripple.api.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final AuthenticationService authenticationService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthenticationService authenticationService) {
         this.userService = userService;
+        this.authenticationService = authenticationService;
     }
 
     //@CrossOrigin(origins = "http://localhost:4200")
@@ -34,6 +39,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByName(userName));
     }
 
+    @PostMapping("/register/admin")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request,
+            @RequestHeader("Authorization") String header
+    ){
+        return ResponseEntity.ok(authenticationService.registerAdmin(request,header));
+    }
     @PutMapping()
     public ResponseEntity<UserReadModel> updateUser(
             @RequestBody UserWriteModel userWriteModel,

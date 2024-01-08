@@ -17,12 +17,13 @@ import java.util.List;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
+    @Mapping(source = "username", target = "userName")
+    UserReadModel toDto(User user);
     User toEntity(UserWriteModel userWriteModel);
     User toEntity(UserSLElement userSLElement);
 
 
-    @Mapping(source = "username", target = "userName")
-    UserReadModel toDto(User user);
+
     void updateUserFromDto(UserWriteModel userWriteModel, @MappingTarget User user);
 
     List<UserReadModel> map(List<User> users);

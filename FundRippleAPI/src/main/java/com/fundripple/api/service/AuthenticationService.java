@@ -55,4 +55,23 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
+
+    public AuthenticationResponse registerAdmin(RegisterRequest request, String header) {
+        Authentication authentication = new Authentication();
+        authentication.setPassword(passwordEncoder.encode(request.getPassword()));
+        authenticationRepository.save(authentication);
+        User user = User.builder()
+                .userName(request.getUserName())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .authentication(authentication)
+                .role(Role.ADMIN)
+                .build();
+        userRepository.save(user);
+        String jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
 }

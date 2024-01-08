@@ -36,12 +36,6 @@ public class UserService {
         return userRepository.findByUserName(userName).get();
     }
 
-    public void setUserAdmin(String userName){
-        User user = userRepository.findByUserName(userName).get();
-        user.setRole(Role.ADMIN);
-        userRepository.save(user);
-    }
-
     public String getUserRole(String userName) {
         return userRepository.findByUserName(userName).get().getRole().name();
     }

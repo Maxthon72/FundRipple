@@ -7,22 +7,28 @@ import com.fundripple.api.model.entity.Project;
 import com.fundripple.api.model.entity.SubGoal;
 import com.fundripple.api.repository.ProjectRepository;
 import com.fundripple.api.repository.SubGoalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SubGoalService {
+public class    SubGoalService {
     private final ProjectRepository projectRepository;
     private final SubGoalMapper subGoalMapper;
     private final SubGoalRepository subGoalRepository;
-    private final CleanService cleanService;
+    @Autowired
+    private CleanService cleanService;
 
-    public SubGoalService(ProjectRepository projectRepository, SubGoalMapper subGoalMapper, SubGoalRepository subGoalRepository, CleanService cleanService) {
+    public SubGoalService(ProjectRepository projectRepository, SubGoalMapper subGoalMapper, SubGoalRepository subGoalRepository) {
         this.projectRepository = projectRepository;
         this.subGoalMapper = subGoalMapper;
         this.subGoalRepository = subGoalRepository;
-        this.cleanService = cleanService;
+    }
+
+    public List<SubGoal> getAllSubGoalsForProject(String projectName) {
+        Project project = projectRepository.findProjectByProjectName(projectName);
+        return subGoalRepository.getSubGoalsByProject(project);
     }
 
     public List<SubGoal> addSubGoalsToProject(String projectName, List<SubGoalWriteModel> subGoalWriteModels) {
@@ -39,10 +45,5 @@ public class SubGoalService {
             cleanService.clearProjectWhenAddingTagsOrDescription(projectName);
             throw new ProjectException("Failed to add project due to: " + e.getMessage());
         }
-    }
-
-    public List<SubGoal> getAllSubGoalsForProject(String projectName) {
-        Project project = projectRepository.findProjectByProjectName(projectName);
-        return subGoalRepository.getSubGoalsByProject(project);
     }
 }
