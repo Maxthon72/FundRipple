@@ -32,6 +32,8 @@ export class SearchProjectComponent {
   selectedProjectElement:string="Project name"
   selectedDirection:string="Descending"
   loading: boolean = true;
+  buttons:boolean=false
+  forUser:number=0
 
   readonly sortFunctions = {
     'Project name': (a:ProjectSLE, b:ProjectSLE) => a.projectName.localeCompare(b.projectName),
@@ -74,6 +76,31 @@ export class SearchProjectComponent {
           this.paginateProjects(0, this.pageSize);
         }
       )
+    }
+    else if(currentUrl.includes('userProjects')){
+      this.buttons=true
+      if(this.forUser==0){
+        this.projectService.getAllProjectSLEForUserByHeader().subscribe(
+          (projectsResponse:ProjectSLE[])=>{
+            this.projects=projectsResponse;
+            this.loading=false
+            this.filteredAndSearchedProjects=projectsResponse;
+            this.totalLength = this.filteredAndSearchedProjects.length;
+            this.paginateProjects(0, this.pageSize);
+          }
+        )
+      }
+      else{
+        this.projectService.getAllProjectSLESupportedNyUserByHeader().subscribe(
+          (projectsResponse:ProjectSLE[])=>{
+            this.projects=projectsResponse;
+            this.loading=false
+            this.filteredAndSearchedProjects=projectsResponse;
+            this.totalLength = this.filteredAndSearchedProjects.length;
+            this.paginateProjects(0, this.pageSize);
+          }
+        )
+      }
     }
     else{
       this.projectService.getOpenAndClosedProjectSLE().subscribe(
@@ -123,7 +150,10 @@ export class SearchProjectComponent {
 
 
   }
-
+switchProjects (type:number) {
+  this.forUser=type
+  this.ngOnInit()
+}
   
   onTagSelect(event: MatSelectChange) {
     if (event.value.length > 3) {

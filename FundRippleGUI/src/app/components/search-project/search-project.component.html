@@ -50,6 +50,10 @@
     </mat-toolbar>
 </div>
 <mat-card class="container">
+    <div *ngIf="buttons">
+        <a mat-button (click)="switchProjects(0)">My projects</a>
+        <a mat-button (click)="switchProjects(1)">Projects I support</a>
+    </div>
     <div class="filters-and-serch">
         <div class="search">
             <mat-form-field appearance="fill">

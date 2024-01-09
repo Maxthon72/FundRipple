@@ -117,6 +117,14 @@ export class ProjectService {
     return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/allProjects/forUser`, { headers });
   }
 
+  public getAllProjectSLESupportedNyUserByHeader():Observable<ProjectSLE[]>{
+    const storedToken = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${storedToken}`,
+    });
+    return this.http.get<ProjectSLE[]>(`${environment.apiBaseUrl}/project/allProjectsSuported/forUser`, { headers });
+  }
+
   public getAllProjectSLEForUserByUserName(userName:string):Observable<ProjectSLE[]>{
     const storedToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
