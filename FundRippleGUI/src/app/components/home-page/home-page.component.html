@@ -53,6 +53,7 @@
         </nav>
     </mat-toolbar>
 </div>
+
 <div class="home">
     <div class="carousel-container-newest">
 
@@ -66,7 +67,7 @@
                 <mat-icon>chevron_left</mat-icon>
             </button>
 
-            <div class="carousel-item" *ngIf="currentItem1">
+            <div class="carousel-item" *ngIf="currentItem1" [@slideAnimation]="currentIndex1">
                 <div class="project-spec" (click)="moveToProject(currentItem1.projectName)">
                     <div class="project-banner">
                         <div *ngIf="loading" class="loading-spinner">

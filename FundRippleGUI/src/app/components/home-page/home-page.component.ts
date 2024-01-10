@@ -1,3 +1,4 @@
+import { animate, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +13,31 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  animations: [
+    trigger('slideAnimation', [
+      // Slide in from right
+      transition(':increment', group([
+        query(':enter', [
+          style({ transform: 'translateX(100%)' }),
+          animate('300ms ease-out', style({ transform: 'translateX(0)' }))
+        ], { optional: true }),
+        query(':leave', [
+          animate('300ms ease-out', style({ transform: 'translateX(-100%)' }))
+        ], { optional: true })
+      ])),
+      // Slide in from left
+      transition(':decrement', group([
+        query(':enter', [
+          style({ transform: 'translateX(-100%)' }),
+          animate('300ms ease-out', style({ transform: 'translateX(0)' }))
+        ], { optional: true }),
+        query(':leave', [
+          animate('300ms ease-out', style({ transform: 'translateX(100%)' }))
+        ], { optional: true })
+      ]))
+    ])
+  ]
 })
 export class HomePageComponent implements OnInit{
   token:string|null = null
@@ -27,6 +52,11 @@ export class HomePageComponent implements OnInit{
   currentIndex2 = 0
   currentIndex3 = 0
   loading = true;
+  show = true;
+
+  toggle() {
+    this.show = !this.show;
+  }
   constructor(private router: Router,private authenticationService:AuthenticationService,private localStorage:LocalStorage,
     private userService:UserService,private projectService:ProjectService){}
   ngOnInit(): void {
@@ -56,7 +86,7 @@ export class HomePageComponent implements OnInit{
                     this.role=res;
                     console.log(this.role)
                     if(this.role=='SUPER'){
-                      
+                      this.router.navigate(['home']);
                     }
                   }
                 )
